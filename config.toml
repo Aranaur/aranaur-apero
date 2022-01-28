@@ -2,7 +2,7 @@ baseURL = "/"
 theme = "hugo-apero"
 languageCode = "en"
 title = "Personal website of Ihor Miroshnychenko"
-author = "Emily Cooper"
+author = "Ihor Miroshnychenko"
 copyright = "" # set to override the auto generated copyright using org info and now year
 googleAnalytics = ""
 disqusShortname = ""
@@ -32,7 +32,7 @@ enableEmoji = true
   orgLocal = "Kyiv"
   description = "A modern, beautiful, and easily configurable blog theme for Hugo."
   favicon = "/img/favicon.ico"
-  logo = "/img/blogophonic-mark-dark.png"
+  logo = "/img/generative.png"
   mainSections = ["blog", "project", "talk"]
   navallcaps = true
   # show/hide social icons in site header & footer
@@ -62,7 +62,7 @@ enableEmoji = true
   # serif options: Fraunces / EB Garamond / Bitter
   # if you import your own fonts, name them here too
   customtextFontFamily = "Commissioner"
-  customheadingFontFamily = "Fraunces"
+  customheadingFontFamily = "Commissioner"
   # alternatively, leave empty and select basic font options: sans-serif or serif
   # for more http://tachyons.io/docs/typography/font-family/
   textFontFamily = "sans-serif"
@@ -76,19 +76,31 @@ enableEmoji = true
   [[params.social]]
       icon      = "github" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://github.com/apreshill/apero"
+      url       = "https://github.com/aranaur"
+  [[params.social]]
+      icon      = "linkedin-in" # icon name without the 'fa-'
+      icon_pack = "fab"
+      url       = "https://www.linkedin.com/in/ihormiroshnychenko/"
   [[params.social]]
       icon      = "facebook-square" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://www.facebook.com/hashtag/ap%C3%A9ro"
+      url       = "https://www.facebook.com/aranaur"
   [[params.social]]
       icon      = "instagram" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://www.instagram.com/explore/tags/apero/"
+      url       = "https://www.instagram.com/aranaur/"
   [[params.social]]
-      icon      = "twitter" # icon name without the 'fa-'
+      icon      = "orcid" # icon name without the 'fa-'
+      icon_pack = "ai"
+      url       = "https://orcid.org/0000-0002-1307-7889"
+  [[params.social]]
+      icon      = "google-scholar" # icon name without the 'fa-'
+      icon_pack = "ai"
+      url       = "https://scholar.google.com/citations?user=MSdFIwsAAAAJ"
+  [[params.social]]
+      icon      = "youtube" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://twitter.com/hashtag/apéro"
+      url       = "https://www.youtube.com/channel/UCBXWO8dwwFFXzcOrrvpCp7w"
   [[params.social]]
       icon      = "rss" # icon name without the 'fa-'
       icon_pack = "fas"
@@ -101,34 +113,34 @@ enableEmoji = true
 
 [menu]
   [[menu.header]]
-    name = "About"
+    name = "Обо мне"
     title = "About Blogophonic"
     url = "/about/"
     weight = 1
   [[menu.header]]
-    name = "Blog"
+    name = "Блог"
     title = "Blog"
     url = "/blog/"
     weight = 2
   [[menu.header]]
-    name = "Projects"
+    name = "Проекты"
     title = "Project Portfolio"
     url = "/project/"
     weight = 3
   [[menu.header]]
-    name = "Talks"
+    name = "Выступления"
     title = "Talks"
     url = "/talk/"
     weight = 4
     
   # Configure footer  
   [[menu.footer]]
-    name = "License"
+    name = "Лицензия"
     title = "License"
     url = "/license/"
     weight = 1
   [[menu.footer]]
-    name = "Contact"
+    name = "Контакты"
     title = "Contact form"
     url = "/contact/"
     weight = 2

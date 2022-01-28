@@ -11,25 +11,26 @@ categories:
 - evergreen
 ---
 
-{{< here >}}
+<!-- {{< here >}} -->
 
-## But first, panelsets with R code chunks
+<!-- ## But first, panelsets with R code chunks -->
 
-{{< panelset class="greetings" >}}
-{{< panel name="Plot" >}}
+<!-- {{< panelset class="greetings" >}} -->
+<!-- {{< panel name="Plot" >}} -->
 
-<img src="{{< blogdown/postref >}}index_files/figure-html/plot-1.png" width="672" />
+<!-- ```{r plot, echo=FALSE} -->
+<!-- plot(pressure) -->
+<!-- ``` -->
 
-{{< /panel >}}
-{{< panel name="Code" >}}
+<!-- {{< /panel >}} -->
+<!-- {{< panel name="Code" >}} -->
 
+<!-- ```{r ref.label='plot', fig.show='hide'} -->
 
-```r
-plot(pressure)
-```
+<!-- ``` -->
 
-{{< /panel >}}
-{{< /panelset  >}}
+<!-- {{< /panel >}} -->
+<!-- {{< /panelset  >}} -->
 
 ## I'm half machine. I'm a monster.
 
