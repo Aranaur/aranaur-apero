@@ -3,8 +3,8 @@
 text_align_right: false
 show_title_as_headline: false
 headline: |
-  Hi, my name is Emily Cooper. Nice to meet you.
+  Всем привет!
 ---
 
 <!-- this is a subheadline -->
-I'm a driven 20-something American from Chicago who moved to Paris for an unexpected job opportunity. I've been tasked with bringing an American point of view to a venerable French marketing firm. :fr:
+Я к.э.н. и доцент кафедры математического моделирования и статистики Института информационных технологий в экономике при Киевском национальном экономическом университете. <br> Кроме того я преподаватель [Международного института бизнеса](https://iib.com.ua).
