@@ -1,8 +1,8 @@
 baseURL = "/"
 theme = "hugo-apero"
 languageCode = "en"
-title = "Personal website of Ihor Miroshnychenko"
-author = "Ihor Miroshnychenko"
+title = "Игорь Мирошниченко"
+author = "Игорь Мирошниченко"
 copyright = "" # set to override the auto generated copyright using org info and now year
 googleAnalytics = ""
 disqusShortname = ""
@@ -114,23 +114,23 @@ enableEmoji = true
 [menu]
   [[menu.header]]
     name = "Обо мне"
-    title = "About Blogophonic"
+    title = "Обо мне"
     url = "/about/"
     weight = 1
   [[menu.header]]
     name = "Блог"
-    title = "Blog"
+    title = "Блог"
     url = "/blog/"
     weight = 2
   [[menu.header]]
     name = "Проекты"
-    title = "Project Portfolio"
+    title = "Проекты"
     url = "/project/"
     weight = 3
   [[menu.header]]
-    name = "Выступления"
-    title = "Talks"
-    url = "/talk/"
+    name = "Лекторий"
+    title = "Лекторий"
+    url = "/lecture/"
     weight = 4
     
   # Configure footer  
