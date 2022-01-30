@@ -11,7 +11,7 @@ options(
   blogdown.serve_site.startup = FALSE,
   # to disable knitting Rmd files on save, set this option to FALSE
   blogdown.knit.on_save = FALSE,
-  # full markdown mode
+  # full markdown mode or "html" mode
   blogdown.method = "markdown"
 )
 
