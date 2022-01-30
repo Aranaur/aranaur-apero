@@ -10,7 +10,7 @@ show_social_links: true # specify social accounts in site config
 show_action_link: true
 action_link: /about
 action_label: "Читать больше &rarr;"
-action_type: text # text, button
+action_type: button # text, button
 type: home
 ---
 
