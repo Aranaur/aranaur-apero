@@ -1,0 +1,8 @@
+https://aranaur.netlify.com/*  https://aranaur.rbind.io/:splat  301!
+http://aranaur.netlify.com/*   https://aranaur.rbind.io/:splat  301!
+https://aranaur.netlify.app/about/*  https://aranaur.rbind.io/about/:splat  301!
+https://aranaur.netlify.app/blog/*  https://aranaur.rbind.io/blog/:splat  301!
+https://aranaur.netlify.app/project/*  https://aranaur.rbind.io/project/:splat  301!
+https://aranaur.netlify.app/lecture/*  https://aranaur.rbind.io/lecture/:splat  301!
+https://aranaur.netlify.app/contact/*  https://aranaur.rbind.io/contact/:splat  301!
+https://aranaur.netlify.app/license/*  https://aranaur.rbind.io/license/:splat  301!
