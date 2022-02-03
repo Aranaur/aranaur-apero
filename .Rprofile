@@ -4,6 +4,7 @@ if (file.exists("~/.Rprofile")) {
   base::sys.source("~/.Rprofile", envir = environment())
 }
 
+
 # a few sample options to customize the behavior of blogdown; for more options,
 # see https://bookdown.org/yihui/blogdown/global-options.html
 options(
