@@ -1,8 +1,8 @@
 ---
-title: Talks & workshops
+title: Лекции и мастер-классы
 description: |
-  Events I have been invited to present at, shared along with slides, videos, and other linkable resources.
-author: "Alison Hill"
+  Лекции и мероприятия на которые меня пригласили, которыми я делюсь с Вами
+author: "Игорь Мирошниченко"
 show_post_thumbnail: true
 thumbnail_left: false
 show_author_byline: false
@@ -13,7 +13,7 @@ layout: list # list, list-sidebar
 
 # set up common front matter for all pages inside blog/
 cascade:
-  author: "Alison Hill"
+  author: "Игорь Мирошниченко"
   show_author_byline: false
   show_post_date: true
   show_post_time: true
