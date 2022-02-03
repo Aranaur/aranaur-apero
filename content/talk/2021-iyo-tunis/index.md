@@ -2,8 +2,8 @@
 title: "2022: Эконометрика (ІЕ-401/402)"
 subtitle: "ІЕ-401/402"
 excerpt: "Материалы лекций по эконометрике для экономической кибернетики КНЭУ"
-date: 2022-02-02
-date_end: "2022-06-31"
+date: 2022-02-03
+date_end: ""
 show_post_time: false
 event: 
 event_url:
@@ -31,10 +31,7 @@ links:
   icon_pack: fab
   name: code
   url: https://github.com/Aranaur/r_econometrics
-  
 ---
 
 
-Материалы будут пополнятся по мере поступления.
-
-Изображение на обложке лекции [Ludmila Markova](https://www.instagram.com/mi_marko)
+I'm really excited to give this talk! Stay tuned for video and slides.
