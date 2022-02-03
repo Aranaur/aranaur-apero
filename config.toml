@@ -130,7 +130,7 @@ enableEmoji = true
   [[menu.header]]
     name = "Лекторий"
     title = "Лекторий"
-    url = "/lecture/"
+    url = "/talk/"
     weight = 4
     
   # Configure footer  
@@ -167,4 +167,5 @@ enableEmoji = true
   [privacy.youtube]
     disable = false
     privacyEnhanced = true
+
 
