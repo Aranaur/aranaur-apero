@@ -1,0 +1,2551 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Основы R для бизнеса</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Игорь Мирошниченко" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+    <script src="libs/freezeframe/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Основы R для бизнеса
+## 02 - Tidyverse
+### Игорь Мирошниченко
+### Carat Ukraine
+### 04.02.2022
+
+---
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 27px;
+    padding: 1em 4em 1em 2em;
+}&lt;/style&gt;
+
+
+# Пакеты в R
+## Встроенные пакеты
+
+```r
+rownames(installed.packages(priority = "base"))
+```
+
+```
+##  [1] "base"      "compiler"  "datasets"  "graphics"  "grDevices"
+##  [6] "grid"      "methods"   "parallel"  "splines"   "stats"    
+## [11] "stats4"    "tcltk"     "tools"     "utils"
+```
+
+---
+
+# Пакеты в R
+## Пакеты в CRAN
+**Comprehensive R Archive Network (CRAN)**
+
+```r
+nrow(available.packages())
+```
+
+```
+## [1] 18822
+```
+
+&lt;img src="img/CRAN.png" width="413" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Установка пакетов c CRAN
+
+```r
+install.packages("__НАЗВАНИЕ_ПАКЕТА__")
+```
+
+Например:
+
+```r
+install.packages("vroom")
+```
+
+&lt;img src="img/install_pack.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Установка пакетов c GitHub
+## Нам понадобится пакет `devtools`
+
+```r
+install_github('yihui/xaringan')
+```
+
+Ссылка `yihui/xaringan` - это адресс адреса пакета в [GitHub](https://github.com/yihui/xaringan)
+
+---
+
+# Подключение пакетов
+
+```r
+library(vroom)
+library(xaringan)
+```
+
+### Но могут возникнуть конфликты названий функций у разных пакетов
+В таких случаях имеет смысл не подключать весь пакет, а использовать только необходимый "минимум" или принудительно указать с какого пакета какую функцию мы хотим использовать.
+
+В таких случаях используется оператор `::`. Где слева находится название пакета, справа название функции из этого пакета:
+
+```r
+vroom::vroom_example()
+```
+
+---
+
+# Tidyverse
+[**Tidyverse**](https://www.tidyverse.org/) – это экосистема, набор пакетов, специально предназначенных для науки о данных (data science). В нем есть ключевые пакеты (ядро tidyverse) и побочные – дополнительно расширяющие возможности языка программирования R.
+
+**Ядро tidyverse:**
+- *ggplot2*, для визуализации
+- *dplyr*, для манипуляции с данными
+- *tidyr*, для получения опрятных данных (tidy data)
+- *readr*, для считывания и записи файлов в R
+- *purrr*, для функционального программирования
+- *tibble*, для работы с тиблами (tibble), продвинутый вариант дата фреймов
+- *stringr*, для работы с текстовыми данными
+- *forcats*, для работы с факторами (factors)
+
+---
+
+# Tidyverse
+**Прочие пакеты tidyverse:**
+.font90[
+.pull-left[
+- *vroom*, для быстрой загрузки данных
+- *DBI*, для работы с базами данных
+- *haven*, для данных SPSS, Stata и SAS
+- *httr*, для работы с API
+- *readxl* для загрузки .xls и .xlsx файлов
+- *googlesheets4*, для работы с Google Sheet
+- *googledrive*, для работы с Google Drive
+- *rvest*, для скраппинга веб-страниц
+- *jsonlite*, для работы с JSON-файлами
+]
+.pull-right[
+
+- *xml2*, для работы с XML
+- *lubridate*, для работы с датами
+- *dbplyr*, для преобразования кода `dplyr` в SQL
+- *dtplyr*, для преобразования кода в `data.table`
+- *magrittr*, для использования конвейеров `%&gt;%` (pipe)
+- *glue*, для сочетания данных и текста
+- *tidymodels*, для работы с моделями манинного обучения.
+]
+]
+
+---
+
+# Tidyverse
+.middle[
+.center[
+
+```r
+install.packages("tidyverse")
+library(tidyverse)
+```
+]]
+
+---
+
+# Пакет **here**
+Помогает делится проектами без привязки к директории
+* Установка
+
+```r
+install.packages("here")
+```
+* Подключение
+
+```r
+library(here)
+```
+
+* Использование 
+
+```r
+here()
+```
+
+```
+## [1] "E:/OneDrive - КНЕУ/Університет/Courses/Carat Ukraine"
+```
+
+---
+
+# Загрузка данных: .csv, .tsv
+**Первый вариант:** использовать функции из пакета `readr`. Это поможет избежать некоторых "проблем" в сравнении с базовым функционалом R.
+
+`readr` включает в себя 4 функции: `read_delim`, `read_csv`, `read_csv2`, `read_tsv`
+
+`read_delim` - чтение файла с **указанием** разделителя.
+
+`read_csv` - чтение файла с **запятой** в качестве разделителя.
+
+`read_csv2` - чтение файла с **точкой с запятой** в качестве разделителя.
+
+`read_tsv` - чтение файла с **табуляцией** в качестве разделителя.
+
+---
+
+# Загрузка данных: .csv, .tsv
+
+```r
+# локальный файл
+read_file &lt;- read_delim(here("00_data/csv/bikes.csv"), delim = ";")
+# файл с интернета
+read_url &lt;- read_csv("https://git.io/JztOr")
+```
+
+---
+
+# Загрузка данных: .csv, .tsv
+**Второй вариант:** пакет `vroom`.
+
+Главной особенностью этого пакета является [скорость загрузки данных](https://cran.r-project.org/web/packages/vroom/vignettes/benchmarks.html).
+
+```r
+# локальный файл
+vroom_file &lt;- vroom(here("00_data/csv/bikes.csv"))
+
+# файл с интернета
+vroom_url &lt;- vroom("https://git.io/JztOr")
+```
+
+---
+
+# Загрузка данных: .csv, .tsv
+Для загрузки **одновременно нескольких файлов одинаковой структуры** полезно использовать следующую конструкцию
+
+
+```r
+files &lt;- fs::dir_ls("00_data/same_structure", glob = "*.csv")
+
+vroom_all &lt;-  vroom(files)
+```
+
+---
+
+# Загрузка данных: .xls, .xlsx
+Для загрузки файлов Excel используется пакет `readxl` и функция `read_excel()`.
+
+
+```r
+library(readxl)
+
+read_excel(here("00_data/xlsx/bikeshops.xlsx"))
+```
+
+```
+## # A tibble: 30 x 3
+##    bikeshop.id bikeshop.name                location       
+##          &lt;dbl&gt; &lt;chr&gt;                        &lt;chr&gt;          
+##  1           1 Pittsburgh Mountain Machines Pittsburgh, PA 
+##  2           2 Ithaca Mountain Climbers     Ithaca, NY     
+##  3           3 Columbus Race Equipment      Columbus, OH   
+##  4           4 Detroit Cycles               Detroit, MI    
+##  5           5 Cincinnati Speed             Cincinnati, OH 
+##  6           6 Louisville Race Equipment    Louisville, KY 
+##  7           7 Nashville Cruisers           Nashville, TN  
+##  8           8 Denver Bike Shop             Denver, CO     
+##  9           9 Minneapolis Bike Shop        Minneapolis, MN
+## 10          10 Kansas City 29ers            Kansas City, KS
+## # ... with 20 more rows
+```
+
+---
+
+# Сравнение data.frame и tibble
+.code70[
+.left-column[
+
+```r
+iris[,1:3]
+```
+
+```
+##     Sepal.Length Sepal.Width Petal.Length
+## 1            5.1         3.5          1.4
+## 2            4.9         3.0          1.4
+## 3            4.7         3.2          1.3
+## 4            4.6         3.1          1.5
+## 5            5.0         3.6          1.4
+## 6            5.4         3.9          1.7
+## 7            4.6         3.4          1.4
+## 8            5.0         3.4          1.5
+## 9            4.4         2.9          1.4
+## 10           4.9         3.1          1.5
+## 11           5.4         3.7          1.5
+## 12           4.8         3.4          1.6
+## 13           4.8         3.0          1.4
+## 14           4.3         3.0          1.1
+## 15           5.8         4.0          1.2
+## 16           5.7         4.4          1.5
+## 17           5.4         3.9          1.3
+## 18           5.1         3.5          1.4
+## 19           5.7         3.8          1.7
+## 20           5.1         3.8          1.5
+## 21           5.4         3.4          1.7
+## 22           5.1         3.7          1.5
+## 23           4.6         3.6          1.0
+## 24           5.1         3.3          1.7
+## 25           4.8         3.4          1.9
+## 26           5.0         3.0          1.6
+## 27           5.0         3.4          1.6
+## 28           5.2         3.5          1.5
+## 29           5.2         3.4          1.4
+## 30           4.7         3.2          1.6
+## 31           4.8         3.1          1.6
+## 32           5.4         3.4          1.5
+## 33           5.2         4.1          1.5
+## 34           5.5         4.2          1.4
+## 35           4.9         3.1          1.5
+## 36           5.0         3.2          1.2
+## 37           5.5         3.5          1.3
+## 38           4.9         3.6          1.4
+## 39           4.4         3.0          1.3
+## 40           5.1         3.4          1.5
+## 41           5.0         3.5          1.3
+## 42           4.5         2.3          1.3
+## 43           4.4         3.2          1.3
+## 44           5.0         3.5          1.6
+## 45           5.1         3.8          1.9
+## 46           4.8         3.0          1.4
+## 47           5.1         3.8          1.6
+## 48           4.6         3.2          1.4
+## 49           5.3         3.7          1.5
+## 50           5.0         3.3          1.4
+## 51           7.0         3.2          4.7
+## 52           6.4         3.2          4.5
+## 53           6.9         3.1          4.9
+## 54           5.5         2.3          4.0
+## 55           6.5         2.8          4.6
+## 56           5.7         2.8          4.5
+## 57           6.3         3.3          4.7
+## 58           4.9         2.4          3.3
+## 59           6.6         2.9          4.6
+## 60           5.2         2.7          3.9
+## 61           5.0         2.0          3.5
+## 62           5.9         3.0          4.2
+## 63           6.0         2.2          4.0
+## 64           6.1         2.9          4.7
+## 65           5.6         2.9          3.6
+## 66           6.7         3.1          4.4
+## 67           5.6         3.0          4.5
+## 68           5.8         2.7          4.1
+## 69           6.2         2.2          4.5
+## 70           5.6         2.5          3.9
+## 71           5.9         3.2          4.8
+## 72           6.1         2.8          4.0
+## 73           6.3         2.5          4.9
+## 74           6.1         2.8          4.7
+## 75           6.4         2.9          4.3
+## 76           6.6         3.0          4.4
+## 77           6.8         2.8          4.8
+## 78           6.7         3.0          5.0
+## 79           6.0         2.9          4.5
+## 80           5.7         2.6          3.5
+## 81           5.5         2.4          3.8
+## 82           5.5         2.4          3.7
+## 83           5.8         2.7          3.9
+## 84           6.0         2.7          5.1
+## 85           5.4         3.0          4.5
+## 86           6.0         3.4          4.5
+## 87           6.7         3.1          4.7
+## 88           6.3         2.3          4.4
+## 89           5.6         3.0          4.1
+## 90           5.5         2.5          4.0
+## 91           5.5         2.6          4.4
+## 92           6.1         3.0          4.6
+## 93           5.8         2.6          4.0
+## 94           5.0         2.3          3.3
+## 95           5.6         2.7          4.2
+## 96           5.7         3.0          4.2
+## 97           5.7         2.9          4.2
+## 98           6.2         2.9          4.3
+## 99           5.1         2.5          3.0
+## 100          5.7         2.8          4.1
+## 101          6.3         3.3          6.0
+## 102          5.8         2.7          5.1
+## 103          7.1         3.0          5.9
+## 104          6.3         2.9          5.6
+## 105          6.5         3.0          5.8
+## 106          7.6         3.0          6.6
+## 107          4.9         2.5          4.5
+## 108          7.3         2.9          6.3
+## 109          6.7         2.5          5.8
+## 110          7.2         3.6          6.1
+## 111          6.5         3.2          5.1
+## 112          6.4         2.7          5.3
+## 113          6.8         3.0          5.5
+## 114          5.7         2.5          5.0
+## 115          5.8         2.8          5.1
+## 116          6.4         3.2          5.3
+## 117          6.5         3.0          5.5
+## 118          7.7         3.8          6.7
+## 119          7.7         2.6          6.9
+## 120          6.0         2.2          5.0
+## 121          6.9         3.2          5.7
+## 122          5.6         2.8          4.9
+## 123          7.7         2.8          6.7
+## 124          6.3         2.7          4.9
+## 125          6.7         3.3          5.7
+## 126          7.2         3.2          6.0
+## 127          6.2         2.8          4.8
+## 128          6.1         3.0          4.9
+## 129          6.4         2.8          5.6
+## 130          7.2         3.0          5.8
+## 131          7.4         2.8          6.1
+## 132          7.9         3.8          6.4
+## 133          6.4         2.8          5.6
+## 134          6.3         2.8          5.1
+## 135          6.1         2.6          5.6
+## 136          7.7         3.0          6.1
+## 137          6.3         3.4          5.6
+## 138          6.4         3.1          5.5
+## 139          6.0         3.0          4.8
+## 140          6.9         3.1          5.4
+## 141          6.7         3.1          5.6
+## 142          6.9         3.1          5.1
+## 143          5.8         2.7          5.1
+## 144          6.8         3.2          5.9
+## 145          6.7         3.3          5.7
+## 146          6.7         3.0          5.2
+## 147          6.3         2.5          5.0
+## 148          6.5         3.0          5.2
+## 149          6.2         3.4          5.4
+## 150          5.9         3.0          5.1
+```
+
+]
+
+.pull-right[
+
+```r
+as_tibble(iris[,1:3])
+```
+
+```
+## # A tibble: 150 x 3
+##    Sepal.Length Sepal.Width Petal.Length
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
+##  1          5.1         3.5          1.4
+##  2          4.9         3            1.4
+##  3          4.7         3.2          1.3
+##  4          4.6         3.1          1.5
+##  5          5           3.6          1.4
+##  6          5.4         3.9          1.7
+##  7          4.6         3.4          1.4
+##  8          5           3.4          1.5
+##  9          4.4         2.9          1.4
+## 10          4.9         3.1          1.5
+## # ... with 140 more rows
+```
+
+]]
+
+---
+
+# Сравнение data.frame и tibble
+## Просмотр структуры
+.code60[
+
+
+```r
+str(iris)
+```
+
+```
+## 'data.frame':	150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+```
+
+```r
+glimpse(as_tibble(iris))
+```
+
+```
+## Rows: 150
+## Columns: 5
+## $ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0~
+## $ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4~
+## $ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5~
+## $ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2~
+## $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa~
+```
+]
+
+---
+
+# Работа с данными: dplyr и не только...
+`dplyr` - это один из самых главных пакетов `tidyverse`.
+
+Главный его функционал - это разнообразные манипуляции с данными:
+.font80[
+- фильтрация: `filter()`
+- срезы: `slice()`
+- упорядочивание: `arrange()`
+- выбор переменных: `select()`
+- упорядочение: `arrange()`
+- смена названия: `rename()`
+- смена позиции: `relocate()`
+- создание новых переменных: `mutate()` + `transmute()`
+- группировка и агрегирование данных: `group_by` + `summarise()`
+- применение функций по столбцам: `across()`
+- быстрый подсчёт количества в группах: `count()`
+- если-то: `case_when()`
+- ...
+]
+
+---
+
+# Данные: пингвины архипелага Палмера
+
+```r
+library(palmerpenguins)
+```
+
+&lt;img src="img/lter_penguins.png" width="667" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Данные: пингвины архипелага Палмера
+
+* **species**: фактор, обозначающий вид пингвинов (Adelie, Chinstrap, or Gentoo)
+* **island**: фактор, обозначающий остров
+* **bill_length_mm**: число, обозначающее длину клюва пингвина (в миллиметрах).
+* **bill_depth_mm**: число, обозначающее глубину клюва пингвина (в миллиметрах)
+* **flipper_length_mm**: целое число, обозначающее длину плавника пингвина (в миллиметрах).
+* **body_mass_g**: целое число, обозначающее массу тела пингвина (граммы).
+* **sex**: фактор, обозначающий пол пингвина (самец, самка).
+* **year**: целое число, обозначающее год обучения (2007, 2008 или 2009)
+
+---
+
+# Данные: пингвины архипелага Палмера
+
+```r
+penguins
+```
+
+```
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+
+---
+
+# Фильтрация строк: **filter()**
+
+## Только пингвины сhinstrap
+
+```r
+filter(penguins, species == "Chinstrap")
+```
+
+```
+## # A tibble: 68 x 8
+##    species   island bill_length_mm bill_depth_mm
+##    &lt;fct&gt;     &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Chinstrap Dream            46.5          17.9
+##  2 Chinstrap Dream            50            19.5
+##  3 Chinstrap Dream            51.3          19.2
+##  4 Chinstrap Dream            45.4          18.7
+##  5 Chinstrap Dream            52.7          19.8
+##  6 Chinstrap Dream            45.2          17.8
+##  7 Chinstrap Dream            46.1          18.2
+##  8 Chinstrap Dream            51.3          18.2
+##  9 Chinstrap Dream            46            18.9
+## 10 Chinstrap Dream            51.3          19.9
+## # ... with 58 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Фильтрация строк: **filter()**
+## Только пингвины сhinstrap **И** gentoo
+
+### Вариант 1:
+* Используйте оператор «или», `|` (вертикальная линия), между условиями
+
+```r
+filter(penguins, species == "Chinstrap" | species == "Gentoo")
+```
+
+```
+## # A tibble: 192 x 8
+##    species island bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Gentoo  Biscoe           46.1          13.2
+##  2 Gentoo  Biscoe           50            16.3
+##  3 Gentoo  Biscoe           48.7          14.1
+##  4 Gentoo  Biscoe           50            15.2
+##  5 Gentoo  Biscoe           47.6          14.5
+##  6 Gentoo  Biscoe           46.5          13.5
+##  7 Gentoo  Biscoe           45.4          14.6
+##  8 Gentoo  Biscoe           46.7          15.3
+##  9 Gentoo  Biscoe           43.3          13.4
+## 10 Gentoo  Biscoe           46.8          15.4
+## # ... with 182 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Фильтрация строк: **filter()**
+## Только пингвины сhinstrap **И** gentoo
+
+### Вариант 2:
+* Используйте оператор `%in%`, за которым следует вектор значений, чтобы найти совпадение
+
+```r
+filter(penguins, species %in% c("Chinstrap", "Gentoo"))
+```
+
+```
+## # A tibble: 192 x 8
+##    species island bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Gentoo  Biscoe           46.1          13.2
+##  2 Gentoo  Biscoe           50            16.3
+##  3 Gentoo  Biscoe           48.7          14.1
+##  4 Gentoo  Biscoe           50            15.2
+##  5 Gentoo  Biscoe           47.6          14.5
+##  6 Gentoo  Biscoe           46.5          13.5
+##  7 Gentoo  Biscoe           45.4          14.6
+##  8 Gentoo  Biscoe           46.7          15.3
+##  9 Gentoo  Biscoe           43.3          13.4
+## 10 Gentoo  Biscoe           46.8          15.4
+## # ... with 182 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Оператор пайпа **%&gt;%**
+
+`%&gt;%` - это оператор, позволяющий создавать последовательности, которые легко читаются и воспринимаются (привет вложенные функции в Excel)
+
+```r
+sort(sqrt(abs(sin(1:10))), decreasing = TRUE)
+```
+
+```
+##  [1] 0.9946649 0.9792468 0.9535709 0.9173173 0.8699440
+##  [6] 0.8105471 0.7375779 0.6419646 0.5285977 0.3756594
+```
+
+```r
+1:10 %&gt;% 
+  sin() %&gt;% 
+  abs() %&gt;% 
+  sqrt() %&gt;% 
+  sort(., decreasing = TRUE)
+```
+
+```
+##  [1] 0.9946649 0.9792468 0.9535709 0.9173173 0.8699440
+##  [6] 0.8105471 0.7375779 0.6419646 0.5285977 0.3756594
+```
+
+---
+
+# Фильтрация строк: **filter()**
+Вернемся к нашим пингвинам...
+
+
+```r
+penguins %&gt;%
+  filter(species == "Chinstrap")
+```
+
+```
+## # A tibble: 68 x 8
+##    species   island bill_length_mm bill_depth_mm
+##    &lt;fct&gt;     &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Chinstrap Dream            46.5          17.9
+##  2 Chinstrap Dream            50            19.5
+##  3 Chinstrap Dream            51.3          19.2
+##  4 Chinstrap Dream            45.4          18.7
+##  5 Chinstrap Dream            52.7          19.8
+##  6 Chinstrap Dream            45.2          17.8
+##  7 Chinstrap Dream            46.1          18.2
+##  8 Chinstrap Dream            51.3          18.2
+##  9 Chinstrap Dream            46            18.9
+## 10 Chinstrap Dream            51.3          19.9
+## # ... with 58 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Фильтрация строк: **filter()**
+## Пингвины Adelie с острова Dream 
+
+Два варианта:
+
+```r
+filter(x == "a", y == "b") # 1. Через запятую
+
+filter(x == "a" &amp; y == "b") # 2. Через &amp;
+```
+
+
+```r
+penguins %&gt;%
+  filter(species == "Adelie", island == "Dream")
+```
+
+```
+## # A tibble: 56 x 8
+##    species island bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Dream            39.5          16.7
+##  2 Adelie  Dream            37.2          18.1
+##  3 Adelie  Dream            39.5          17.8
+##  4 Adelie  Dream            40.9          18.9
+##  5 Adelie  Dream            36.4          17  
+##  6 Adelie  Dream            39.2          21.1
+##  7 Adelie  Dream            38.8          20  
+##  8 Adelie  Dream            42.2          18.5
+##  9 Adelie  Dream            37.6          19.3
+## 10 Adelie  Dream            39.8          19.1
+## # ... with 46 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Фильтрация строк: **filter()**
+## Пингвины с длинной плавника более 200 мм
+
+```r
+penguins %&gt;%
+  filter(flipper_length_mm &gt; 200)
+```
+
+```
+## # A tibble: 148 x 8
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Dream               35.7          18  
+##  2 Adelie  Dream               41.1          18.1
+##  3 Adelie  Dream               40.8          18.9
+##  4 Adelie  Biscoe              41            20  
+##  5 Adelie  Torgersen           41.4          18.5
+##  6 Adelie  Torgersen           44.1          18  
+##  7 Adelie  Dream               41.5          18.5
+##  8 Gentoo  Biscoe              46.1          13.2
+##  9 Gentoo  Biscoe              50            16.3
+## 10 Gentoo  Biscoe              48.7          14.1
+## # ... with 138 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Фильтрация строк: **filter()**
+## Пингвины Adelie с длинной тела более 40 мм
+
+```r
+penguins %&gt;%
+  filter(species == "Adelie", bill_length_mm &gt; 40)
+```
+
+```
+## # A tibble: 51 x 8
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           40.3          18  
+##  2 Adelie  Torgersen           42            20.2
+##  3 Adelie  Torgersen           41.1          17.6
+##  4 Adelie  Torgersen           42.5          20.7
+##  5 Adelie  Torgersen           46            21.5
+##  6 Adelie  Biscoe              40.6          18.6
+##  7 Adelie  Biscoe              40.5          17.9
+##  8 Adelie  Biscoe              40.5          18.9
+##  9 Adelie  Dream               40.9          18.9
+## 10 Adelie  Dream               42.2          18.5
+## # ... with 41 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Фильтрация строк: **filter()**
+## Исключение наблюдений по условию
+### Оставить все наблюдения **кроме** пингвинов Chinstrap
+
+```r
+penguins %&gt;%
+  filter(species != "Chinstrap")
+```
+
+```
+## # A tibble: 276 x 8
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 266 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Срез данных: **slice()**
+## С первого по пятое + десятое наблюдение
+
+```r
+penguins %&gt;% 
+  slice(1:5, 10)
+```
+
+```
+## # A tibble: 6 x 8
+##   species island    bill_length_mm bill_depth_mm
+##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Adelie  Torgersen           39.1          18.7
+## 2 Adelie  Torgersen           39.5          17.4
+## 3 Adelie  Torgersen           40.3          18  
+## 4 Adelie  Torgersen           NA            NA  
+## 5 Adelie  Torgersen           36.7          19.3
+## 6 Adelie  Torgersen           42            20.2
+## # ... with 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+
+# Срез данных: **slice()**
+## Все кроме первых 4
+
+```r
+penguins %&gt;% 
+  slice(-(1:4))
+```
+
+```
+## # A tibble: 340 x 8
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           36.7          19.3
+##  2 Adelie  Torgersen           39.3          20.6
+##  3 Adelie  Torgersen           38.9          17.8
+##  4 Adelie  Torgersen           39.2          19.6
+##  5 Adelie  Torgersen           34.1          18.1
+##  6 Adelie  Torgersen           42            20.2
+##  7 Adelie  Torgersen           37.8          17.1
+##  8 Adelie  Torgersen           37.8          17.3
+##  9 Adelie  Torgersen           41.1          17.6
+## 10 Adelie  Torgersen           38.6          21.2
+## # ... with 330 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Срез данных: **slice()**
+## Первые 5
+
+```r
+penguins %&gt;% 
+  slice_head(n = 5)
+```
+
+```
+## # A tibble: 5 x 8
+##   species island    bill_length_mm bill_depth_mm
+##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Adelie  Torgersen           39.1          18.7
+## 2 Adelie  Torgersen           39.5          17.4
+## 3 Adelie  Torgersen           40.3          18  
+## 4 Adelie  Torgersen           NA            NA  
+## 5 Adelie  Torgersen           36.7          19.3
+## # ... with 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+
+# Срез данных: **slice()**
+## Последние 5
+
+```r
+penguins %&gt;% 
+  slice_tail(n = 5)
+```
+
+```
+## # A tibble: 5 x 8
+##   species   island bill_length_mm bill_depth_mm
+##   &lt;fct&gt;     &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Chinstrap Dream            55.8          19.8
+## 2 Chinstrap Dream            43.5          18.1
+## 3 Chinstrap Dream            49.6          18.2
+## 4 Chinstrap Dream            50.8          19  
+## 5 Chinstrap Dream            50.2          18.7
+## # ... with 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+
+# Срез данных: **slice()**
+## 5 максимальных по переменной `body_mass_g`
+
+```r
+penguins %&gt;% 
+  slice_max(body_mass_g, n = 3)
+```
+
+```
+## # A tibble: 4 x 8
+##   species island bill_length_mm bill_depth_mm
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Gentoo  Biscoe           49.2          15.2
+## 2 Gentoo  Biscoe           59.6          17  
+## 3 Gentoo  Biscoe           51.1          16.3
+## 4 Gentoo  Biscoe           48.8          16.2
+## # ... with 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+
+# Срез данных: **slice()**
+## 5 максимальных по переменной `body_mass_g`
+
+```r
+penguins %&gt;% 
+  slice_max(body_mass_g, n = 3, with_ties = FALSE)
+```
+
+```
+## # A tibble: 3 x 8
+##   species island bill_length_mm bill_depth_mm
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Gentoo  Biscoe           49.2          15.2
+## 2 Gentoo  Biscoe           59.6          17  
+## 3 Gentoo  Biscoe           51.1          16.3
+## # ... with 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+
+# Срез данных: **slice()**
+## 5 минимальных по переменной `body_mass_g` 
+
+```r
+penguins %&gt;% 
+  slice_min(body_mass_g, n = 3)
+```
+
+```
+## # A tibble: 3 x 8
+##   species   island bill_length_mm bill_depth_mm
+##   &lt;fct&gt;     &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Chinstrap Dream            46.9          16.6
+## 2 Adelie    Biscoe           36.5          16.6
+## 3 Adelie    Biscoe           36.4          17.1
+## # ... with 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+
+# Срез данных: **slice()**
+## 3 случайных без возврата
+
+```r
+penguins %&gt;% 
+  slice_sample(n = 3)
+```
+
+```
+## # A tibble: 3 x 8
+##   species   island    bill_length_mm bill_depth_mm
+##   &lt;fct&gt;     &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Chinstrap Dream               45.4          18.7
+## 2 Adelie    Torgersen           40.9          16.8
+## 3 Chinstrap Dream               50.8          18.5
+## # ... with 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+
+# Срез данных: **slice()**
+## 3 случайных с возвратом
+
+```r
+penguins %&gt;% 
+  slice_sample(n = 3, replace = TRUE)
+```
+
+```
+## # A tibble: 3 x 8
+##   species   island bill_length_mm bill_depth_mm
+##   &lt;fct&gt;     &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Gentoo    Biscoe           50            15.9
+## 2 Adelie    Dream            32.1          15.5
+## 3 Chinstrap Dream            50.8          18.5
+## # ... with 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+
+# Упорядочивание: **arrange()**
+## По возрастанию `bill_length_mm`
+
+```r
+penguins %&gt;% 
+  arrange(bill_length_mm)
+```
+
+```
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Dream               32.1          15.5
+##  2 Adelie  Dream               33.1          16.1
+##  3 Adelie  Torgersen           33.5          19  
+##  4 Adelie  Dream               34            17.1
+##  5 Adelie  Torgersen           34.1          18.1
+##  6 Adelie  Torgersen           34.4          18.4
+##  7 Adelie  Biscoe              34.5          18.1
+##  8 Adelie  Torgersen           34.6          21.1
+##  9 Adelie  Torgersen           34.6          17.2
+## 10 Adelie  Biscoe              35            17.9
+## # ... with 334 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Упорядочивание: **arrange()**
+## По спаданию `bill_length_mm`
+### Можно так...
+
+```r
+penguins %&gt;% 
+  arrange(desc(bill_length_mm))
+```
+
+```
+## # A tibble: 344 x 8
+##    species   island bill_length_mm bill_depth_mm
+##    &lt;fct&gt;     &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Gentoo    Biscoe           59.6          17  
+##  2 Chinstrap Dream            58            17.8
+##  3 Gentoo    Biscoe           55.9          17  
+##  4 Chinstrap Dream            55.8          19.8
+##  5 Gentoo    Biscoe           55.1          16  
+##  6 Gentoo    Biscoe           54.3          15.7
+##  7 Chinstrap Dream            54.2          20.8
+##  8 Chinstrap Dream            53.5          19.9
+##  9 Gentoo    Biscoe           53.4          15.8
+## 10 Chinstrap Dream            52.8          20  
+## # ... with 334 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Упорядочивание: **arrange()**
+## По спаданию `bill_depth_mm`
+### А можно так...
+
+```r
+penguins %&gt;% 
+  arrange(-bill_depth_mm)
+```
+
+```
+## # A tibble: 344 x 8
+##    species   island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;     &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie    Torgersen           46            21.5
+##  2 Adelie    Torgersen           38.6          21.2
+##  3 Adelie    Dream               42.3          21.2
+##  4 Adelie    Torgersen           34.6          21.1
+##  5 Adelie    Dream               39.2          21.1
+##  6 Adelie    Biscoe              41.3          21.1
+##  7 Chinstrap Dream               54.2          20.8
+##  8 Adelie    Torgersen           42.5          20.7
+##  9 Adelie    Biscoe              39.6          20.7
+## 10 Chinstrap Dream               52            20.7
+## # ... with 334 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Отбор столбцов: **select()**
+## Оставить только `year`, `island` и `species`
+
+```r
+penguins %&gt;%
+  select(year, island, species)
+```
+
+```
+## # A tibble: 344 x 3
+##     year island    species
+##    &lt;int&gt; &lt;fct&gt;     &lt;fct&gt;  
+##  1  2007 Torgersen Adelie 
+##  2  2007 Torgersen Adelie 
+##  3  2007 Torgersen Adelie 
+##  4  2007 Torgersen Adelie 
+##  5  2007 Torgersen Adelie 
+##  6  2007 Torgersen Adelie 
+##  7  2007 Torgersen Adelie 
+##  8  2007 Torgersen Adelie 
+##  9  2007 Torgersen Adelie 
+## 10  2007 Torgersen Adelie 
+## # ... with 334 more rows
+```
+
+---
+
+# Отбор столбцов: **select()**
+## Оставить все столбцы начиная с `species` и до `body_mass_g`
+
+```r
+penguins %&gt;%
+  select(species:body_mass_g)
+```
+
+```
+## # A tibble: 344 x 6
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 2 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;
+```
+
+---
+
+# Отбор столбцов: **select()**
+## Оставить все столбцы начиная с `species` до `bill_depth_mm ` и `year` 
+
+```r
+penguins %&gt;%
+  select(species:bill_depth_mm, year)
+```
+
+```
+## # A tibble: 344 x 5
+##    species island    bill_length_mm bill_depth_mm  year
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt; &lt;int&gt;
+##  1 Adelie  Torgersen           39.1          18.7  2007
+##  2 Adelie  Torgersen           39.5          17.4  2007
+##  3 Adelie  Torgersen           40.3          18    2007
+##  4 Adelie  Torgersen           NA            NA    2007
+##  5 Adelie  Torgersen           36.7          19.3  2007
+##  6 Adelie  Torgersen           39.3          20.6  2007
+##  7 Adelie  Torgersen           38.9          17.8  2007
+##  8 Adelie  Torgersen           39.2          19.6  2007
+##  9 Adelie  Torgersen           34.1          18.1  2007
+## 10 Adelie  Torgersen           42            20.2  2007
+## # ... with 334 more rows
+```
+
+---
+
+# Отбор столбцов: **select()**
+* Убрать **столбец** можно с помощью знака `-`
+* Убрать **несколько последовательных столбцов** можно с помощью `!(var1:var5)`
+* Убрать **несколько не последовательных столбцов** можно с помощью `!(var1, var3, var5)`
+## Оставить все кроме `island`
+
+```r
+penguins %&gt;%
+  select(-island)
+```
+
+```
+## # A tibble: 344 x 7
+##    species bill_length_mm bill_depth_mm flipper_length_mm
+##    &lt;fct&gt;            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+##  1 Adelie            39.1          18.7               181
+##  2 Adelie            39.5          17.4               186
+##  3 Adelie            40.3          18                 195
+##  4 Adelie            NA            NA                  NA
+##  5 Adelie            36.7          19.3               193
+##  6 Adelie            39.3          20.6               190
+##  7 Adelie            38.9          17.8               181
+##  8 Adelie            39.2          19.6               195
+##  9 Adelie            34.1          18.1               193
+## 10 Adelie            42            20.2               190
+## # ... with 334 more rows, and 3 more variables:
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;
+```
+
+---
+
+# Отбор столбцов: **select()**
+## Убрать столбцы с `island` по `bill_depth_mm`
+
+```r
+penguins %&gt;%
+  select(!(island:bill_depth_mm))
+```
+
+```
+## # A tibble: 344 x 5
+##    species flipper_length_mm body_mass_g sex     year
+##    &lt;fct&gt;               &lt;int&gt;       &lt;int&gt; &lt;fct&gt;  &lt;int&gt;
+##  1 Adelie                181        3750 male    2007
+##  2 Adelie                186        3800 female  2007
+##  3 Adelie                195        3250 female  2007
+##  4 Adelie                 NA          NA &lt;NA&gt;    2007
+##  5 Adelie                193        3450 female  2007
+##  6 Adelie                190        3650 male    2007
+##  7 Adelie                181        3625 female  2007
+##  8 Adelie                195        4675 male    2007
+##  9 Adelie                193        3475 &lt;NA&gt;    2007
+## 10 Adelie                190        4250 &lt;NA&gt;    2007
+## # ... with 334 more rows
+```
+
+---
+
+# Отбор столбцов: **select()**
+## Убрать столбцы `species`, `flipper_length_mm` и `year`
+
+```r
+penguins %&gt;%
+  select(!c(species, flipper_length_mm, year))
+```
+
+```
+## # A tibble: 344 x 5
+##    island    bill_length_mm bill_depth_mm body_mass_g sex   
+##    &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;       &lt;int&gt; &lt;fct&gt; 
+##  1 Torgersen           39.1          18.7        3750 male  
+##  2 Torgersen           39.5          17.4        3800 female
+##  3 Torgersen           40.3          18          3250 female
+##  4 Torgersen           NA            NA            NA &lt;NA&gt;  
+##  5 Torgersen           36.7          19.3        3450 female
+##  6 Torgersen           39.3          20.6        3650 male  
+##  7 Torgersen           38.9          17.8        3625 female
+##  8 Torgersen           39.2          19.6        4675 male  
+##  9 Torgersen           34.1          18.1        3475 &lt;NA&gt;  
+## 10 Torgersen           42            20.2        4250 &lt;NA&gt;  
+## # ... with 334 more rows
+```
+
+---
+
+# Несколько полезных функций
+Есть много вспомогательных функций, которые расширяют возможности `select()` (например, выбор всех переменных указанного типа или выбор всех переменных, которые начинаются или заканчиваются определенным шаблоном текста).
+## Отобрать все столбцы которые начинаются на “bill”
+
+```r
+penguins %&gt;%
+  select(starts_with("bill"))
+```
+
+```
+## # A tibble: 344 x 2
+##    bill_length_mm bill_depth_mm
+##             &lt;dbl&gt;         &lt;dbl&gt;
+##  1           39.1          18.7
+##  2           39.5          17.4
+##  3           40.3          18  
+##  4           NA            NA  
+##  5           36.7          19.3
+##  6           39.3          20.6
+##  7           38.9          17.8
+##  8           39.2          19.6
+##  9           34.1          18.1
+## 10           42            20.2
+## # ... with 334 more rows
+```
+
+---
+
+# Несколько полезных функций
+## Отобрать все столбцы которые заканчиваются на “mm”
+
+```r
+penguins %&gt;%
+  select(ends_with("mm"))
+```
+
+```
+## # A tibble: 344 x 3
+##    bill_length_mm bill_depth_mm flipper_length_mm
+##             &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+##  1           39.1          18.7               181
+##  2           39.5          17.4               186
+##  3           40.3          18                 195
+##  4           NA            NA                  NA
+##  5           36.7          19.3               193
+##  6           39.3          20.6               190
+##  7           38.9          17.8               181
+##  8           39.2          19.6               195
+##  9           34.1          18.1               193
+## 10           42            20.2               190
+## # ... with 334 more rows
+```
+
+---
+
+# Несколько полезных функций
+## Отобрать все столбцы которые содержат на “length”
+
+```r
+penguins %&gt;%
+  select(contains("length"))
+```
+
+```
+## # A tibble: 344 x 2
+##    bill_length_mm flipper_length_mm
+##             &lt;dbl&gt;             &lt;int&gt;
+##  1           39.1               181
+##  2           39.5               186
+##  3           40.3               195
+##  4           NA                  NA
+##  5           36.7               193
+##  6           39.3               190
+##  7           38.9               181
+##  8           39.2               195
+##  9           34.1               193
+## 10           42                 190
+## # ... with 334 more rows
+```
+
+---
+
+# Несколько полезных функций
+## Отобрать все столбцы которые содержат на “length” ИЛИ начинаются на “bill”
+
+```r
+penguins %&gt;%
+  select(contains("length") | starts_with("bill"))
+```
+
+```
+## # A tibble: 344 x 3
+##    bill_length_mm flipper_length_mm bill_depth_mm
+##             &lt;dbl&gt;             &lt;int&gt;         &lt;dbl&gt;
+##  1           39.1               181          18.7
+##  2           39.5               186          17.4
+##  3           40.3               195          18  
+##  4           NA                  NA          NA  
+##  5           36.7               193          19.3
+##  6           39.3               190          20.6
+##  7           38.9               181          17.8
+##  8           39.2               195          19.6
+##  9           34.1               193          18.1
+## 10           42                 190          20.2
+## # ... with 334 more rows
+```
+
+---
+
+# Несколько полезных функций
+## Отобрать все числовые столбцы
+
+```r
+penguins %&gt;%
+  select(where(is.numeric))
+```
+
+```
+## # A tibble: 344 x 5
+##    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##             &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+##  1           39.1          18.7               181        3750
+##  2           39.5          17.4               186        3800
+##  3           40.3          18                 195        3250
+##  4           NA            NA                  NA          NA
+##  5           36.7          19.3               193        3450
+##  6           39.3          20.6               190        3650
+##  7           38.9          17.8               181        3625
+##  8           39.2          19.6               195        4675
+##  9           34.1          18.1               193        3475
+## 10           42            20.2               190        4250
+## # ... with 334 more rows, and 1 more variable: year &lt;int&gt;
+```
+
+---
+
+# Смена позиции столбца: **relocate()**
+**Подсказки:**
+* используйте `.before` или `.after`, чтобы переместить столбец до или после другого (по имени или типу).
+* если написать `relocate(var_1)` - этот столбец переместится в начало.
+## Переместить `year` в начало
+
+```r
+penguins %&gt;%
+  relocate(year)
+```
+
+```
+## # A tibble: 344 x 8
+##     year species island    bill_length_mm bill_depth_mm
+##    &lt;int&gt; &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1  2007 Adelie  Torgersen           39.1          18.7
+##  2  2007 Adelie  Torgersen           39.5          17.4
+##  3  2007 Adelie  Torgersen           40.3          18  
+##  4  2007 Adelie  Torgersen           NA            NA  
+##  5  2007 Adelie  Torgersen           36.7          19.3
+##  6  2007 Adelie  Torgersen           39.3          20.6
+##  7  2007 Adelie  Torgersen           38.9          17.8
+##  8  2007 Adelie  Torgersen           39.2          19.6
+##  9  2007 Adelie  Torgersen           34.1          18.1
+## 10  2007 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 3 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;
+```
+
+---
+
+# Смена позиции столбца: **relocate()**
+## Переместить `flipper_length_mm` после `island` 
+
+```r
+penguins %&gt;%
+  relocate(flipper_length_mm, .after = island)
+```
+
+```
+## # A tibble: 344 x 8
+##    species island    flipper_length_mm bill_length_mm
+##    &lt;fct&gt;   &lt;fct&gt;                 &lt;int&gt;          &lt;dbl&gt;
+##  1 Adelie  Torgersen               181           39.1
+##  2 Adelie  Torgersen               186           39.5
+##  3 Adelie  Torgersen               195           40.3
+##  4 Adelie  Torgersen                NA           NA  
+##  5 Adelie  Torgersen               193           36.7
+##  6 Adelie  Torgersen               190           39.3
+##  7 Adelie  Torgersen               181           38.9
+##  8 Adelie  Torgersen               195           39.2
+##  9 Adelie  Torgersen               193           34.1
+## 10 Adelie  Torgersen               190           42  
+## # ... with 334 more rows, and 4 more variables:
+## #   bill_depth_mm &lt;dbl&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Смена позиции столбца: **relocate()**
+## Переместить `bill_lenth_mm ` перед `year` 
+
+```r
+penguins %&gt;%
+  relocate(bill_length_mm, .before = year)
+```
+
+```
+## # A tibble: 344 x 8
+##    species island  bill_depth_mm flipper_length_~ body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Torger~          18.7              181        3750
+##  2 Adelie  Torger~          17.4              186        3800
+##  3 Adelie  Torger~          18                195        3250
+##  4 Adelie  Torger~          NA                 NA          NA
+##  5 Adelie  Torger~          19.3              193        3450
+##  6 Adelie  Torger~          20.6              190        3650
+##  7 Adelie  Torger~          17.8              181        3625
+##  8 Adelie  Torger~          19.6              195        4675
+##  9 Adelie  Torger~          18.1              193        3475
+## 10 Adelie  Torger~          20.2              190        4250
+## # ... with 334 more rows, and 3 more variables: sex &lt;fct&gt;,
+## #   bill_length_mm &lt;dbl&gt;, year &lt;int&gt;
+```
+
+---
+
+# Смена позиции столбца: **relocate()**
+## Переместить все числовые после факторных (номинативных)
+
+```r
+penguins %&gt;%
+  relocate(where(is.numeric), .after = where(is.factor))
+```
+
+```
+## # A tibble: 344 x 8
+##    species island    sex    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen male             39.1          18.7
+##  2 Adelie  Torgersen female           39.5          17.4
+##  3 Adelie  Torgersen female           40.3          18  
+##  4 Adelie  Torgersen &lt;NA&gt;             NA            NA  
+##  5 Adelie  Torgersen female           36.7          19.3
+##  6 Adelie  Torgersen male             39.3          20.6
+##  7 Adelie  Torgersen female           38.9          17.8
+##  8 Adelie  Torgersen male             39.2          19.6
+##  9 Adelie  Torgersen &lt;NA&gt;             34.1          18.1
+## 10 Adelie  Torgersen &lt;NA&gt;             42            20.2
+## # ... with 334 more rows, and 3 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, year &lt;int&gt;
+```
+
+---
+
+# Смена названия столбца: **rename()**
+**Формат записи:**
+
+```r
+df %&gt;% 
+  rename(новое_имя = старое_имя)
+```
+
+**Множественное переиминование:** `rename_with()`
+
+## Переиминовать `island` в `palmer_island`
+
+```r
+penguins %&gt;%
+  rename(palmer_island = island)
+```
+
+```
+## # A tibble: 344 x 8
+##    species palmer_island bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;                  &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen               39.1          18.7
+##  2 Adelie  Torgersen               39.5          17.4
+##  3 Adelie  Torgersen               40.3          18  
+##  4 Adelie  Torgersen               NA            NA  
+##  5 Adelie  Torgersen               36.7          19.3
+##  6 Adelie  Torgersen               39.3          20.6
+##  7 Adelie  Torgersen               38.9          17.8
+##  8 Adelie  Torgersen               39.2          19.6
+##  9 Adelie  Torgersen               34.1          18.1
+## 10 Adelie  Torgersen               42            20.2
+## # ... with 334 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Смена названия столбца: **rename()**
+## Переиминовать `year` в `study_yr` и `body_mass_g` в `mass`
+
+```r
+penguins %&gt;%
+  rename(study_yr = year, mass = body_mass_g)
+```
+
+```
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, mass &lt;int&gt;, sex &lt;fct&gt;,
+## #   study_yr &lt;int&gt;
+```
+
+---
+
+# Смена названия столбца: **rename()**
+## Записать все названия стобцов заглавными
+
+```r
+penguins %&gt;%
+  rename_with(toupper)
+```
+
+```
+## # A tibble: 344 x 8
+##    SPECIES ISLAND    BILL_LENGTH_MM BILL_DEPTH_MM
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 4 more variables:
+## #   FLIPPER_LENGTH_MM &lt;int&gt;, BODY_MASS_G &lt;int&gt;, SEX &lt;fct&gt;,
+## #   YEAR &lt;int&gt;
+```
+
+---
+
+# Смена названия столбца: **rename()**
+## Записать все названия стобцов которые заканчиваются на “mm” заглавными
+
+```r
+penguins %&gt;%
+  rename_with(toupper, ends_with("mm"))
+```
+
+```
+## # A tibble: 344 x 8
+##    species island    BILL_LENGTH_MM BILL_DEPTH_MM
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 4 more variables:
+## #   FLIPPER_LENGTH_MM &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Смена названия столбца: **rename()**
+## Заменить в названиях `_` на `.`
+
+```r
+penguins %&gt;%
+  rename_with(~ gsub("_", ".", .x))
+```
+
+```
+## # A tibble: 344 x 8
+##    species island    bill.length.mm bill.depth.mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 4 more variables:
+## #   flipper.length.mm &lt;int&gt;, body.mass.g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Создание новых столбцов: **mutate()**
+**Формат записи:**
+
+```r
+df %&gt;% 
+  mutate(имя_нового_столбца = содержание_столбца)
+```
+
+## Создать новую переменну с весом пингвинов в кг
+
+```r
+penguins %&gt;%
+  mutate(body_mass_kg = body_mass_g / 1000)
+```
+
+```
+## # A tibble: 344 x 9
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 5 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;, body_mass_kg &lt;dbl&gt;
+```
+
+---
+
+# Создание новых столбцов: **mutate()**
+## Создать новую переменну с отношением длинны плавника к его ширине
+
+```r
+penguins %&gt;%
+  mutate(bill_ratio = bill_length_mm / bill_depth_mm)
+```
+
+```
+## # A tibble: 344 x 9
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 5 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;, bill_ratio &lt;dbl&gt;
+```
+
+---
+
+# Создание новых столбцов: **mutate()**
+## Создать несколько новых переменных
+
+```r
+penguins %&gt;%
+  mutate(bill_ratio = bill_length_mm / bill_depth_mm,
+         body_mass_kg = body_mass_g / 1000,
+         flipper_length_m = flipper_length_mm / 1000)
+```
+
+```
+## # A tibble: 344 x 11
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 7 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;, bill_ratio &lt;dbl&gt;, body_mass_kg &lt;dbl&gt;,
+## #   flipper_length_m &lt;dbl&gt;
+```
+
+---
+
+# Создание новых столбцов: **mutate()**
+## Добавьте новый столбец с последовательностью значений от 1 до длины дата фрейма.
+.code60[
+.pull-left[
+
+```r
+penguins %&gt;%
+  mutate(record_number = row_number()) %&gt;% 
+  relocate(record_number) %&gt;% 
+  select(1:3)
+```
+
+```
+## # A tibble: 344 x 3
+##    record_number species island   
+##            &lt;int&gt; &lt;fct&gt;   &lt;fct&gt;    
+##  1             1 Adelie  Torgersen
+##  2             2 Adelie  Torgersen
+##  3             3 Adelie  Torgersen
+##  4             4 Adelie  Torgersen
+##  5             5 Adelie  Torgersen
+##  6             6 Adelie  Torgersen
+##  7             7 Adelie  Torgersen
+##  8             8 Adelie  Torgersen
+##  9             9 Adelie  Torgersen
+## 10            10 Adelie  Torgersen
+## # ... with 334 more rows
+```
+]
+.pull-right[
+
+```r
+penguins %&gt;%
+  mutate(record_number = seq(1:n())) %&gt;% 
+  relocate(record_number) %&gt;% 
+  select(1:3)
+```
+
+```
+## # A tibble: 344 x 3
+##    record_number species island   
+##            &lt;int&gt; &lt;fct&gt;   &lt;fct&gt;    
+##  1             1 Adelie  Torgersen
+##  2             2 Adelie  Torgersen
+##  3             3 Adelie  Torgersen
+##  4             4 Adelie  Torgersen
+##  5             5 Adelie  Torgersen
+##  6             6 Adelie  Torgersen
+##  7             7 Adelie  Torgersen
+##  8             8 Adelie  Torgersen
+##  9             9 Adelie  Torgersen
+## 10            10 Adelie  Torgersen
+## # ... with 334 more rows
+```
+]
+]
+
+---
+
+# Создание новых столбцов: **mutate()**
+## Преобразуйте переменную `island` в строку
+
+```r
+penguins %&gt;%
+  mutate(island = as.character(island))
+```
+
+```
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Создание новых столбцов: **mutate()**
+## Используйте `fct_relevel()` внутри `mutate()`, чтобы переупорядочить уровни фактора `island` на (1) Torgersen, (2) Biscoe, (3) Dream.
+
+&gt; См. `fct_relevel()` и `fct_reorder()` в пакете `forcats`, чтобы изменить порядок уровней факторов.
+
+
+```r
+penguins %&gt;%
+  mutate(island = fct_relevel(island, "Torgersen", "Biscoe", "Dream"))
+```
+
+```
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 4 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;
+```
+
+---
+
+# Группировка и агрегация:
+## group_by() %&gt;% summarize()
+### Расчитать средний вес по виду пингвинов
+
+&gt; `na.rm = TRUE` используется для исключения пропущенных значений 
+
+
+```r
+penguins %&gt;%
+  group_by(species) %&gt;%
+  summarize(mass_mean = mean(body_mass_g, na.rm = TRUE))
+```
+
+```
+## # A tibble: 3 x 2
+##   species   mass_mean
+##   &lt;fct&gt;         &lt;dbl&gt;
+## 1 Adelie        3701.
+## 2 Chinstrap     3733.
+## 3 Gentoo        5076.
+```
+
+---
+
+# group_by() %&gt;% summarize()
+## Расчитать средний вес и стандартное отклонение веса по виду пингвинов
+
+```r
+penguins %&gt;%
+  group_by(species) %&gt;%
+  summarize(mass_mean = mean(body_mass_g, na.rm = TRUE),
+            mass_sd = sd(body_mass_g, na.rm = TRUE))
+```
+
+```
+## # A tibble: 3 x 3
+##   species   mass_mean mass_sd
+##   &lt;fct&gt;         &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Adelie        3701.    459.
+## 2 Chinstrap     3733.    384.
+## 3 Gentoo        5076.    504.
+```
+
+---
+
+# group_by() %&gt;% summarize()
+## Расчитать средний вес и стандартное отклонение веса по виду и полу пингвинов 
+
+```r
+penguins %&gt;%
+  group_by(species, sex) %&gt;%
+  summarize(bill_length_mean = mean(bill_length_mm, na.rm = TRUE),
+            bill_length_sd = sd(bill_length_mm, na.rm = TRUE))
+```
+
+```
+## # A tibble: 8 x 4
+## # Groups:   species [3]
+##   species   sex    bill_length_mean bill_length_sd
+##   &lt;fct&gt;     &lt;fct&gt;             &lt;dbl&gt;          &lt;dbl&gt;
+## 1 Adelie    female             37.3           2.03
+## 2 Adelie    male               40.4           2.28
+## 3 Adelie    &lt;NA&gt;               37.8           2.80
+## 4 Chinstrap female             46.6           3.11
+## 5 Chinstrap male               51.1           1.56
+## 6 Gentoo    female             45.6           2.05
+## 7 Gentoo    male               49.5           2.72
+## 8 Gentoo    &lt;NA&gt;               45.6           1.37
+```
+
+---
+
+# group_by() %&gt;% summarize()
+## Найти максимальную и минимальную длинну мужских особей вида Adelie на каждом острове
+
+```r
+penguins %&gt;%
+  filter(species == "Adelie", sex == "male") %&gt;%
+  group_by(island) %&gt;%
+  summarize(flip_max_length = max(flipper_length_mm),
+            flip_min_length = min(flipper_length_mm))
+```
+
+```
+## # A tibble: 3 x 3
+##   island    flip_max_length flip_min_length
+##   &lt;fct&gt;               &lt;int&gt;           &lt;int&gt;
+## 1 Biscoe                203             180
+## 2 Dream                 208             178
+## 3 Torgersen             210             181
+```
+
+---
+
+# across()
+`across()` упрощает применение одного и того же преобразования к нескольким столбцам. Очень полезно с `summarize()`
+
+.panelset[
+.panel[.panel-name[Без across()]
+
+```r
+penguins %&gt;%
+  group_by(species) %&gt;%
+  summarize(bill_length_mean = mean(bill_length_mm, na.rm = TRUE),
+            bill_depth_mean = mean(bill_depth_mm, na.rm = TRUE),
+            flipper_length_mean = mean(flipper_length_mm, na.rm = TRUE))
+```
+
+```
+## # A tibble: 3 x 4
+##   species   bill_length_mean bill_depth_mean flipper_length_~
+##   &lt;fct&gt;                &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Adelie                38.8            18.3             190.
+## 2 Chinstrap             48.8            18.4             196.
+## 3 Gentoo                47.5            15.0             217.
+```
+]
+
+.panel[.panel-name[С использование across()]
+
+```r
+penguins %&gt;%
+  group_by(species) %&gt;%
+  summarize(across(ends_with("mm"), mean, na.rm = TRUE))
+```
+
+```
+## # A tibble: 3 x 4
+##   species   bill_length_mm bill_depth_mm flipper_length_mm
+##   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
+## 1 Adelie              38.8          18.3              190.
+## 2 Chinstrap           48.8          18.4              196.
+## 3 Gentoo              47.5          15.0              217.
+```
+]
+
+.panel[.panel-name[Еще примеры]
+
+```r
+penguins %&gt;%
+  group_by(species, island) %&gt;%
+  summarize(across(bill_depth_mm:body_mass_g, min, na.rm = TRUE))
+```
+
+```
+## # A tibble: 5 x 5
+## # Groups:   species [3]
+##   species   island bill_depth_mm flipper_length_~ body_mass_g
+##   &lt;fct&gt;     &lt;fct&gt;          &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
+## 1 Adelie    Biscoe          16                172        2850
+## 2 Adelie    Dream           15.5              178        2900
+## 3 Adelie    Torge~          15.9              176        2900
+## 4 Chinstrap Dream           16.4              178        2700
+## 5 Gentoo    Biscoe          13.1              203        3950
+```
+
+]
+
+.panel[.panel-name[И еще...]
+
+```r
+penguins %&gt;%
+  group_by(species) %&gt;%
+  summarize(across(c(bill_length_mm, body_mass_g), min, na.rm = TRUE))
+```
+
+```
+## # A tibble: 3 x 3
+##   species   bill_length_mm body_mass_g
+##   &lt;fct&gt;              &lt;dbl&gt;       &lt;int&gt;
+## 1 Adelie              32.1        2850
+## 2 Chinstrap           40.9        2700
+## 3 Gentoo              40.9        3950
+```
+
+]
+]
+
+---
+
+# across()
+## А что с названиями?
+
+--
+
+.panelset[
+.panel[.panel-name[Всё хорошо :)]
+
+```r
+penguins %&gt;%
+  group_by(year) %&gt;%
+  summarise(across(starts_with("bill"),
+                   max, na.rm = TRUE,
+                   .names = "max_{.col}"))
+```
+
+```
+## # A tibble: 3 x 3
+##    year max_bill_length_mm max_bill_depth_mm
+##   &lt;int&gt;              &lt;dbl&gt;             &lt;dbl&gt;
+## 1  2007               59.6              21.5
+## 2  2008               54.3              21.1
+## 3  2009               55.9              20.7
+```
+]
+
+.panel[.panel-name[И можно еще лучше]
+
+```r
+penguins %&gt;%
+  group_by(species) %&gt;%
+  summarize(across(contains("length"),
+                   list(avg = mean, stdev = sd),
+                   na.rm = TRUE,
+                   .names = "{.fn}_{.col}"))
+```
+
+```
+## # A tibble: 3 x 5
+##   species  avg_bill_length~ stdev_bill_leng~ avg_flipper_len~
+##   &lt;fct&gt;               &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Adelie               38.8             2.66             190.
+## 2 Chinstr~             48.8             3.34             196.
+## 3 Gentoo               47.5             3.08             217.
+## # ... with 1 more variable: stdev_flipper_length_mm &lt;dbl&gt;
+```
+]
+]
+
+---
+
+# Посчёт количества: **count()**
+**Два варианта:**
+1. Использование `group_by()` %&gt;% `summarize()` с `n()`
+2. Использование `count()`, что гараздо удобней
+
+.pull-left[
+
+```r
+penguins %&gt;%
+  group_by(species) %&gt;%
+  summarize(
+    n = n())
+```
+
+```
+## # A tibble: 3 x 2
+##   species       n
+##   &lt;fct&gt;     &lt;int&gt;
+## 1 Adelie      152
+## 2 Chinstrap    68
+## 3 Gentoo      124
+```
+
+]
+
+.pull-right[
+
+```r
+penguins %&gt;%
+  count(species)
+```
+
+```
+## # A tibble: 3 x 2
+##   species       n
+##   &lt;fct&gt;     &lt;int&gt;
+## 1 Adelie      152
+## 2 Chinstrap    68
+## 3 Gentoo      124
+```
+]
+
+---
+
+# Посчёт количества: **count()**
+## Подсчитать количество пингвинов по видам и годам.
+
+```r
+penguins %&gt;%
+  count(species, year)
+```
+
+```
+## # A tibble: 9 x 3
+##   species    year     n
+##   &lt;fct&gt;     &lt;int&gt; &lt;int&gt;
+## 1 Adelie     2007    50
+## 2 Adelie     2008    50
+## 3 Adelie     2009    52
+## 4 Chinstrap  2007    26
+## 5 Chinstrap  2008    18
+## 6 Chinstrap  2009    24
+## 7 Gentoo     2007    34
+## 8 Gentoo     2008    46
+## 9 Gentoo     2009    44
+```
+
+---
+
+# Посчёт количества: **count()**
+## Подсчитать количество наблюдений по островам
+
+```r
+penguins %&gt;%
+  count(island)
+```
+
+```
+## # A tibble: 3 x 2
+##   island        n
+##   &lt;fct&gt;     &lt;int&gt;
+## 1 Biscoe      168
+## 2 Dream       124
+## 3 Torgersen    52
+```
+
+---
+
+# Если-то: **case_when()**
+Функция `case_when()` похожа на очень удобный оператор if-else. При использовании внутри `mutate()` он позволяет добавить новый столбец, содержащий значения, зависящие от ваших условий.
+## Создать новый столбец `size_bin` по условиям:
+* «large», если масса тела превышает 4500 г.
+* «medium», если масса тела больше 3000 г и меньше или равна 4500 г
+* «small», если масса тела меньше или равна 3000 г
+
+```r
+penguins %&gt;%
+  mutate(size_bin = case_when(
+      body_mass_g &gt; 4500 ~ "large",
+      body_mass_g &gt; 3000 &amp; body_mass_g &lt;= 4500 ~ "medium",
+      body_mass_g &lt;= 3000 ~ "small"
+    ))
+```
+
+```
+## # A tibble: 344 x 9
+##    species island    bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7
+##  2 Adelie  Torgersen           39.5          17.4
+##  3 Adelie  Torgersen           40.3          18  
+##  4 Adelie  Torgersen           NA            NA  
+##  5 Adelie  Torgersen           36.7          19.3
+##  6 Adelie  Torgersen           39.3          20.6
+##  7 Adelie  Torgersen           38.9          17.8
+##  8 Adelie  Torgersen           39.2          19.6
+##  9 Adelie  Torgersen           34.1          18.1
+## 10 Adelie  Torgersen           42            20.2
+## # ... with 334 more rows, and 5 more variables:
+## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
+## #   year &lt;int&gt;, size_bin &lt;chr&gt;
+```
+
+---
+
+# Если-то: **case_when()**
+.panelset[
+.panel[.panel-name[Условия:]
+* Отобрать только `species`, `year` и `flipper_length_mm.`
+* Переименовать столбец `year` в `study_year.`
+* Оставить наблюдения только за пингвинами Adelie
+* Добавьте новый столбец с именем `flipper_rank`, который содержит:
+  * 1, если `flipper_length_mm` &lt; 200 мм
+  * 2, если `flipper_length_mm` &gt;= 200 мм
+  * 0, если `flipper_length_mm` имеет другие значения (например, `NA`)
+]
+.panel[.panel-name[Код:]
+
+```r
+penguins %&gt;%
+  select(species, year, flipper_length_mm) %&gt;%
+  rename(study_year = year) %&gt;%
+  filter(species == "Adelie") %&gt;%
+  mutate(flipper_rank = case_when(
+    flipper_length_mm &lt; 200 ~ 1,
+    flipper_length_mm &gt;= 200 ~ 2,
+    TRUE ~ 0 # 0 для всего остального
+  ))
+```
+
+```
+## # A tibble: 152 x 4
+##    species study_year flipper_length_mm flipper_rank
+##    &lt;fct&gt;        &lt;int&gt;             &lt;int&gt;        &lt;dbl&gt;
+##  1 Adelie        2007               181            1
+##  2 Adelie        2007               186            1
+##  3 Adelie        2007               195            1
+##  4 Adelie        2007                NA            0
+##  5 Adelie        2007               193            1
+##  6 Adelie        2007               190            1
+##  7 Adelie        2007               181            1
+##  8 Adelie        2007               195            1
+##  9 Adelie        2007               193            1
+## 10 Adelie        2007               190            1
+## # ... with 142 more rows
+```
+
+]]
+
+---
+
+# Длинный и широкий формат
+## `pivot_longer()`
+
+```r
+penguins %&gt;% 
+  pivot_longer(cols = contains("_"),
+               names_to = "var_name",
+               values_to = "var_value")
+```
+
+```
+## # A tibble: 1,376 x 6
+##    species island    sex     year var_name          var_value
+##    &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt; &lt;chr&gt;                 &lt;dbl&gt;
+##  1 Adelie  Torgersen male    2007 bill_length_mm         39.1
+##  2 Adelie  Torgersen male    2007 bill_depth_mm          18.7
+##  3 Adelie  Torgersen male    2007 flipper_length_mm     181  
+##  4 Adelie  Torgersen male    2007 body_mass_g          3750  
+##  5 Adelie  Torgersen female  2007 bill_length_mm         39.5
+##  6 Adelie  Torgersen female  2007 bill_depth_mm          17.4
+##  7 Adelie  Torgersen female  2007 flipper_length_mm     186  
+##  8 Adelie  Torgersen female  2007 body_mass_g          3800  
+##  9 Adelie  Torgersen female  2007 bill_length_mm         40.3
+## 10 Adelie  Torgersen female  2007 bill_depth_mm          18  
+## # ... with 1,366 more rows
+```
+
+---
+
+# Длинный и широкий формат
+## `pivot_longer()`
+
+```r
+penguins_longer &lt;- penguins %&gt;% 
+  pivot_longer(cols = contains("_"),
+               names_sep = "_",
+               names_to = c("part", "measure", "unit"),
+               values_to = "var_value")
+
+penguins_longer
+```
+
+```
+## # A tibble: 1,376 x 8
+##    species island  sex     year part  measure unit  var_value
+##    &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
+##  1 Adelie  Torger~ male    2007 bill  length  mm         39.1
+##  2 Adelie  Torger~ male    2007 bill  depth   mm         18.7
+##  3 Adelie  Torger~ male    2007 flip~ length  mm        181  
+##  4 Adelie  Torger~ male    2007 body  mass    g        3750  
+##  5 Adelie  Torger~ female  2007 bill  length  mm         39.5
+##  6 Adelie  Torger~ female  2007 bill  depth   mm         17.4
+##  7 Adelie  Torger~ female  2007 flip~ length  mm        186  
+##  8 Adelie  Torger~ female  2007 body  mass    g        3800  
+##  9 Adelie  Torger~ female  2007 bill  length  mm         40.3
+## 10 Adelie  Torger~ female  2007 bill  depth   mm         18  
+## # ... with 1,366 more rows
+```
+
+---
+# Длинный и широкий формат
+## `pivot_wider()`
+
+```r
+penguins_longer %&gt;% 
+  pivot_wider(names_from = c("part", "measure", "unit"),
+                     values_from = "var_value",
+                     names_sep = "_",
+                     values_fn = mean)
+```
+
+```
+## # A tibble: 35 x 8
+##    species island    sex    year bill_length_mm bill_depth_mm
+##    &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt; &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Adelie  Torgersen male   2007           39.9          20.5
+##  2 Adelie  Torgersen fema~  2007           38.3          18.2
+##  3 Adelie  Torgersen &lt;NA&gt;   2007           NA            NA  
+##  4 Adelie  Biscoe    fema~  2007           37.5          18.6
+##  5 Adelie  Biscoe    male   2007           39.2          18.3
+##  6 Adelie  Dream     fema~  2007           37.9          17.8
+##  7 Adelie  Dream     male   2007           40.4          19.4
+##  8 Adelie  Dream     &lt;NA&gt;   2007           37.5          18.9
+##  9 Adelie  Biscoe    fema~  2008           36.6          17.2
+## 10 Adelie  Biscoe    male   2008           40.8          19.0
+## # ... with 25 more rows, and 2 more variables:
+## #   flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;
+```
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

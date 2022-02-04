@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Основы R для бизнеса</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Игорь Мирошниченко" />
+    <meta name="date" content="2022-02-03" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+    <script src="libs/freezeframe/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Основы R для бизнеса
+## 01 - Введение в язык R
+### Игорь Мирошниченко
+### Carat
+### 2022-02-03
+
+---
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 27px;
+    padding: 1em 4em 1em 2em;
+}&lt;/style&gt;
+
+
+# Немного о себе
+
+## Игорь Викторович Мирошниченко
+
+* кандидат экономических наук 
+* доцент кафедры математического моделирования и статистики КНЕУ
+* преподаватель [Международного института бизнеса (MBA)](https://iib.com.ua/)
+
+
+  * **email**: ihor.miroshnychenko@kneu.ua
+  * **site**: [aranaur.rbind.io](https://aranaur.rbind.io)
+  * **Github**: [@aranaur](https://github.com/Aranaur)
+  * **LinkedIn**: [@ihormiroshnychenko](https://www.linkedin.com/in/ihormiroshnychenko/)
+  * **тел.**: +380976391806
+
+---
+
+# Установка R + RStudio IDE
+## R:
+- [Windows](https://cran.r-project.org/bin/windows/base/)
+- [MacOS](https://cran.r-project.org/bin/macosx/)
+- [Linux](https://cran.rstudio.com/bin/linux/)
+
+## RStudio:
+[https://rstudio.com/products/rstudio/download/](https://rstudio.com/products/rstudio/download/)
+
+## Cloud:
+- [RStudio Cloud](https://rstudio.cloud/)
+- [Google Colab](https://colab.research.google.com/#create=true&amp;language=r)
+
+---
+
+# R + RStudio
+
+.center[
+![](img/r_00.png) и ![](img/rstudio_00.png)
+]
+
+---
+
+# RStudio
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/rstudio_01.png" alt="Базовий інтерфейс RStudio" width="100%" /&gt;
+&lt;p class="caption"&gt;Базовий інтерфейс RStudio&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# RStudio
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/rstudio_02.png" alt="Створення скрипта в RStudio" width="75%" /&gt;
+&lt;p class="caption"&gt;Створення скрипта в RStudio&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# RStudio
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/rstudio_03.png" alt="Інтерфейс RStudio" width="100%" /&gt;
+&lt;p class="caption"&gt;Інтерфейс RStudio&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# Базовые операции: арифметика
+
+| Оператор | Описание                 | Пример |
+|:--------:|----------------------|---------|
+|     +    | Сумма            | a + b   |
+|     -    | Разница           | a - b   |
+|     *    | Умножение             | a * b   |
+|     /    | Деление              | a / b   |
+|     ^    | Степень              | a ^ b   |
+|    %%    | Остаток от деления  | a %% b  |
+|    %/%   | Целочисленное деление | a %/% b |
+
+---
+
+# Базовые операции: арифметика
+.pull-left[
+
+```r
+2 + 2
+```
+
+```
+## [1] 4
+```
+
+
+```r
+5 - 2
+```
+
+```
+## [1] 3
+```
+
+
+```r
+3 * 5
+```
+
+```
+## [1] 15
+```
+
+
+```r
+25 / 5
+```
+
+```
+## [1] 5
+```
+]
+.pull-right[
+
+```r
+3 ^ 3 
+```
+
+```
+## [1] 27
+```
+
+
+```r
+17 %% 3
+```
+
+```
+## [1] 2
+```
+
+
+```r
+17 %/% 5
+```
+
+```
+## [1] 3
+```
+]
+
+---
+
+# Комментарии к коду
+Для написания комментариев к коду используется решётка `#`. 
+
+Всё, что после `#` игнорируется интерпретатором.
+
+```r
+# look at this awesome code
+2 + 2 - 3 + 1
+```
+
+```
+## [1] 2
+```
+
+
+```r
+2 + 2 - 3 + 1 # look at this awesome code
+```
+
+```
+## [1] 2
+```
+
+Если надо "закомментировать" часть кода используем **Ctrl + Shift + C**
+
+---
+
+# Приоритеты расчётов
+После знакомства с арифметикой в R возникает логичный вопрос по поводу приоритетов операторов.
+
+На самом деле, здесь все просто, приоритеты работают как в математике. 
+
+Поэтому не забывайте правильно расставлять скобки.
+
+```r
+2 + 3 * 4
+```
+
+```
+## [1] 14
+```
+
+```r
+(2 + 3) * 4
+```
+
+```
+## [1] 20
+```
+
+---
+
+# Готовые функции
+
+Кроме обычных арифметических операторов, в языке программирования R сразу встроено много разнообразных функций, в том числе и математических.
+
+Для расчета квадратного корня из числа используется функция `sqrt()`, которая может быть вам знакома, если вы пользовались англоязычной версией Excel.
+
+```r
+9^0.5
+```
+
+```
+## [1] 3
+```
+
+```r
+sqrt(9)
+```
+
+```
+## [1] 3
+```
+
+---
+
+# Готовые функции
+&gt; ***Язык программирования R чувствителен к регистру***, так что варианты Sqrt(9), SQRT(9) работать не будут.
+
+Вместе с тем внутри функции можно проводить математические расчеты:
+
+```r
+sqrt((2 + 3) * 4)
+```
+
+```
+## [1] 4.472136
+```
+
+Функция `abs()` рассчитывает абсолютное значение:
+
+```r
+abs(3 - 5)
+```
+
+```
+## [1] 2
+```
+
+---
+
+# Готовые функции
+Расчет натурального логарифма через функцию `log()`:
+
+
+```r
+log(15)
+```
+
+```
+## [1] 2.70805
+```
+
+Но это еще не все, поскольку для логарифма свойственно иметь основу, то в таких случаях следует добавить в середине скобок дополнительный аргумент `base=`:
+
+```r
+log(x = 10, base = 3)
+```
+
+```
+## [1] 2.095903
+```
+
+---
+
+# Готовые функции
+
+Аргументы функций можно изменять местами:
+
+```r
+log(base = 3, x = 10)
+```
+
+```
+## [1] 2.095903
+```
+
+Кстати, не обязательно писать названия аргументов функций. Если вы уверены в их порядке, запись может выглядеть следующим образом:
+
+```r
+log(10, 3)
+```
+
+```
+## [1] 2.095903
+```
+
+---
+
+# Встроенная документация
+Уже на этом этапе может возникнуть ряд вопросов:
+
+* где найти описание функции?
+* какие существуют аргументы функций?
+* есть ли примеры использования функций?
+
+Ответ достаточно прост: все функции сопровождаются подробной документацией. Для ее вызова можно воспользоваться функцией `help()`, где внутри скобок указать название функции:
+
+
+```r
+help(abs)
+?abs()
+```
+
+---
+
+# Встроенная документация
+Но, по моему мнению, самый быстрый вариант - это написать функцию и нажать клавишу **F1** на клавиатуре.
+
+Все указанные варианты приведут вас к окну документации в правом нижнем углу RStudio:
+![](img/rstudio_04_fix.png)
+
+---
+
+# Где искать помощь?
+
+## Для начала тут:
+
+* **Google**
+
+* **Stack Overflow**
+
+## А уже потом в телеграм-каналах:
+
+* **"Взрослый" канал:** [R (язык программирования)](https://t.me/rlang_ru). &lt;br&gt; *Читайте правила сообщества!*
+
+* **Канал для новичков:** [Горячая линия R](https://t.me/hotlineR_EU)
+
+* **Канал Алексея Селезнёва:** [R4marketing](https://t.me/R4marketing)
+
+* **Лента новостей по языку:** [R Feed](https://t.me/rlang_feed)
+
+---
+
+# Создание переменных
+Еще один важный пункт во многих языках программирования - возможность сохранять значения в переменных.
+
+В R это делается с помощью символов **&lt;-**. 
+
+Для быстрого написания существует удобная комбинация клавиш `Alt+-`.
+
+**Слева** от символа **&lt;-** записывается название будущей переменной. 
+
+**Справа** значение или выражение, которое необходимо сохранить в этой переменной.
+
+```r
+x &lt;- 2
+y &lt;- 4
+z &lt;- sqrt(x^2 + y^3)
+```
+
+---
+
+# Создание переменных
+&gt; Для присвоения можно использовать и знак **=**, но среди сообщества пользователей R это не принято.
+
+.pull-left[
+![](img/assignment.jpg)
+
+]
+.pull-right[
+
+```r
+# Good
+x &lt;- 2
+# Bad
+x = 2
+```
+]
+
+---
+
+# Создание переменных
+Следует обратить внимание, что при присваивании результат расчета не выводится в консоль. Если же хочется просмотреть результат, следует использовать функцию `print()` или просто обратиться к созданной переменной:
+
+
+```r
+print(z)
+```
+
+```
+## [1] 8.246211
+```
+
+```r
+z
+```
+
+```
+## [1] 8.246211
+```
+
+---
+
+# Создание переменных
+После создания переменная появляется во вкладке **Environment** рабочего пространства RStudio:
+.center[
+![](img/rstudio_05.png)
+]
+
+---
+
+# Операторы сравнения
+| Операторы сравнения | Описание                | Пример |
+|:-------------------:|---------------------|---------|
+|          ==         | Равно            | a == b  |
+|          !=         | Не равно         | a != b  |
+|          &gt;          | Больше              | a &gt; b   |
+|          &lt;          | Меньше               | a &lt; b   |
+|          &gt;=         | Больше або равно | a &gt;= b  |
+|          &lt;=         | Меньше або равно  | a &lt;= b  |
+
+&gt; Отдельно замечу, что для сравнения двух переменных используется оператор с двойным знаком равено `==`, а не с одним `=`.
+
+---
+
+# Типы данных
+Информация хранится в разных типах данных. Это может быть число, текст, булевая переменная и т.д.
+
+Один из самых популярных вариантов сохранения данных - это **числовой формат**. В языке программирования R для него имеется отдельный класс - **numeric**. При этом существует три типа numeric:
+- Целые - **integer**.
+- Дробные – **double**.
+- Комплексные – **complex**.
+
+---
+
+# Типы данных
+
+В большинстве случаев R будет сам конвертировать числа в нужный формат. Но если необходимо задать конкретный тип числа, то можно использовать функции `as.integer()`, `as.double()` и `as.complex()`.
+&gt; В языке программирования R достаточно много функций, начинающихся на `as.`, которые переводят объект в конкретный класс. То есть просит читать данные внутри скобок в соответствующем формате.
+
+&gt; Функции, начинающиеся на `is.` проверяют, принадлежит ли объект к выбранному классу.
+
+.pull-left[
+
+```r
+is.integer(10)
+```
+
+```
+## [1] FALSE
+```
+]
+.pull-right[
+
+```r
+is.integer(10L)
+```
+
+```
+## [1] TRUE
+```
+]
+
+---
+
+# Типы данных
+Для работы с **текстовыми данными** есть класс **character**. Они записываются в кавычках, при этом можно использовать как двойные `"`, так и одинарные `'`.
+
+```r
+is.character("Ash nazg durbatulûk, ash nazg gimbatul,
+             ash nazg thrakatulûk, agh burzum-ishi krimpatul.")
+```
+
+```
+## [1] TRUE
+```
+
+**Логические (logical) данные** - это тип данных, принимающих только значения `TRUE` или `FALSE`. Мы с ними уже встречались, когда использовали операторы сравнения.
+
+Для проверки типа данных используется функция `class()`:
+.code50[
+
+```r
+class(5)
+```
+
+```
+## [1] "numeric"
+```
+]
+
+---
+
+# Структуры данных
+R работает с множеством структур данных: векторы, матрицы, массивы, дата фреймы и списки. Они отличаются по способу создания, структуре, сложности строения и способу обращения к их элементам.
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/001_data_stucture.png" alt="Структури даних R" width="80%" /&gt;
+&lt;p class="caption"&gt;Структури даних R&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# Вектор
+Начнем с самого простого. **Вектор** – это одномерная последовательность элементов **одного типа**. Для создания вектора используется функция `c()`.
+
+```r
+c(2, 4, 8, -2, -6, 0)
+```
+
+```
+## [1]  2  4  8 -2 -6  0
+```
+
+```r
+c("два", "чотири", "шість")
+```
+
+```
+## [1] "два"    "чотири" "шість"
+```
+
+```r
+c(TRUE, TRUE, FALSE)
+```
+
+```
+## [1]  TRUE  TRUE FALSE
+```
+
+---
+
+# Вектор
+Для создания последовательностей с шагом 1 удобно использовать оператор `:`
+
+```r
+-5:5
+```
+
+```
+##  [1] -5 -4 -3 -2 -1  0  1  2  3  4  5
+```
+
+```r
+3:-2
+```
+
+```
+## [1]  3  2  1  0 -1 -2
+```
+
+---
+
+# Вектор
+Для более сложных последовательностей есть встроенная функция `seq()` (не забывайте смотреть справку по функциям)
+
+```r
+seq(1, 10, by = 2)
+```
+
+```
+## [1] 1 3 5 7 9
+```
+
+Кроме того, можно задать не только шаг последовательности (аргумент `by=`), но и длину (аргумент `length.out=`)
+
+```r
+seq(1, 10, length.out = 3)
+```
+
+```
+## [1]  1.0  5.5 10.0
+```
+
+---
+
+# Вектор
+Другая полезная функция `rep()` позволяет создать вектор с повторяющимися значениями. Первый аргумент – значение которое следует повторять, второй аргумент – сколько раз повторять.
+
+```r
+rep(3, 5)
+```
+
+```
+## [1] 3 3 3 3 3
+```
+При этом и первый и второй аргумент может быть вектором:
+.code70[
+
+```r
+rep(1:3, 5)
+```
+
+```
+##  [1] 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3
+```
+
+```r
+rep(1:3, 1:3)
+```
+
+```
+## [1] 1 2 2 3 3 3
+```
+]
+
+---
+
+# Вектор
+Кроме того, можно объединять векторы:
+
+```r
+v1 &lt;- c("Say", "friend")
+
+v2 &lt;- c("and", "enter")
+
+c(v1, v2)
+```
+
+```
+## [1] "Say"    "friend" "and"    "enter"
+```
+
+---
+
+# Вектор
+
+В определении вектора в языке программирования R говорится, что **все элементы вектора должны быть одного типа**. 
+
+Сразу хочется проверить, что будет, если это условие не выполняется. 
+
+Язык программирования R, при расхождении типов, будет сводить все к "общему знаменателю", то есть конвертировать данные по определенным правилам – приведение типов (coercion).
+
+Выделяют два типа:
+
+- **неявное приведение типов (implicit coercion)**, когда все происходит автоматически по встроенным правилам.
+- **явное приведение типов (explicit coercion)**, когда мы сами решаем, к какому типу перевести данные, если это возможно.
+
+---
+
+# Вектор
+.pull-left[
+Пример **неявного приведения** типов:
+
+```r
+c(TRUE, 2, FALSE)
+```
+
+```
+## [1] 1 2 0
+```
+
+```r
+3 - TRUE
+```
+
+```
+## [1] 2
+```
+`TRUE` превратился в `1`, а `FALSE` в `0`.
+]
+.pull-right[
+В этом случае все данные приведены к текстовому типу:
+
+```r
+c(TRUE, 2, "Hello")
+```
+
+```
+## [1] "TRUE"  "2"     "Hello"
+```
+]
+
+У R есть своя иерархия типов:
+`NULL &lt; raw &lt; logical &lt; integer &lt; double &lt; complex &lt; character &lt; list &lt; expression`
+
+---
+
+# Вектор
+Для **явного приведения** типов данных используется семейство функций, начинающееся на `as.`:
+
+```r
+as.numeric(c(TRUE, 2, FALSE, FALSE))
+```
+
+```
+## [1] 1 2 0 0
+```
+
+```r
+as.character(c(TRUE, 2, FALSE, FALSE))
+```
+
+```
+## [1] "1" "2" "0" "0"
+```
+
+---
+
+# Операции с векторами
+Все рассматриваемые ранее арифметические операции можно использовать и **к векторам одинаковой длины**:
+.pull-left[
+
+```r
+q &lt;- 1:5
+
+w &lt;- 2:6
+
+q + w
+```
+
+```
+## [1]  3  5  7  9 11
+```
+
+```r
+q - w
+```
+
+```
+## [1] -1 -1 -1 -1 -1
+```
+]
+.pull-right[
+
+```r
+q * w
+```
+
+```
+## [1]  2  6 12 20 30
+```
+
+```r
+q / w
+```
+
+```
+## [1] 0.5000000 0.6666667 0.7500000 0.8000000 0.8333333
+```
+
+```r
+w ^ q + q - w * q
+```
+
+```
+## [1]    1    5   55  609 7751
+```
+]
+
+---
+
+# Правило переписывания
+Если **векторы не одинаковой длины** и мы хотим провести с ними определенные операции, то в таком случае сработает **правило переписывания (recycling rule)**: если более короткий вектор кратен длине более длинного, короткий будет повторяться необходимое количество раз.
+
+```r
+q &lt;- 1:2
+w &lt;- 1:4
+q * w
+```
+
+```
+## [1] 1 4 3 8
+```
+
+---
+
+# Правило переписывания
+Операции с вектором и отдельным значением можно считать частным случаем рестайлинга: отдельное значение будет повторяться необходимое количество раз:
+
+```r
+w * 2
+```
+
+```
+## [1] 2 4 6 8
+```
+
+---
+
+# Правило переписывания
+Если более короткий вектор **не кратен** более длинному (например, первый длиной 2, а другой - 3), то R все равно посчитает результат, но выдаст предупреждение:
+
+```r
+q + c(1, 5, 7)
+```
+
+```
+## Warning in q + c(1, 5, 7): longer object length is not a
+## multiple of shorter object length
+```
+
+```
+## [1] 2 7 8
+```
+
+---
+
+# Индексация векторов
+Индексация – задача выбора отдельного элемента структуры данных. 
+
+Для этого используются квадратные скобки `[]`.
+
+Самый простой вариант – индексация по номеру, т.е. порядковое значение элемента:
+
+.pull-left[
+
+```r
+e &lt;- c(-5:-3, 2, 7, -6, 4:2)
+e[1]
+```
+
+```
+## [1] -5
+```
+
+```r
+e[5]
+```
+
+```
+## [1] 7
+```
+]
+
+.pull-right[
+**Важный факт - индексация в языке программирования R начинается с 1.**
+]
+
+---
+
+# Индексация векторов
+Посредством индексации можно не только обращаться к отдельному элементу, но и заменять его значение:
+
+```r
+e[5] &lt;- 15
+```
+
+Можно использовать целые векторы для индексации:
+
+```r
+e[2:5]
+```
+
+```
+## [1] -4 -3  2 15
+```
+
+```r
+e[6:1]
+```
+
+```
+## [1] -6 15  2 -3 -4 -5
+```
+
+---
+
+# Индексация векторов
+Индексация со знаком минус выдаст все значения вектора кроме избранных:
+
+```r
+e
+```
+
+```
+## [1] -5 -4 -3  2 15 -6  4  3  2
+```
+
+```r
+e[-1]
+```
+
+```
+## [1] -4 -3  2 15 -6  4  3  2
+```
+
+```r
+e[c(-1, -5)]
+```
+
+```
+## [1] -4 -3  2 -6  4  3  2
+```
+
+---
+
+# Матрицы
+**Матрица (matrix)** - это двумерный массив данных, в котором каждый элемент имеет одинаковый тип (числовой, текстовый, логический...). Другими словами, матрица – это двумерный вектор, у которого есть длина и ширина.
+
+Создание матрицы происходит с помощью функции `matrix()`, в которой следует указать количество строк и столбцов:
+
+```r
+matrix(1:16, nrow = 4, ncol = 4)
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    5    9   13
+## [2,]    2    6   10   14
+## [3,]    3    7   11   15
+## [4,]    4    8   12   16
+```
+
+---
+
+# Матрицы
+По умолчанию значения матрицы заполняются по столбикам. Но это можно изменить с помощью аргумента `byrow=TRUE`
+
+```r
+matrix(1:16, nrow = 4, ncol = 4, byrow = TRUE)
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    2    3    4
+## [2,]    5    6    7    8
+## [3,]    9   10   11   12
+## [4,]   13   14   15   16
+```
+
+---
+
+# Матрицы
+Поскольку матрица - это двумерный массив, то для индексации используются два индекса, разделенных запятой: первый отвечает за строку, второй за столбик.
+.pull-left[
+
+```r
+my_matrix &lt;- matrix(1:16, nrow = 4, ncol = 4)
+my_matrix
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    5    9   13
+## [2,]    2    6   10   14
+## [3,]    3    7   11   15
+## [4,]    4    8   12   16
+```
+
+```r
+my_matrix[2, 3]
+```
+
+```
+## [1] 10
+```
+]
+
+.pull-right[
+
+```r
+my_matrix[1:2, 3:4]
+```
+
+```
+##      [,1] [,2]
+## [1,]    9   13
+## [2,]   10   14
+```
+]
+
+---
+
+# Матрицы
+Если один из индексов оставить пустым - получим все значения строки/столбика в зависимости от того, какой индекс мы не указываем.
+
+```r
+my_matrix[, 1:2]
+```
+
+```
+##      [,1] [,2]
+## [1,]    1    5
+## [2,]    2    6
+## [3,]    3    7
+## [4,]    4    8
+```
+
+```r
+my_matrix[1:2, ]
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    5    9   13
+## [2,]    2    6   10   14
+```
+
+---
+
+# Матрицы
+Аналогично вектору, с помощью индексации можно переписывать часть матрицы:
+
+```r
+my_matrix[1:2, 3:4] &lt;- 0
+my_matrix
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    5    0    0
+## [2,]    2    6    0    0
+## [3,]    3    7   11   15
+## [4,]    4    8   12   16
+```
+
+---
+
+# Массивы
+**Массивы данных (array)** - похожи на матрицы, но имеют более двух измерений. Создаются они с помощью функции `array()`, где следует указать вектор, из которого будет создан массив, и его размерность:
+.pull-left[
+
+```r
+my_array &lt;- array(1:16,
+                  c(4, 2, 2))
+```
+]
+.code50[
+.pull-right[
+
+```r
+my_array
+```
+
+```
+## , , 1
+## 
+##      [,1] [,2]
+## [1,]    1    5
+## [2,]    2    6
+## [3,]    3    7
+## [4,]    4    8
+## 
+## , , 2
+## 
+##      [,1] [,2]
+## [1,]    9   13
+## [2,]   10   14
+## [3,]   11   15
+## [4,]   12   16
+```
+]]
+
+---
+
+# Списки
+**Списки** - это упорядоченный набор объектов. Я представляю себе списки как блокнот, в котором на каждой странице хранится информация в определенном формате. Они могут хранить различные данные, включая векторы, матрицы, датафреймы и другие списки.
+
+Списки создаются с помощью функции `list()`:
+
+```r
+my_list &lt;- list(vec = c(1:5),
+                gendalf = "You shall not pass",
+                my_matrix = matrix(1:4, ncol = 2))
+my_list
+```
+
+```
+## $vec
+## [1] 1 2 3 4 5
+## 
+## $gendalf
+## [1] "You shall not pass"
+## 
+## $my_matrix
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+```
+
+---
+
+# Списки
+Для обращения к элементам списка можно использовать индексы или имена (через символ `$`). При обращении через индекс необходимо использовать двойные квадратные скобки, например:
+.pull-left[
+
+```r
+my_list[[2]]
+```
+
+```
+## [1] "You shall not pass"
+```
+
+```r
+my_list$gendalf
+```
+
+```
+## [1] "You shall not pass"
+```
+
+```r
+my_list[['gendalf']]
+```
+
+```
+## [1] "You shall not pass"
+```
+]
+
+.pull-right[
+&gt; Списки часто используются в R, например результаты построения математических моделей, статистических тестов хранятся в виде списков. Поэтому важно уметь с ними работать.
+
+]
+
+---
+
+# Дата фреймы
+Наконец-то мы перешли к самому главному - **дата фреймы (data frames)**.
+
+Именно с такой структурой данных работают чаще всего.
+
+Главной особенностью их является то, что разные столбцы могут содержать разный тип данных (но их длина должна быть одинаковой).
+
+---
+
+# Дата фреймы
+Для создания дата фрейма используется функция `data.frame()`.
+
+```r
+my_df &lt;- data.frame(name = c("Frodo", "Eowyn", "Legolas", "Arwen"),
+                    sex = c("male", "female", "male", "female"),
+                    age = c(51, 24, 2931, 2700),
+                    one_ring = c(TRUE, FALSE, FALSE, FALSE))
+my_df
+```
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; name &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; sex &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; age &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; one_ring &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Frodo &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; male &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Eowyn &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; female &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; FALSE &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Legolas &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; male &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2931 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; FALSE &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Arwen &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; female &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2700 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; FALSE &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Дата фреймы
+Просмотреть структуру дата фрейма можно с помощью функции `str()`:
+
+```r
+str(my_df)
+```
+
+```
+## 'data.frame':	4 obs. of  4 variables:
+##  $ name    : chr  "Frodo" "Eowyn" "Legolas" "Arwen"
+##  $ sex     : chr  "male" "female" "male" "female"
+##  $ age     : num  51 24 2931 2700
+##  $ one_ring: logi  TRUE FALSE FALSE FALSE
+```
+В нашем случае первая и вторая колонка - *текстовые*, третья - *цифровая*, четвертая - *логическая*.
+
+---
+
+# Дата фреймы
+Переглянути назви стовпців або надати їм нову назву можна за допомогою функції `names()`.
+
+```r
+names(my_df)
+```
+
+```
+## [1] "name"     "sex"      "age"      "one_ring"
+```
+
+---
+
+# Дата фреймы
+Индексация аналогично матрице и спискам возможна через `[]` и знак `$`.
+.pull-left[
+
+```r
+my_df$name
+```
+
+```
+## [1] "Frodo"   "Eowyn"   "Legolas" "Arwen"
+```
+
+```r
+my_df$name[2:3]
+```
+
+```
+## [1] "Eowyn"   "Legolas"
+```
+]
+
+.pull-right[
+
+```r
+my_df[2,3]
+```
+
+```
+## [1] 24
+```
+
+```r
+my_df[2:3, "name"]
+```
+
+```
+## [1] "Eowyn"   "Legolas"
+```
+]
+
+Для просмотра даты фрейма в RStudio используется функция `View()` или можно просто нажать на название переменной в разделе Environment. Вы увидите таблицу, несколько похожую на Excel или Google Spreadsheets.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
