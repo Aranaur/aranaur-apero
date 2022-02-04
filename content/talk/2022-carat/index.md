@@ -18,12 +18,16 @@ links:
 - icon: images
   icon_pack: fas
   name: slides
-  url: https://aranaur.rbind.io/talk/2022-carat/slides/01_intro_r.html
+  url: https://aranaur.rbind.io/talk/2022-carat/slides/00_content.html
 
 ---
 
 # Презентации к курсу:
-![](https://aranaur.rbind.io/talk/2022-carat/slides/img/carat.png)
-1. [Основы языка программирования R](https://aranaur.rbind.io/talk/2022-carat/slides/01_intro_r.html)
-2. [Tidyverse](https://aranaur.rbind.io/talk/2022-carat/slides/02_tidyverse.html)
+
+![](https://aranaur.rbind.io/talk/2022-carat/slides/img/carat.png) 
+
+1. **Основы языка программирования R:** [<i class="fas fa-images"></i>](https://aranaur.rbind.io/talk/2022-carat/slides/01_intro_r.html)
+
+2. **Tidyverse:** [<i class="fas fa-images"></i>](https://aranaur.rbind.io/talk/2022-carat/slides/02_tidyverse.html)
+
 
