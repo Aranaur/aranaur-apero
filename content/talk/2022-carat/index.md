@@ -21,7 +21,6 @@ links:
   url: https://aranaur.rbind.io/talk/2022-carat/slides/00_content.html
 
 ---
-
 # Презентации к курсу:
 
 ![](https://aranaur.rbind.io/talk/2022-carat/slides/img/carat.png) 
@@ -31,3 +30,5 @@ links:
 2. **Tidyverse:** [<i class="fas fa-images"></i>](https://aranaur.rbind.io/talk/2022-carat/slides/02_tidyverse.html)
 
 
+
+> Рисунок к посту от [Ludmila Markova](https://www.instagram.com/mi_marko/)

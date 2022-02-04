@@ -26,4 +26,4 @@ links:
 ---
 
 
-I'm really excited to give this talk! Stay tuned for video and slides.
+> Рисунок к посту от [Ludmila Markova](https://www.instagram.com/mi_marko/)
