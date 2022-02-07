@@ -1,14 +1,14 @@
 ---
-title: "2022: Эконометрика (ІЕ-401/402)"
-subtitle: "ІЕ-401/402"
-excerpt: "Материалы лекций по эконометрике для экономической кибернетики КНЭУ"
+title: "2022: Економетрика (ІЕ-201/202)"
+subtitle: "ІЕ-201/202"
+excerpt: "Матеріали до курсу з економетрики для спеціальності економічна кібернетика КНЕУ"
 date: 2022-02-03
 date_end: ""
 show_post_time: false
 event: 
 event_url:
 author: "Игорь Мирошниченко"
-location: "Киев, Украина"
+location: "Київ, Україна"
 draft: false
 # layout options: single, single-sidebar
 layout: single
@@ -17,8 +17,8 @@ categories:
 links:
 - icon: youtube
   icon_pack: fab
-  name: youtube
-  url: https://www.youtube.com/channel/UCBXWO8dwwFFXzcOrrvpCp7w
+  name: playlist
+  url: https://www.youtube.com/playlist?list=PLWL2vVyKljMO5o5QPnbgforF2Yqwwg9DQ
 - icon: book
   icon_pack: fas
   name: book
@@ -32,6 +32,9 @@ links:
   name: code
   url: https://github.com/Aranaur/r_econometrics
 ---
+# Материалы к курсу:
+
+1. **Основи мови програмування R (2022.02.07):** [<i class="fab fa-youtube"></i>](https://www.youtube.com/watch?v=rDFSKIP-7l0)
 
 
-> Рисунок к посту от [Ludmila Markova](https://www.instagram.com/mi_marko/)
+> Рисунок до посту від [Ludmila Markova](https://www.instagram.com/mi_marko/)
