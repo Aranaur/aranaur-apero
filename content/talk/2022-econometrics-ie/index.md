@@ -32,7 +32,7 @@ links:
   name: code
   url: https://github.com/Aranaur/r_econometrics
 ---
-# Материалы к курсу:
+# Матеріали до курсу:
 
 1. **Основи мови програмування R (2022.02.07):** [<i class="fab fa-youtube"></i>](https://www.youtube.com/watch?v=rDFSKIP-7l0)
 
