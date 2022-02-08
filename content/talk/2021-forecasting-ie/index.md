@@ -15,14 +15,14 @@ layout: single
 categories:
 - лекции
 links:
-- icon: door-open
+- icon: book
   icon_pack: fas
-  name: website
-  url: https://bakeoff.netlify.com/
+  name: book
+  url: https://aranaur.github.io/r_forecasting
 - icon: github
   icon_pack: fab
   name: code
-  url: https://github.com/apreshill/bakeoff
+  url: https://github.com/Aranaur/r_forecasting
 ---
 
 
