@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Машинне навчання</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ігор Мірошниченко" />
+    <meta name="date" content="2022-02-08" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+    <script src="libs/freezeframe/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="libs/mark.js/mark.min.js"></script>
+    <link href="libs/xaringanExtra-search/search.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-search/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":true,"autoSearch":true}) })</script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="cols.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Машинне навчання
+## 01 - Вступ до машинного навчання
+### Ігор Мірошниченко
+### ІІТЕ
+### 2022-02-08
+
+---
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 27px;
+    padding: 1em 4em 1em 2em;
+}&lt;/style&gt;
+
+
+# Що таке ML?
+**Машинне навчання** - це розділ інформатики, який присвячений створенню алгоритмів для досягнення певних цілей на підґрунті набору даних про досліджуваний об'єкт.
+
+.pull-left[
+**Три складові ML:**
+* данні
+* ознаки (features)
+* алгоритм
+]
+.pull-right[
+&lt;img src="img/venn.jpg" width="656" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Навчання vs. Інтелект
+.pull-left[
+* **Штучний інтелект** - загальна назва сфери.
+
+* **Машинне навчання** - розділ штучного інтелекту.
+
+* **Нейромережі** - вид з видів машинного навчання.
+
+* **Глибоке навчання** - архітектура нейромереж, підхід до побудови.
+]
+.pull-right[
+&lt;img src="img/ai_vs_ml.jpg" width="600" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Мапа машинного навчання
+&lt;img src="img/ml_map.png" width="800" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Види машинного навчання
+* **Класичне навчання:** прості дані, зрозумілі ознаки
+* **Навчання з підкріпленням:** даних не має, але є оточення з котрим можна взаємодіяти
+* **Ансамблі:** коли треба краще!
+* **Нейромережі та глибоке навчання:** складі данні, незрозумілі ознаки, магія!
+
+---
+
+# 1. Класичне навчання
+* **З вчителем (supervised learning)**
+  * класифікація
+  * регресія
+* **Без вчителя (unsupervised learning)**
+  * кластеризація
+  * зменшення розмірності
+  * асоціації
+* **Напівконтрольне навчання (semi-supervised learning)**
+
+---
+
+# З вчителем (supervised learning)
+
+**Що в нас є:**
+1. Розмічені дані
+2. Вектор ознак.
+
+&gt; На основі даних, побудувати модель, яка приймає значення (`x`) на вході і повертає інформацію, яка дозволяє визначити мітку для цього вектора показників (`y`).
+
+* Регресія: визначаємо число
+* Класифікація: визначаємо клас
+
+---
+
+# Регресія
+.pull-left[
+## Приклади використання:
+* прогноз вартості цінних бумаг
+* аналіз попиту, об'єм продажів
+* часові ряди у всіх проявах
+* ...
+]
+.pull-right[
+## Популярні алгоритми:
+* Лінійна регресія
+* Поліноміальна регресія
+* Рідж/Лассо регресія
+* Квантильна регресія
+* ...
+]
+
+---
+
+# Класифікація
+.pull-left[
+## Приклади використання:
+* спам-фільтри
+* визначення мови
+* пошук подібних документів
+* аналіз тональності
+* розпізнавання рукописного тексту
+* визначення підозрілих транзакцій
+* ...
+]
+.pull-right[
+## Популярні алгоритми:
+* Наївний байєсовський класифікатор
+* Дерева прийняття рішень (CART, C4.5)
+* Логістична регресія
+* К-ближчих сусідів
+* Метод опорних векторів
+* ...
+]
+
+---
+
+# Без вчителя (unsupervised learning)
+
+**Що в нас є:**
+1. Нерозмічені дані.
+2. Вектор ознак.
+
+&gt; На основі даних побудувати модель, яка приймає значення (`x`) та перетворює його в інший вектор або значення, яке дозволяє вирішити задачу.
+
+* Кластеризація: ідентифікація кластеру
+* Зменшення розмірності: повертається вектор меншої розмірності
+* Виявлення аномалій: визначаємо які значення `x` відрізняється від "типових" даних
+
+---
+
+# Кластеризація
+.pull-left[
+## Приклади використання:
+* сегментація ринку
+* об'єднання близьких точок на карті
+* стиснення зображень
+* аналіз та розмітки нових даних
+* детектори аномальної поведінки
+* ...
+]
+.pull-right[
+## Популярні алгоритми:
+* Метод К-середніх
+* Mean-Shift
+* DBSCAN
+* ...
+]
+
+---
+
+background-image: url("img/kmeans.gif")
+
+# Метод К-середніх
+
+---
+
+background-image: url("img/dbscan.gif")
+
+# DBSCAN
+
+---
+
+# Зменшення розмірності
+.pull-left[
+## Приклади використання:
+* рекомендовані системи
+* візуалізація
+* визначення тематики та пошуку схожих документів
+* аналіз фейкових зображень
+* ризик-менеджмент
+* ...
+]
+.pull-right[
+## Популярні алгоритми:
+* Метод головних компонентів (PCA)
+* Сингулярне розкладання (SVD)
+* Латентне розміщення Діріхле (LDA)
+* Латентно-семантичний аналіз (LSA, pLSA, GLSA)
+* t-SNE (для візуалізації)
+* ...
+]
+
+---
+
+background-image: url("img/pca.gif")
+
+# Метод головних компонентів (PCA)
+
+---
+
+background-image: url("img/lsa.gif")
+# Сингулярне розкладання (SVD)
+
+---
+
+# Асоціативні правила
+.pull-left[
+## Приклади використання:
+* прогноз акцій та розпродажів
+* аналіз товарів, які купують разом
+* розміщення товарів на поличках
+* аналіз поведінки на сайті
+* ...
+]
+.pull-right[
+## Популярні алгоритми:
+* Apriori
+* Euclat
+* FP-growth
+* ...
+]
+
+---
+
+# Напівконтрольне навчання (semi-supervised)
+
+**Що в нас є:**
+1. Частково розмічені дані.
+2. Вектор ознак.
+
+&gt; На основі даних, побудувати модель, яка приймає значення (`x`) на вході і повертає інформацію, яка дозволяє визначити мітку для нерозмічених даних.
+
+---
+
+background-image: url("img/semi-supervised.gif")
+# Напівконтрольне навчання (semi-supervised)
+
+
+---
+
+# 2. Навчання з підкріпленням (reinforcement)
+.pull-left[
+## Застосування:
+* Самокеровані автомобілі
+* Роботи пилососи
+* Ігри
+* Автоматична торгівля
+* Управління ресурсами підприємства
+* ...
+]
+.pull-right[
+## Популярні алгоритми:
+* Q-Learning 
+* SARSA
+* DQN, 
+* A3C, 
+* Генетичний алгоритм
+* ...
+]
+
+---
+
+# 3. Ансамблі
+.pull-left[
+## Застосування:
+* Там де й класичні підходи, але працюють краще
+* Пошукові системи
+* Комп'ютерний зір
+* Розпізнавання об'єктів
+* ...
+
+## Популярні алгоритми:
+* Випадковий ліс
+* Градіентний бустінг
+* ...
+]
+.pull-right[
+## Варіанти побудови:
+* Стекінг
+* Беггінг
+* Бустінг
+]
+
+---
+
+background-image: url("img/stacking.png")
+# Стекінг
+
+Результати різних алгоритмів передаються результуючому, який приймає рішення
+
+---
+
+# Bagging (Bootstrap AGGregatING)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="cols_macro.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
