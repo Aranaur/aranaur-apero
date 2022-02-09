@@ -101,10 +101,10 @@ enableEmoji = true
       icon      = "youtube" # icon name without the 'fa-'
       icon_pack = "fab"
       url       = "https://www.youtube.com/channel/UCBXWO8dwwFFXzcOrrvpCp7w"
-  [[params.social]]
-      icon      = "rss" # icon name without the 'fa-'
-      icon_pack = "fas"
-      url       = "/blog/index.xml"
+#  [[params.social]]
+#     icon      = "rss" # icon name without the 'fa-'
+#    icon_pack = "fas"
+#      url       = "/blog/index.xml"
 
 [taxonomies]
   category = "categories"
