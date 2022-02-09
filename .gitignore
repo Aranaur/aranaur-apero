@@ -6,5 +6,5 @@
 /resources/
 .DS_Store
 Thumbs.db
-/content/talk/2022-ml-ids/slides/*.rmd
-/content/talk/2022-ml-ids/slides/*_cache*
+/content/talk/2022-ml-ids/slides/*.Rmd
+/content/talk/2022-ml-ids/slides/*_cache/

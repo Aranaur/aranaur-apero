@@ -10,10 +10,10 @@ stringr
 forcats
 vroom
 kableExtra
-knitr
 hrbrthemes
 NLP
 tm
 proustr
 futile.logger
 VennDiagram
+knitr
