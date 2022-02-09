@@ -18,7 +18,7 @@ links:
 - icon: youtube
   icon_pack: fab
   name: playlist
-  url: https://www.youtube.com/channel/UCBXWO8dwwFFXzcOrrvpCp7w
+  url: https://youtube.com/playlist?list=PLWL2vVyKljMPCl1EZejhJO_aGBY6waP_L
 - icon: book
   icon_pack: fas
   name: book
@@ -37,7 +37,7 @@ links:
 
 | **№** 	| **Назва**                   	| **Дата**   	|                                         **Слайд**                                         	| **Відео** 	| **Код** 	|
 |-------	|-----------------------------	|------------	|:-----------------------------------------------------------------------------------------:	|:---------:	|:-------:	|
-| 1     	| Вступ до машинного навчання 	| 2022.02.09 	| [<i class="fas fa-images"></i>](https://aranaur.rbind.io/talk/2022-ml-ids/slides/01.html) 	|           	|         	|
+| 1     	| Вступ до машинного навчання 	| 2022.02.09 	| [<i class="fas fa-images"></i>](https://aranaur.rbind.io/talk/2022-ml-ids/slides/01.html) 	| [<i class="fab fa-youtube"></i>](https://www.youtube.com/watch?v=EXmV5bYaRDw)          	|         	|
 
 
 > Рисунок к посту от [Ludmila Markova](https://www.instagram.com/mi_marko/)
