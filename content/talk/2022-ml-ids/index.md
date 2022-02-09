@@ -35,9 +35,7 @@ links:
 ---
 # Зміст курсу
 
-1. **Вступ до машинного навчання** [<i class="fas fa-images"></i>]()
-
-2. **Tidyverse:** [<i class="fas fa-images"></i>]()
+1. **Вступ до машинного навчання - 2022.02.09** [<i class="fas fa-images"></i>](https://aranaur.rbind.io/talk/2022-ml-ids/slides/01.html)
 
 
 
