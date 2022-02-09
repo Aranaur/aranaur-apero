@@ -26,7 +26,7 @@ links:
 - icon: images
   icon_pack: fas
   name: slides
-  url: https://aranaur.rbind.io/content/talk/2022-ml-ids
+  url: https://aranaur.rbind.io/talk/2022-ml-ids/slides/00_content.html
 - icon: github
   icon_pack: fab
   name: code
@@ -35,8 +35,9 @@ links:
 ---
 # Зміст курсу
 
-1. **Вступ до машинного навчання - 2022.02.09** [<i class="fas fa-images"></i>](https://aranaur.rbind.io/talk/2022-ml-ids/slides/01.html)
-
+| **№** 	| **Назва**                   	| **Дата**   	|                                         **Слайд**                                         	| **Відео** 	| **Код** 	|
+|-------	|-----------------------------	|------------	|:-----------------------------------------------------------------------------------------:	|:---------:	|:-------:	|
+| 1     	| Вступ до машинного навчання 	| 2022.02.09 	| [<i class="fas fa-images"></i>](https://aranaur.rbind.io/talk/2022-ml-ids/slides/01.html) 	|           	|         	|
 
 
 > Рисунок к посту от [Ludmila Markova](https://www.instagram.com/mi_marko/)
