@@ -335,4 +335,73 @@ background-image: url("img/stacking.png")
 
 ---
 
-# Bagging (Bootstrap AGGregatING)
+background-image: url("img/bagging.png")
+# Беггінг (**B**ootstrap **AGG**regat**ING**)
+
+---
+
+background-image: url("img/Boosting.svg")
+# Бустінг
+
+---
+
+# 4. Нейронні мережі і глибоке навчання
+.pull-left[
+## Застосування:
+* Всі задачі, що були перечислені до цього
+* Переклад
+* Обробка фото та відео
+* Розпізнавання та синтез мови
+* Визначення об'єктів на фото та відео
+* ...
+]
+.pull-right[
+## Популярні алгоритми:
+* Перцептрон
+* Згорткові (CNN)
+* Рекурентні (RNN)
+* Автоенкодери
+* ...
+]
+
+---
+
+background-image: url("img/nural.gif")
+background-size: contain
+
+# Перцептрон
+
+---
+
+background-image: url("img/mlp.gif")
+background-size: contain
+
+# Багатошаровий перцептрон (MLP)
+
+---
+
+background-image: url("img/cnn.gif")
+
+# Згорткові нейромережі (CNN)
+
+---
+
+# Згорткові нейромережі (CNN)
+.pull-left[
+```{r cnn3.gif, echo=FALSE}
+include_graphics("img/cnn3.gif")
+```
+]
+.pull-right[
+```{r cnn2.gif, echo=FALSE}
+include_graphics("img/cnn2.gif")
+```
+]
+
+---
+
+# Зоопарк архітектур нейромереж
+[THE NEURAL NETWORK ZOO](https://www.asimovinstitute.org/neural-network-zoo/)
+```{r zoo, echo=FALSE}
+include_graphics("img/zoo.png")
+```
