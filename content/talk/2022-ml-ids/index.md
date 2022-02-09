@@ -1,14 +1,14 @@
 ---
-title: "2022: Машинне навчання (ІДС-501)"
+title: "2022: Машинне навчання"
 subtitle: ІДС-501
 excerpt: "Матеріали до курсу з машинного навчання для спеціальності економічна кібернетика та дата сайнс КНЕУ"
 date: 2022-02-08
-date_end: ""
+date_end:
 show_post_time: false
 event: 
 event_url:
 author: "Ігор Мірошниченко"
-location: "Киев, Украина"
+location:
 draft: false
 # layout options: single, single-sidebar
 layout: single
