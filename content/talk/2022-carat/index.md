@@ -21,7 +21,7 @@ links:
   url: https://aranaur.rbind.io/talk/2022-carat/slides/00_content.html
 
 ---
-# Презентации к курсу:
+# Материалы к курсу:
 
 ![](https://aranaur.rbind.io/talk/2022-carat/slides/img/carat.png) 
 
