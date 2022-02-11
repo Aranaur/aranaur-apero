@@ -28,8 +28,6 @@ links:
 | **№** 	| **Название**                       	| **Дата**   	|                                             **Слайд**                                            	| **Видео** 	| **Код** 	|
 |-------	|---------------------------------	|------------	|:------------------------------------------------------------------------------------------------:	|:---------:	|:-------:	|
 | 1     	| Основы языка программирования R 	| 2022.01.26 	| [<i class="fas fa-images"></i>](https://aranaur.rbind.io/talk/2022-carat/slides/01_intro_r.html) 	|           	|         	|
-| 2 | Tidyverse | 2022.02.02 | [<i class="fas fa-images"></i>](https://aranaur.rbind.io/talk/2022-carat/slides/02_tidyverse.html) | | |
-
-
+| 2 | Tidyverse | 2022.02.02 | [<i class="fas fa-images"></i>](https://aranaur.rbind.io/talk/2022-carat/slides/02_tidyverse.html) | | [<i class="fab fa-r-project"></i>](https://aranaur.rbind.io/talk/2022-carat/files/01_dplyr.R) |
 
 > Рисунок к посту от [Ludmila Markova](https://www.instagram.com/mi_marko/)
