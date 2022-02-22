@@ -37,5 +37,6 @@ links:
 | **№** | **Назва** 	| **Дата** 	|  **Слайд** | **Відео** 	| **Код** 	| **Завдання** |
 |----	|----	|---	|:----:	|:----:	|:----:	|:----:	|
 |  1  |  Основи мови програмування R  |  2022.02.07  |    |  [<i class="fab fa-youtube"></i>](https://www.youtube.com/watch?v=rDFSKIP-7l0)  |    |  [<i class="fas fa-dumbbell"></i>](https://aranaur.rbind.io/talk/2022-econometrics-ie/labs/01.html)  |
+|  2  |  Робота з даними  |  2022.02.22  |    |  [<i class="fab fa-youtube"></i>](https://youtu.be/DPMvidtEQ5w)  |  [<i class="fab fa-r-project"></i>](https://aranaur.rbind.io/talk/2022-econometrics-ie/code/02_dplyr.R)  |    |
 
 > Рисунок до посту від [Ludmila Markova](https://www.instagram.com/mi_marko/)
