@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Science</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ігор Мірошниченко" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+    <script src="libs/freezeframe/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data Science
+## Лекція 3: контроль версій з Git(Hub)
+### Ігор Мірошниченко
+### ІІТЕ | ІК-301
+
+---
+
+
+&lt;style type="text/css"&gt;
+@media print {
+  .has-continuation {
+    display: block !important;
+  }
+}
+&lt;/style&gt;
+
+
+
+# Table of contents
+
+1. [Пролог](#prologue)
+
+2. [Git та GitHub](#git)
+
+3. [Git(Hub) + RStudio](#rstudio)
+
+4. [Інші поради](#other)
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Пролог
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=1100px&gt;&lt;/html&gt;
+
+---
+
+# Презентації студентів: R Markdown
+
+Ресурси:
+- Web: https://rmarkdown.rstudio.com
+- Cheatsheat: https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf
+- Книга: [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown) (Yihui Xie, JJ Allaire, and Garrett Grolemund)
+
+Інші нюанси:
+- Ви будете здавати всі свої завдання як документи R Markdown.
+- Наприклад, мої лекційні слайди та конспекти також написані на R Markdown. (Наприклад, ця презентація створена за допомогою пакета [**xaringan**](https://github.com/yihui/xaringan/wiki) із темою metropolis)
+
+---
+
+# Перед тим як почати
+
+Під час попередньої лекції ми пройшли перевірку встановлення програмного забезпечення. На даний момент ви повинні мати:
+
+☑ Встановлену [R](https://www.r-project.org/).
+
+☑ Встановлену [RStudio](https://www.rstudio.com/products/rstudio/download/preview/).
+
+☑ Встановлену [Git](https://git-scm.com/downloads).
+
+☑ Створений аккаунт в [GitHub](https://github.com/)
+
+
+&lt;/br&gt;
+
+Якщо у вас є проблеми щодо програмного забезпечення, зверніться до посібника Дженні Браян: http://happygitwithr.com.
+
+---
+class: inverse, center, middle
+name: git
+
+# Git and GitHub
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=1100px&gt;&lt;/html&gt;
+---
+
+# Навіщо?
+
+&lt;div align="center"&gt;
+&lt;img src="pics/phd101212s.png" height=500&gt;
+&lt;/div&gt;
+
+---
+
+# Git(Hub) вирішує цю проблему
+
+### Git
+
+- Git — це розподілена система контролю версій. (Чекате, що?)
+- Гаразд, спробуйте так: уявіть собі, якби Dropbox і функція «Відстеження змін» у MS Word мали дитину. Git був би тією дитиною.
+- Насправді, це навіть краще, тому що Git оптимізований для речей, над якими економісти та науковці витрачають багато часу (наприклад, код).
+
+### GitHub
+
+- Важливо усвідомлювати, що Git і GitHub - різні речі.
+- GitHub — це онлайн-хостингова платформа, яка надає низку послуг, побудованих на основі системи Git. (Схожі платформи включають Bitbucket і GitLab.)
+- Так само, як нам не *потрібна* RStudio для запуску R-коду, нам *не потрібен* GitHub для використання Git... Але це значно полегшить наше життя.
+
+---
+
+# Git(Hub) для наукових досліджень
+
+### Від розробки програмного забезпечення...
+
+Роль Git і GitHub у глобальній розробці програмного забезпечення не піддається сумніву.
+- Є велика ймовірність, що ваша улюблена програма, програма чи пакет створено за допомогою інструментів на основі Git. (RStudio є прикладом.)
+
+### ... до наукових досліджень
+
+- Крім переваг VC та інструментів для співпраці, Git(Hub) допомагає втілити в життя ідеали відкритої науки та відтворюваності.
+- Журнали мають дедалі суворіші вимоги щодо відтворюваності та доступу до даних. GH робить це легко (інтеграція DOI, готові ліцензії тощо)
+- Я розміщую весь код і дані до моїх документів на GH. Те саме для навчальних матеріалів. Я навіть використовую його для розміщення та підтримки свого [веб-сайту](https://github.com/aranaur/aranaur-apero).
+- *Nature:* "[Democratic databases: science on GitHub](https://www.nature.com/news/democratic-databases-science-on-github-1.20719)" (Perkel, 2016).
+
+---
+class: inverse, center, middle
+name: rstudio
+
+# Git(Hub) + RStudio
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=1100px&gt;&lt;/html&gt;
+
+---
+
+# Безпроблемна інтеграція
+
+Однією з (багатьох) чудових особливостей RStudio є те, наскільки добре він інтегрує контроль версій у вашій роботі.
+- Незважаючи на те, що Git є повністю окремою програмою для R, вони відчувають себе частиною однієї і тієї ж «речі» в RStudio.
+- Цей наступний розділ присвячений вивченню основних команд Git(Hub) і рецепту успішної інтеграції проекту з RStudio.
+
+---
+
+# Зв’яжіть репозиторій GitHub з проектом RStudio
+
+Відправною точкою нашого робочого процесу є зв’язування репозиторію GitHub (тобто «repo») з проектом RStudio. Нижче наведено кроки, які ми будемо виконувати:
+
+1. Створіть repo на GitHub та ініціалізуйте за допомогою README.
+2. Скопіюйте посилання HTTPS/SSH (зелена кнопка "Клонувати або завантажити").&lt;sup&gt;1&lt;/sup&gt;
+3. Відкрийте RStudio.
+4. Перейдіть до **File -&gt; New Project -&gt; Version Control -&gt; Git**.
+5. Вставте скопійоване посилання в поле «URL-адреса репозитарію:».
+6. Виберіть шлях проекту ("Create project as subdirectory of:") і натисніть **Create Project**.
+
+.footnote[&lt;sup&gt;1&lt;/sup&gt; Найпростіше почати з HTTPS, але &lt;a href="http://happygitwithr.com/ssh-keys.html#ssh-keys" target="_blank"&gt;SSH&lt;/a&gt; рекомендується для більш досвідчених користувачів.]
+
+--
+
+&lt;/br&gt;
+Тепер я хочу, щоб ви потренувалися, дотримуючись цих кроків, створивши власне репо на GitHub — назвемо це «тест» — і клонуючи його через проект RStudio.
+- Дивіться мій покроковий посібник у форматі GIF на наступному слайді...
+
+---
+
+# Зв’яжіть репозиторій GitHub з проектом RStudio
+
+&lt;div align="center"&gt;
+&lt;img src="pics/git-create-repo.gif"&gt;
+&lt;/div&gt;
+
+---
+
+# Внесіть деякі зміни
+
+Подивіться на верхню праву панель у вашій IDE RStudio. Ви бачите вкладку "Git"?
+- Натисніть на нього.
+- Там уже мають бути деякі файли, які ми наразі проігноруємо.&lt;sup&gt;1&lt;/sup&gt;
+
+Тепер відкрийте файл README (див. вкладку «Файли» у нижній правій панелі).
+- Додайте текст, наприклад "Hello World!" і збережіть README.
+- Чи бачите ви якісь зміни на панелі «Git»? добре.
+
+Знову ж таки, дивіться мій покроковий посібник у форматі GIF на наступному слайді...
+
+.footnote[&lt;sup&gt;1&lt;/sup&gt; Вони важливі, але не для цього розділу.]
+
+---
+
+# Внесіть деякі зміни
+
+&lt;div align="center"&gt;
+&lt;img src="pics/git-local-change.gif"&gt;
+&lt;/div&gt;
+
+---
+
+# Основні операції Git
+
+Тепер, коли ви клонували свій перший repo та внесли деякі локальні зміни, настав час вивчити чотири основні операції Git.
+
+1. **Stage** (або "додати")
+   - Скажіть Git, що ви хочете додати зміни до історії репо (редагування файлів, додавання, видалення тощо)
+2. **Commit**
+   - Скажіть Git, що так, ви впевнені, що ці зміни мають бути частиною історії repo.
+3. **Pull**
+   - Отримуйте будь-які нові зміни, внесені в репозиторію GitHub (тобто на віддаленому сервісі), або вашими співробітниками, або вами на іншій машині.
+4. **Push**
+   - Відправити будь-які (здійснені) локальні зміни в репозиторій GitHub
+
+--
+
+На даний момент буде корисно згрупувати перші дві операції та дві останні операції разом. (На практиці вони також часто поєднуються, хоча незабаром ви зрозумієте, коли і чому їх слід розділити.)
+
+--
+
+Готові до GIF-ок?
+
+---
+
+# Stage та Commit
+
+&lt;div align="center"&gt;
+&lt;img src="pics/git-stage-commit.gif"&gt;
+&lt;/div&gt;
+
+--
+
+Зверніть увагу на корисне повідомлення для себе.
+
+---
+
+# Push та Pull
+
+&lt;div align="center"&gt;
+&lt;img src="pics/git-push-pull.gif"&gt;
+&lt;/div&gt;
+
+--
+
+Дивіться [тут](https://ohi-science.org/manual/#rpostback-askpass-error) якщо ви отримуєте `Error: unable to read askpass response from 'rpostback-askpass'`.
+
+---
+
+# Підсумок
+
+Ось покроковий шлях того, що ми щойно зробили.
+- Зроблено зміни у файлі та зберегли їх локально.
+- *Staged* ці локальні зміни.
+- *Committed* ці локальні зміни в нашій історії Git з корисним повідомленням.
+- *Pulled* з репозиторію GitHub на випадок, якщо хтось ще вніс зміни (тут не використовується, але хороша практика).
+- *Pushed* наші зміни в репозиторій GitHub.
+
+&lt;/br&gt;
+
+Примітка: Завжди витягуйте з попереднього repo *перед* внесенням будь-яких змін. Серйозно, робіть це навіть на сольних проектах; Якщо зробити це звичкою, це позбавить вас головного болю.
+
+---
+class: inverse, center, middle
+name: other
+
+# Інші поради
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=1100px&gt;&lt;/html&gt;
+
+---
+
+# README
+
+Файли README є особливими в GitHub, оскільки вони діють як цільові сторінки репо.
+– Для проекту, пов’язаного з науково-дослідницькою роботою, саме тут ви повинні чітко вказати мету наукової роботи, вимоги до програмного забезпечення, спосіб проведення аналізу тощо (наприклад, [тут](https://github.com/grantmcdermott/bycatch)).
+— З іншого боку, багато репозиторіїв GitHub — це в основному окремі файли README. Подумайте про це як дописи в блозі, які контролюються версіями (наприклад, [тут](https://github.com/jfiksel/github-classroom-for-teachers)).
+
+Файли README також можна додати до *підкаталогів* репозиторії, де вони також будуть виконувати роль цільових сторінок.
+- Особливо корисно для великих проектів. Скажімо, де ви використовуєте кілька мов програмування (наприклад, [тут](https://github.com/grantmcdermott/blueparadox)) або хочете додати більше інформації про набір даних (наприклад, [тут](https://github. com/grantmcdermott/sceptic-priors/tree/master/data)).
+
+README повинні бути написані в Markdown, GH автоматично відтворює його.
+- Ми дізнаємося більше про [Markdown](https://www.markdownguide.org/) (і його близький зв’язок, [R Markdown](https://rmarkdown.rstudio.com/)) під час нашого домашні завдання.
+
+---
+
+# .gitignore
+
+Файл .gitignore повідомляє Git, що потрібно ігнорувати.
+
+Це особливо корисно, якщо ви хочете виключити цілі папки або клас файлів (наприклад, на основі розміру чи типу).
+- Власні файли даних слід ігнорувати з самого початку, якщо ви збираєтеся зробити репо публічним у якийсь момент.
+- Дуже великі окремі файли (&gt;100 МБ) перевищують максимально допустимий розмір GitHub, і їх слід ігнорувати. Дивіться &lt;a href="https://help.github.com/articles/working-with-large-files/" target="_blank"&gt;тут&lt;/a&gt; та &lt;a href="https://help.github.com/articles/versioning-large-files/" target=_"blank"&gt;тут&lt;/a&gt;.
+  
+---
+
+# .gitignore (прод.)
+
+Ви можете створити файл .gitignore кількома способами.
+
+— Файл .gitignore створювався автоматично, якщо ви клонували своє репо за допомогою проекту RStudio.
+- Ви також можете додати його, коли ви вперше створюєте репо на GitHub.
+- Або ви можете створити його за допомогою текстового редактора. (Повинно бути збережено як ".gitignore".)
+
+Після створення файлу .gitignore просто додайте рядки тексту, що відповідають файлам, які слід ігнорувати.
+
+- Щоб ігнорувати один файл: `FILE-I-WANT-TO-IGNORE.csv`
+- Щоб ігнорувати цілу папку (і весь її вміст, підпапки тощо): `FOLDER-NAME/**`
+- Застосовуються стандартні команди та спеціальні символи.
+   - Напр.: Ігноруйте всі файли CSV в сховищі: `*.csv`
+   - Напр.: Ігноруйте всі файли, які починаються з "test": `test*`
+   - Напр.: Не ігноруйте певний файл: `!somefile.txt`
+
+---
+
+# GitHub Issues
+
+[GitHub Issues](https://guides.github.com/features/issues/) — це ще один чудовий спосіб взаємодії з вашими співробітниками та/або супроводжуючими пакетами.
+  
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
