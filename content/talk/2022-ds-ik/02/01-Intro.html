@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Science</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ігор Мірошниченко" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+    <script src="libs/freezeframe/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data Science
+## Лекція 2: R та RStudio
+### Ігор Мірошниченко
+### ІІТЕ | ІК-301
+
+---
+
+
+&lt;style type="text/css"&gt;
+# CSS for including pauses in printed PDF output (see bottom of lecture)
+@media print {
+  .has-continuation {
+    display: block !important;
+  }
+}
+&lt;/style&gt;
+
+
+
+
+# Зміст
+
+1. [Пролог](#prologue)
+
+2. [Починаємо!](#started)
+
+3. [R в Data Science](#r4ds)
+
+4. [Візуалізація за допомогою ggplot2](#ggplot2)
+
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Пролог
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=1100px&gt;&lt;/html&gt;
+
+---
+
+# Вступ
+
+### Про мене
+
+<svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M436 160c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h320c26.5 0 48-21.5 48-48v-48h20c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20v-64h20c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20v-64h20zm-228-32c35.3 0 64 28.7 64 64s-28.7 64-64 64-64-28.7-64-64 28.7-64 64-64zm112 236.8c0 10.6-10 19.2-22.4 19.2H118.4C106 384 96 375.4 96 364.8v-19.2c0-31.8 30.1-57.6 67.2-57.6h5c12.3 5.1 25.7 8 39.8 8s27.6-2.9 39.8-8h5c37.1 0 67.2 25.8 67.2 57.6v19.2z"/></svg> [Ігор Вікторович Мірошниченко](http://aranaur.rbind.io)
+
+<svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/></svg> [ihor.miroshnychenko@kneu.ua](mailto:ihor.miroshnychenko@kneu.ua)
+
+<svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/></svg> Доцент кафедри математичного моделювання та статистики ІІТЕ
+
+<svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg> [@ihormiroshnychenko](https://www.linkedin.com/in/ihormiroshnychenko/)
+
+<svg aria-hidden="true" role="img" viewBox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm121.8 169.9l-40.7 191.8c-3 13.6-11.1 16.9-22.4 10.5l-62-45.7-29.9 28.8c-3.3 3.3-6.1 6.1-12.5 6.1l4.4-63.1 114.9-103.8c5-4.4-1.1-6.9-7.7-2.5l-142 89.4-61.2-19.1c-13.3-4.2-13.6-13.3 2.8-19.7l239.1-92.2c11.1-4 20.8 2.7 17.2 19.5z"/></svg> [Data Mirosh](https://t.me/araprof)
+
+
+
+---
+class: inverse, center, middle
+name: started
+
+# Починаємо!
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=1100px&gt;&lt;/html&gt;
+
+---
+
+# Встановлення софту та реєстрація
+
+1. Завантажити [R](https://www.r-project.org/).
+
+2. Завантажити [RStudio](https://www.rstudio.com/products/rstudio/download/preview/).
+
+3. Завантажити [Git](https://git-scm.com/downloads).
+
+4. Створити аккаунт на [GitHub](https://github.com/) та отримати бонуси як студент [discount](https://education.github.com/discount_requests/new).
+
+--
+
+Якщо виникли питання на будь-якому кроці, звертайтесь.
+
+Також рекомендую ознайомитись з інструкціями до Дженні Брайана - http://happygitwithr.com.
+
+---
+
+# Деякі доповнення для ОС
+
+Я докладно розповім про додаткові вимоги до програмного забезпечення, коли виникне така потреба. Однак, щоб допомогти усунути деякі проблеми з встановленням програмного забезпечення, виконайте також наступне (залежно від вашої ОС):
+
+- **Windows:** Встановіть [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
+- **Mac:** Рекомендую встановити (не обов'язково) [Homebrew](https://brew.sh/).
+- **Linux:** Все ок.
+
+---
+
+# Checklist
+
+☑ Встановлена остання версія R?
+  
+  ```r
+  version$version.string
+  ```
+  
+  ```
+  ## [1] "R version 4.1.1 (2021-08-10)"
+  ```
+
+
+☑ DВстановлена остання версія RStudio? ([Preview версії](https://www.rstudio.com/products/rstudio/download/preview/) це ок.)
+  
+  ```r
+  RStudio.Version()$version
+  ## Маєте отримати щось на кшталт "[1] ‘1.4.1103’"
+  ```
+
+☑ Оновили всі пакети R?
+  
+  ```r
+  update.packages(ask = FALSE, checkBuilt = TRUE)
+  ```
+  
+---
+
+# Checklist (прод.)
+
+Відкрийте [shell](http://happygitwithr.com/shell.html#shell).
+- Користувачі Windows, мають пересвідчитися, що вони встановили Bash-compatible версію  shell. Якщо ви встановили [Git for Windows](https://gitforwindows.org), все має бути ок.
+
+☑ Яку версію Git ви встановили?
+  
+  ```bash
+  git --version
+  ```
+
+☑ Ви представилися Git? (Введіть свої дані.)
+  
+  ```bash
+  git config --global user.name 'Ihor Miroshnychenko'
+  git config --global user.email 'ihor.miroshnychenko@kneu.ua'
+  git config --global --list
+  ```
+
+☑ Ви зареєструвались на GitHub?
+
+---
+
+# Checklist (прод.)
+
+На наступній лекції ми переконаємося, що все працює належним чином з вашими налаштуваннями R і GitHub.
+
+До кінця сьогоднішньої лекції я хочу розглянути деякі дуже основні поняття R.
+
+--
+
+&lt;/br&gt;
+
+PS — Враховуючи ситуацію в країні я буду скорочувати програму але сподіваюсь, що встигнемо освноїти основи.
+
+---
+class: inverse, center, middle
+name: r4ds
+
+# R в Data Science
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=1100px&gt;&lt;/html&gt;
+
+---
+name: whyr
+
+# Чому R та RStudio?
+&lt;img src="01-Intro_files/figure-html/indeeddotcom-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Чому R та RStudio? (прод.)
+
+### Data science positivism
+
+- Поряд з Python, R став *де-факто* мовою для науки про дані.
+  - Дивіться: [*The Impressive Growth of R*](https://stackoverflow.blog/2017/10/10/impressive-growth-r/), [*The Popularity of Data Science Software*](http://r4stats.com/articles/popularity/)
+- З відкритим кодом (безкоштовно!) із великою базою користувачів, що охоплює наукові кола та промисловість.
+  - Компанії які використовують R: Amazon, Google, Meta, Twitter, Uber, Deloitte, Glovo...
+
+### Міст до прикладних сфер та інших інструментів
+
+- Уже має підтримку всієї статистики та економетрики та дивовижно адаптується як «клей» до інших мов програмування та API.
+- RStudio IDE та її екосистема забезпечують бездоганну інтеграцію.
+
+### Залежність
+
+- Це мова яку я люблю та популяризую.
+--
+
+- (Але вивчення кількох мов є гарною ідеєю.)
+
+---
+
+# Деякі основи R
+
+1. Усе є об’єктом.
+
+2. Усе має ім'я
+
+3. Ви все робите за допомогою функцій.
+
+4. Функції поставляються у попередньо створених пакетах, хоча ви можете — і повинні — також писати власні функції.
+
+---
+
+# R приклад коду (лінійна регресія)
+
+
+```r
+fit = lm(mpg ~ wt, data = mtcars)
+summary(fit)
+```
+
+```
+## 
+## Call:
+## lm(formula = mpg ~ wt, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+## wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.046 on 30 degrees of freedom
+## Multiple R-squared:  0.7528,	Adjusted R-squared:  0.7446 
+## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10
+```
+
+---
+
+# Базова візуалізація R
+
+
+```r
+par(mar = c(4, 4, 1, .1)) ## Це просто налаштування до відображення на слайді
+plot(mtcars$wt, mtcars$mpg)
+abline(fit, col = "red")
+```
+
+&lt;img src="01-Intro_files/figure-html/mtcars_baseplot-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ggplot2
+
+
+```r
+library(ggplot2)
+ggplot(data = mtcars, aes(x = wt, y = mpg)) + 
+  geom_smooth(method = "lm", col = "red") + 
+  geom_point() 
+```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+&lt;img src="01-Intro_files/figure-html/mtcars_ggplot-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, center, middle
+name: ggplot2
+
+# Більше ggplot2
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=1100px&gt;&lt;/html&gt;
+
+---
+
+# Встановлення на завантаження
+
+Для того щоб зацікавити вас покажу певні маніпуляції з  [ggplot2](https://ggplot2.tidyverse.org/) (такий собі livecoding).
+
+Якщо у вас їх ще немає, інсталюйте пакети `ggplot2` та `gapminder` за допомогою одного з варіантів:
+- **Консоль:** Введіть `install.packages(c("ggplot2", "gapminder"), dependencies=T)`.
+- **RStudio:** Натисніть вкладку "Packages" в нижній правій панелі вікна. Потім натисніть «Install» та знайдіть ці два пакети.
+  
+![](pics/install.gif)
+
+---
+
+# Встановлення на завантаження (прод.)
+
+Після встановлення пакетів завантажте їх у свій сеанс R за допомогою функції `library()`.
+
+```r
+library(ggplot2)
+library(gapminder)
+```
+
+Зверніть увагу, що вам більше не потрібні лапки навколо назв пакетів. Причина: R тепер розпізнає ці пакети, як об'єкти з заданими іменами. ("Все в R є об'єктом, і все має ім'я.")
+
+--
+
+PS. Зручний спосіб об’єднати етапи встановлення та завантаження пакета - це функція `p_load()` [pacman package's](https://github.com/trinker/pacman). Якщо ви запустите `pacman::p_load(ggplot, gapminder)`, він спочатку перевірить, чи потрібно інсталювати будь-який пакет, перш ніж завантажувати їх. Розумний :).
+- Ми розглянемо це пізніше, але якщо ви хочете запустити функцію з (встановленого) пакета без його завантаження, ви можете використовувати синтаксис `PACKAGE::package_function()`.
+
+---
+
+# Gapminder dataset
+
+Оскільки ми будемо будувати графік набору даних [gapminder](https://github.com/jennybc/gapminder), корисно знати, що він містить панельні дані про тривалість життя, чисельність населення та ВВП на душу населення для 142 країн з 1950-х років.
+
+
+```r
+gapminder
+```
+
+```
+## # A tibble: 1,704 x 6
+##    country     continent  year lifeExp      pop gdpPercap
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+##  1 Afghanistan Asia       1952    28.8  8425333      779.
+##  2 Afghanistan Asia       1957    30.3  9240934      821.
+##  3 Afghanistan Asia       1962    32.0 10267083      853.
+##  4 Afghanistan Asia       1967    34.0 11537966      836.
+##  5 Afghanistan Asia       1972    36.1 13079460      740.
+##  6 Afghanistan Asia       1977    38.4 14880372      786.
+##  7 Afghanistan Asia       1982    39.9 12881816      978.
+##  8 Afghanistan Asia       1987    40.8 13867957      852.
+##  9 Afghanistan Asia       1992    41.7 16317921      649.
+## 10 Afghanistan Asia       1997    41.8 22227415      635.
+## # ... with 1,694 more rows
+```
+
+
+---
+
+# Елементи ggplot2
+
+Пакет [Хедлі Вікхема](http://hadley.nz/) ggplot2 є одним із найпопулярніших пакетів у в R.
+- Він також ґрунтується на деякій глибокій теорії візуалізації: Леланда Вілкінсона [*Граматика графіки*](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448).
+
+Можна багато сказати про реалізацію цього підходу «граматики графіки» ggplot2, але три ключові елементи:
+
+1. Ваш сюжет ("візуалізація") пов'язаний з вашими змінними ("даними") за допомогою різних **естетичних відображень** (*aesthetic mappings*).
+
+2. Після визначення естетичних відображень ви можете представляти свої дані різними способами, вибираючи різні **geoms** (тобто «геометричні об’єкти»: точки, лінії або стовпці).
+
+3. Ви будуєте свій сюжет **шарами**, як в Photoshop.
+
+--
+
+&lt;/br&gt;
+
+Звучить, як абстракція. Давайте розглянемо кожен елемент по черзі.
+
+---
+
+# 1. Aesthetic mappings
+
+
+```r
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point()
+```
+
+&lt;img src="01-Intro_files/figure-html/aesthetics0-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# 1. Aesthetic mappings (прод.)
+
+
+```r
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point()
+```
+
+Зосередьтеся на верхньому рядку, який містить ініціалізуючий виклик функції `ggplot()`. Ця функція приймає різні аргументи, зокрема:
+- Звідки надходять дані (тобто `data = gapminder`).
+- Що таке естетика (тобто `mapping = aes(x = gdpPercap, y = lifeExp)`).
+
+--
+
+Естетичні відображення тут досить прості: вони просто визначають вісь `\(x\)` (ВВП на душу населення) і вісь `\(y\)` (тривалість життя).
+- Однак, щоб відчути силу та гнучкість цього підходу, подумайте, що станеться, якщо ми додамо більше естетики...
+
+---
+
+# 1. Aesthetic mappings (прод.)
+
+
+```r
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp,
+                             size = pop, col = continent)) + geom_point(alpha = 0.3)
+```
+
+&lt;img src="01-Intro_files/figure-html/aesthetics2-1.svg" style="display: block; margin: auto;" /&gt;
+
+```r
+## "alpha" вказує на рівень прозорості. Приймає значення від 0 до 1.
+```
+
+--
+
+Зверніть увагу, що я відкинув частину "mapping =" у виклику ggplot. Більшість людей просто починають з "aes(...)", оскільки `ggplot2` знає порядок аргументів.
+
+---
+
+# 1. Aesthetic mappings (прод.)
+
+Ми також можемо вказати естетику в шарі geom.
+
+```r
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + ## Застосовується до всіх geoms
+  geom_point(aes(size = pop, col = continent), alpha = 0.3) ## Застосовується до цього geoms
+```
+
+&lt;img src="01-Intro_files/figure-html/aesthetics3-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# 1. Aesthetic mappings (прод.)
+
+Упс. Що пішло не по плану?
+
+```r
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point(aes(size = "big", col="black"), alpha = 0.3)
+```
+
+&lt;img src="01-Intro_files/figure-html/aesthetics_mistake-1.svg" style="display: block; margin: auto;" /&gt;
+
+--
+
+**Відповідь: **Естетика повинна бути зіставлена зі змінними, а не з описами!
+
+---
+
+# 1. Aesthetic mappings (прод.)
+
+На цьому етапі, замість того, щоб щоразу повторювати той самий виклик ggplot2, буде зручно визначити проміжний об’єкт, який ми можемо використовувати повторно.
+
+
+```r
+p  &lt;- ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp))
+p
+```
+
+&lt;img src="01-Intro_files/figure-html/p-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# 2. Geoms
+
+Після того, як ваші змінні відношення будуть визначені естетичними відображеннями, ви можете викликати та комбінувати різні геоми для створення різних візуалізацій.
+
+
+```r
+p + 
+  geom_point(alpha = 0.3)  +
+  geom_smooth(method = "loess") 
+```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+&lt;img src="01-Intro_files/figure-html/geoms1-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# 2. Geoms (прод.)
+
+Естетика може бути застосована по-різному до геомів.
+
+
+```r
+p + 
+  geom_point(aes(size = pop, col = continent), alpha = 0.3)  +
+  geom_smooth(method = "loess") 
+```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+&lt;img src="01-Intro_files/figure-html/geoms2-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# 2. Geoms (прод.)
+
+Попередній графік надає гарну ілюстрацію потужності (або ефекту), що виникає від призначення естетичних відображень «глобально» порівняно з окремими шарами geom.
+
+
+```r
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, size = pop, col = continent)) +
+  geom_point(alpha = 0.3)  +
+  geom_smooth(method = "loess")
+```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+&lt;img src="01-Intro_files/figure-html/geoms3-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# 2. Geoms (прод.)
+
+Так само зверніть увагу, що деякі геоми приймають лише підмножину відображень. напр. `geom_density()` не знає, що робити з естетичним відображенням "y".
+
+
+```r
+p + geom_density()
+```
+
+```
+## Error in `check_required_aesthetics()`:
+## ! geom_density requires the following missing aesthetics: y
+```
+
+&lt;img src="01-Intro_files/figure-html/geoms4-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# 2. Geoms (прод.)
+
+Ми можемо виправити це, більш уважно ставлячись до того, який графік ми будуємо.
+
+
+```r
+ggplot(data = gapminder) + ## Ніяких "глобальних" естетичних відображень
+  geom_density(aes(x = gdpPercap, fill = continent), alpha=0.3)
+```
+
+&lt;img src="01-Intro_files/figure-html/geoms5-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# 3. Побудуємо власний графік пошарово
+
+Ми вже бачили, як ми можемо об’єднати (або «розшарувати») послідовні елементи сюжету за допомогою з’єднувача «+».
+- Свідченням цього є той факт, що ми можемо створити, а потім повторно використати проміжний сюжетний об’єкт (наприклад, «p»).
+
+Але варто повторити: ви можете створити справді вражаючу складність і трансформацію своєї візуалізації за допомогою цього простого процесу розшарування.
+- Вам не потрібно перетворювати вихідні дані; ggplot2 подбає про все це.
+- Наприклад (див. малюнок на наступному слайді).
+
+
+```r
+p2 =
+  p +
+  geom_point(aes(size = pop, col = continent), alpha = 0.3) +
+  scale_color_brewer(name = "Continent", palette = "Set1") + ## Інша плітра кольорів
+  scale_size(name = "Population", labels = scales::comma) + ## Інші позначки легенди
+  scale_x_log10(labels = scales::dollar) + ## Логарифмування на осі х. Використання знаку долара.
+  labs(x = "Log (GDP per capita)", y = "Life Expectancy") + ## Кращі підписи до осей
+  theme_minimal() ## Мінімалистична (ч/б) тема рисунку
+```
+
+---
+
+# 3. Побудуємо власний графік пошарово (прод.)
+
+&lt;img src="01-Intro_files/figure-html/layers2-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Що ще?
+
+Ми ледь доторкнулися до функціональності ggplot2... не кажучи вже про всю екосистему пакетів, яка була побудована навколо неї.
+- Ось два швидких додаткові приклади, які допоможуть зробити крок далі
+
+--
+
+Зауважте, що вам потрібно буде встановити та завантажити деякі додаткові пакети, якщо ви хочете відтворити наступні дві фігури на власній машині. Швидкий спосіб зробити це:
+
+
+```r
+if (!require("pacman")) install.packages("pacman")
+```
+
+```
+## Loading required package: pacman
+```
+
+```
+## Warning: package 'pacman' was built under R version 4.1.3
+```
+
+```r
+pacman::p_load(hrbrthemes, gganimate)
+```
+
+---
+
+# Що ще? (прод.)
+
+Простий варіант: використовуйте тему зовнішнього пакету.
+
+```r
+# library(hrbrthemes)
+p2 + theme_modern_rc() + geom_point(aes(size = pop, col = continent), alpha = 0.2)
+```
+
+&lt;img src="01-Intro_files/figure-html/modern_rc_theme-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Що ще? (прод.)
+
+Більш продуманий варіант: Анімація! (Див. наступний слайд, щоб побачити GIF.)
+
+```r
+# library(gganimate)
+gapminder %&gt;% 
+  filter(continent != "Oceania") %&gt;% 
+  ggplot(, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  # Here comes the gganimate specific bits
+  labs(title = 'Year: {frame_time}', x = 'Log (GDP per capita)', y = 'Life expectancy') +
+  transition_time(year) +
+  ease_aes('linear')
+```
+
+---
+
+# Що ще? (прод.)
+
+&lt;img src="01-Intro_files/figure-html/ggamin2-1.gif" style="display: block; margin: auto;" /&gt;
+
+--
+
+Зауважте, що цей анімований сюжет забезпечує набагато більш інтуїтивне розуміння основних даних. Як і задумав [Ганс Рослінг](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen).
+
+---
+# Що ще? (прод.)
+
+Ми також не торкнулися відношення ggplot2 до «охайних» даних.
+  - Насправді він є частиною набору пакетів, відомих як [tidyverse](https://www.tidyverse.org/).
+
+Будьте впевнені, ви будете використовувати ggplot2 протягом решти цього курсу і розвивати свої навички на цьому шляху.
+- Ваше перше завдання (наближається) - це шанс відточити деякі з цих навичок.
+
+А тим часом я хочу, щоб ви почитали і потренувалися самостійно. Виберіть один із наведених нижче варіантів (або виберіть серед онлайн-ресурсів) і опрацюйте їх приклади:
+- [Розділ 3](https://r4ds.had.co.nz/data-visualisation.html) *R for Data Science*, автор Хедлі Вікхем і Гаретт Гролемунд.
+- [*Data Visualization: A Practical Guide*](https://socviz.co/makeplot.html) Кірана Хілі.
+- [Designing ggplots](https://designing-ggplots.netlify.com) від Малкома Барретта.
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
