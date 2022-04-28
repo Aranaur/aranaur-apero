@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Вступ у Data Science</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ігор Мірошниченко" />
+    <meta name="date" content="2022-02-21" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+    <script src="libs/freezeframe/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Вступ у Data Science
+## 01 - Становлення та розвиток науки про дані
+### Ігор Мірошниченко
+### КНЕУ
+### 2022-02-21
+
+---
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 27px;
+    padding: 1em 4em 1em 2em;
+}&lt;/style&gt;
+
+
+# Про мене
+
+## Мірошниченко Ігор Вікторовч
+
+* кандидат економічних наук
+* доцент кафедри математичного моделювання і статистики КНЕУ
+* викладач [Міжнародного інституту бізнесу (MBA)](https://iib.com.ua/)
+
+
+  * **email**: ihor.miroshnychenko@kneu.ua
+  * **site**: [aranaur.rbind.io](https://aranaur.rbind.io)
+  * **Github**: [@aranaur](https://github.com/Aranaur)
+  * **LinkedIn**: [@ihormiroshnychenko](https://www.linkedin.com/in/ihormiroshnychenko/)
+  * **тел.**: +380976391806
+
+---
+
+# Що таке наука про дані?
+
+Як і будь-яка нова сфера, вона ще чітко невизначена, але включає елементи:
+
+* Розвідувальний аналіз та візуалізація даних
+
+* Машинне навчання та статистика
+
+* Високопродуктивні обчислювальні технології
+
+---
+
+# Що таке наука про дані?
+&lt;img src="img/Screenshot_120.png" width="852" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Чому наука про дані?
+* Нові технології дозволяють збирати величезні обсяги даних.
+
+* Обчислення дозволяють аналізувати дані у постійно зростаючих масштабах. 
+
+* Багато прикладів успіху (Google, Facebook, Netfiks, гедж-фонди, Moneyball, ...), що зарекомендували себе, як потужний напрямок сучасної аналітики даних.
+
+---
+
+# Google Ngram
+&lt;img src="img/Screenshot_121.png" width="1279" style="display: block; margin: auto;" /&gt;
+
+---
+
+# НАВИЧКИ ДЛЯ НАУКИ ПРО ДАНІ
+&lt;img src="img/01.png" width="561" style="display: block; margin: auto;" /&gt;
+
+---
+
+# НАВИЧКИ ДЛЯ НАУКИ ПРО ДАНІ
+&lt;img src="img/Screenshot_120 - Copy.png" width="615" style="display: block; margin: auto;" /&gt;
+---
+
+# ФОРМУВАННЯ ЦІКАВИХ ПИТАНЬ ДО ДАНИХ
+
+## Базові питання для Data Scientists:
+
+* Що можна дізнатися з даного набору даних?
+
+* Що хочете знати про дані Ви?
+
+* Що це буде означати для Вас, коли ви досягнете мети?
+
+---
+
+# Transfermarkt
+
+&lt;img src="img/Screenshot_122.png" width="1283" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Футбольні питання
+
+* Як оцінюється майстерність, цінність та ефективність гравців?
+
+* Формування ціни на гравців?
+
+* Ефективність трансферів?
+
+* Ефективність гравців з плином часу та віку?
+
+* Кореляція позиції з ефективністю?
+
+---
+
+# ДЕМОГРАФІНЧІ ПИТАННЯ
+
+* Правші живуть довше ніж лівші?
+
+* Як часто люди повертаються жити в місце, де вони народилися?
+
+* Як змінилася зріст та вага населення в цілому?
+
+* Заробітна платня відображає минулу, сучасну та майбутню результативність?
+
+---
+
+# IMDb: база даних фільмів
+&lt;img src="img/Screenshot_122 - Copy.png" width="1223" style="display: block; margin: auto;" /&gt;
+
+---
+
+# IMDb: база даних акторів
+&lt;img src="img/Screenshot_123.png" width="901" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ПИТАННЯ IMDb
+
+* Які актори приймали участь у найбільшій кількості фільмів?
+
+* Заробляли більше грошей?
+
+* Приймали участь фільмах з низьким рейтингом?
+
+* Мали найдовшу кар'єру?
+
+* Який фільм має найвищій рейтинг за визначений рік?
+
+* Які фільми втратили найбільшу кількість грошей?
+
+---
+
+# ПИТАННЯ ЩОДО КІНОБІЗНЕСУ
+* Чи корелює касовий збір з рейтингом глядачів?
+
+* Порівняння Голівуду та Болівуду у розрізі рейтингів, бюджету, касового збору
+
+* Розподіл акторів по віку у фільмах? Наскільки частіше молоді акторки грають дружину, ніж актори чоловіків? З часом цей показник зменшується чи збільшується?
+
+* Кінозірки живуть довше звичайних акторів або загальної публіки?
+
+---
+
+# N-ГРАММИ GOOGLE
+.pull-left[
+* Щорічні часові ряди кожного популярного слова або словосполучення від 1 до 5 слів, що зустрічається у відсканованих книгах
+
+* «Популярне» означає, що зустрічається і більш ніж 40 книгах
+
+* Охоплює приблизно 15-20% усіх виданих книг
+]
+.pull-right[
+&lt;img src="img/Screenshot_124.png" width="374" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# N-ГРАММИ GOOGLE
+&lt;img src="img/Screenshot_125.png" width="1065" style="display: block; margin: auto;" /&gt;
+
+---
+
+# N-ГРАММИ GOOGLE
+&lt;img src="img/Screenshot_126.png" width="1066" style="display: block; margin: auto;" /&gt;
+
+---
+
+# N-ГРАММИ GOOGLE
+&lt;img src="img/Screenshot_127.png" width="1066" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# ПИТАННЯ N-ГРАММИ GOOGLE
+
+* Як змінилося вживання певних слів з часом?
+
+* Як часто нові слова стають популярними?
+
+* Як вплинули нові стандарти перевірки орфографічних помилок в еру автоматизованої перевірки правопису?
+
+---
+
+# ТАКСІ NY
+.pull-left[
+* Дані про водія/власника, місце посадки/висадки та вартість проїздки.
+
+* Дані отримані в Нью-Йорку на запит згідно Закону про свободу інформації
+]
+
+.pull-right[
+&lt;img src="img/Screenshot_128.png" width="291" style="display: block; margin: auto;" /&gt;
+]
+
+&lt;img src="img/Screenshot_129.png" width="951" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ПИТАННЯ ТАКСІ NY
+* Заробіток водіїв вночі? Як далеко вони їздять?
+
+* На скільки повільніший рух у часи пік?
+
+* Куди їдуть люди у різні часи доби?
+
+* Які водії отримують більше чайових? Від чого це залежить?
+
+---
+
+# ВІЗУАЛІЗАЦІЯ ТАКСІ NY
+.pull-left[
+&lt;img src="img/Screenshot_130.png" width="625" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+* [Towards Data Science](https://towardsdatascience.com/if-taxi-trips-were-fireflies-1-3-billion-nyc-taxi-trips-plotted-b34e89f96cfa)
+
+* [Chriswhong](https://chriswhong.github.io/nyctaxi/)
+]
+
+---
+
+# ТЕРМІНИ НАВКОЛО DATA SCIENCE
+&lt;img src="img/Screenshot_131.png" width="673" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ТЕРМІНИ НАВКОЛО DATA SCIENCE
+.left-column[
+&lt;img src="img/Screenshot_132.png" width="357" style="display: block; margin: auto;" /&gt;
+]
+
+.right-column[
+
+**Штучний інтелект (Artificial Intelligence)** - область, присвячена створенню інтелектуальних систем, що працюють і діють як люди. Її виникнення пов'язане з появою машин Алана Тьюринга в 1936 році. Незважаючи на довгу історію розвитку, штучний інтелект поки що не здатний повністю замінити людину в більшості областей. Але є приклади, що демонструють позитивну тенденцію розвитку цього напрямку.
+]
+
+---
+
+# ТЕРМІНИ НАВКОЛО DATA SCIENCE
+.left-column[
+&lt;img src="img/Screenshot_133.png" width="292" style="display: block; margin: auto;" /&gt;
+]
+
+.right-column[
+
+**Машинне навчання (Machine learning)** - інструмент для отримання знань з даних. Моделі ML навчаються на даних самостійно або поетапно: навчання з учителем на підготовлених людиною даних і без вчителя - робота зі стихійними, зашумленими даними.
+]
+
+---
+
+# Машинне навчання
+.left-column[
+&lt;img src="img/Screenshot_134.png" width="305" style="display: block; margin: auto;" /&gt;
+]
+
+.right-column[
+
+
+**1. Класифікація.** Намагання поставити мітку на елемент з дискретного набору можливостей: передбачення переможця спортивного змагання (команда А або команда Б) або вибір жанру деякого фільму (комедія, драма, бойовик тощо).
+
+* Ціна акції завтра буде вищою чи нижчою за сьогоднішню?
+
+* Чи є має сенс продавати страховий поліс даному клієнту? 
+
+* Яка група клієнтів зреагує на рекламну пропозицію?
+]
+
+---
+
+# Машинне навчання
+.left-column[
+&lt;img src="img/Screenshot_135.png" width="249" style="display: block; margin: auto;" /&gt;
+]
+
+.right-column[
+
+
+**2. Регресія.** Задача передбачення деякого числового значення. Прогноз ваги людини, кількість клієнтів на добу тощо.
+
+* Що буде з ціною акції завтра? 
+
+* Як довго людина буде жити? 
+
+* Як часто клієнт користується послугою?
+]
+
+---
+
+# Машинне навчання
+.left-column[
+&lt;img src="img/Screenshot_136.png" width="134" style="display: block; margin: auto;" /&gt;
+]
+
+.right-column[
+
+
+**3. Визначення подібності.** Ідентифікація подібних індивідів, ґрунтуючись на даних які ми про них знаємо.
+Визначення кращих клієнтів для концентрації уваги маркетологів.
+
+**4. Кластеризація.** Об'єднання у групи, які не мають спільної цілі.
+Чи формують наші клієнти природні групи або сегменти?
+Як часто клієнт користується послугою?
+
+
+**5. Асоціації.**
+Які товари часто купують разом?
+
+]
+
+---
+
+# Машинне навчання
+.left-column[
+&lt;img src="img/Screenshot_137.png" width="218" style="display: block; margin: auto;" /&gt;
+]
+
+.right-column[
+**6. Профілювання.** Визначення поведінки групи, індивіда, вибірки.
+Як часто ця група клієнтів користується нашим товаром?
+
+**7. Прогнозування зав'язків.** Оцінювання зав'язків між елементами.
+Ви маєте 10 спільних друзів, можливо, Ви хочете додати когось у друзі?
+
+**8. Семплювання.** Заміна великого об'єму даних їх меншим аналогом.
+
+**9. Причино-наслідкове моделювання.** Чи дійсно тергетована реклама впливає на об'єм продажів?
+]
+
+---
+
+# ТЕРМІНИ НАВКОЛО DATA SCIENCE
+
+.left-column[
+&lt;img src="img/Screenshot_138.png" width="354" style="display: block; margin: auto;" /&gt;
+]
+
+.right-column[
+
+
+**Глибоке навчання (Deep learning)**- створення багатошарових нейронних мереж в областях, де потрібно більш просунутий або швидкий аналіз, і традиційне машинне навчання не справляється. «Глибина» забезпечується деякою кількістю прихованих шарів нейронів в мережі, які проводять математичні обчислення.
+
+]
+
+---
+
+# ТЕРМІНИ НАВКОЛО DATA SCIENCE
+.left-column[
+&lt;img src="img/Screenshot_139.png" width="354" style="display: block; margin: auto;" /&gt;
+]
+
+.right-column[
+
+**Великі дані (Big Data)** - робота з великим об'ємом часто неструктурованих даних. Специфіка сфери - це інструменти і системи, здатні витримувати високі навантаження.
+]
+
+---
+
+# BIG DATA
+## Проблеми з BIG DATA:
+* Ріст об'єму даних уповільнює їх аналіз
+* Великі набори даних складніше візуалізовувати
+* Прості моделі не потребують великих даних
+
+&lt;img src="img/Screenshot_140.png" width="925" style="display: block; margin: auto;" /&gt;
+
+---
+
+# BIG DATA
+* Twitter: 600+ млн. твітів на день
+
+* Facebook: 600+ ТБ даних на день
+
+* Google: 3,5+ млрд. пошукових запитів на день
+
+* Instagram: 55+ млн. фото на день
+
+* Apple: 130 млрд. завантажень додатків
+
+* Netflix: 125 млн. годин шоу та фільмів щодня
+
+* E-mail: 205+ млрд. повідомлень на день.
+
+---
+
+# BIG DATA
+
+## Розглянемо задачу виміру соціального ставлення до публікацій у соціальній мережі або на онлайн-сайті:
+
+* Необ'єктивність вибірки.
+* Спам, фальсифікація тощо
+* Надмірність, повторюваність
+* Чутливість до часу
+
+---
+
+# BIG DATA: 5V
+.pull-left[
+&lt;img src="img/Screenshot_141.png" width="854" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+## Для того щоб масив інформації отримав приставку «BIG», він повинен мати наступні властивості:
+* Об'єм (volume)
+* Різноманітність (variety)
+* Цінність (value)
+* Швидкість (velocity)
+* Достовірність (veracity)
+]
+
+---
+
+# BIG DATA: 5V
+## Основні джерела Big Data:
+
+* Інтернет – соціальні мережі, блоги, сайти, ЗМІ, форуми тощо
+
+* Корпоративна інформація – архіви, транзакції, бази даних, CRM-системи
+
+* Показники вимірювальних пристроїв – метеорологічні прилади, датчики мобільного зв'язку тощо
+
+---
+
+# ВЛАСТИВОСТІ ДАНИХ
+## Структуровані
+&lt;img src="img/Screenshot_142.png" width="1226" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ВЛАСТИВОСТІ ДАНИХ
+## Неструктуровані
+&lt;img src="img/Screenshot_143.png" width="908" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ВЛАСТИВОСТІ ДАНИХ
+&lt;img src="img/Screenshot_144.png" width="700" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ТИПИ ДАНИХ
+&lt;img src="img/Screenshot_145.png" width="838" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ТИПИ ДАНИХ
+&lt;img src="img/Screenshot_146.png" width="906" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ТИПИ ДАНИХ
+&lt;img src="img/Screenshot_147.png" width="942" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ОСНОВНІ ІНСТРУМЕНТИ DATA SCIENCE
+.center[
+&lt;img src="img/Screenshot_148.png" width="686" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# ОСНОВНІ ІНСТРУМЕНТИ DATA SCIENCE
+&lt;img src="img/Screenshot_149.png" width="1052" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ОСНОВНІ ІНСТРУМЕНТИ DATA SCIENCE
+&lt;img src="img/Screenshot_150.png" width="812" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ОСНОВНІ ІНСТРУМЕНТИ DATA SCIENCE
+&lt;img src="img/Screenshot_151.png" width="1015" style="display: block; margin: auto;" /&gt;
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE*
+.pull-left[
+&lt;img src="img/Screenshot_152.png" width="742" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+## 1. Вибух даних.
+## Ми потопаємо у даних!
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.font50[
+*Carl Howe and Greg Wilson
+
+https://github.com/rstudio/conf20-future-dse]
+]
+
+---
+
+class: center, inverse, middle
+
+# «90% даних світу було створено за останні 2 роки»
+
+## IBM Marketing Cloud, «10 Key Marketing Trends»
+
+---
+
+class: inverse, center, middle
+background-size: contain
+
+background-image: url("img/Screenshot_153.png")
+
+---
+
+class: inverse, center, middle
+background-size: contain
+
+background-image: url("img/Screenshot_154.png")
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+
+## Закон Мура не працює у розрізі зростання даних
+
+&lt;img src="img/Screenshot_155.png" width="1622" style="display: block; margin: auto;" /&gt;
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+.pull-left[
+
+## 2. Невідтворюваність результатів.
+## Довіра до науки занепадає
+]
+
+.pull-right[
+
+&lt;img src="img/Screenshot_156.png" width="208" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+&lt;img src="img/Screenshot_157.png" width="443" style="display: block; margin: auto;" /&gt;
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+&lt;img src="img/Screenshot_158.png" width="574" style="display: block; margin: auto;" /&gt;
+
+Amgen 2012: 6 з 53 значних результатів можна відтворити
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+## Психологія
+&lt;img src="img/Screenshot_159.png" width="878" style="display: block; margin: auto;" /&gt;
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+&lt;img src="img/Screenshot_160.png" width="1058" style="display: block; margin: auto;" /&gt;
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+&lt;img src="img/Screenshot_161.png" width="621" style="display: block; margin: auto;" /&gt;
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+.pull-left[
+
+## 3. Підроблені дані.
+##	Дані стали ще одним засобом брехні
+
+]
+
+.pull-right[
+
+&lt;img src="img/Screenshot_162.png" width="440" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+&lt;img src="img/Screenshot_163.png" width="743" style="display: block; margin: auto;" /&gt;
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+&lt;img src="img/Screenshot_164.png" width="723" style="display: block; margin: auto;" /&gt;
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+&lt;img src="img/Screenshot_165.png" width="598" style="display: block; margin: auto;" /&gt;
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+&lt;img src="img/Screenshot_166.png" width="887" style="display: block; margin: auto;" /&gt;
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+&lt;img src="img/Screenshot_167.png" width="1066" style="display: block; margin: auto;" /&gt;
+
+---
+
+# МАЙБУТНЄ DATA SCIENCE
+&lt;img src="img/Screenshot_168.png" width="1449" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse, center, middle
+# Дякую за увагу!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
