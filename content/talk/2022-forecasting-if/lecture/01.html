@@ -552,12 +552,12 @@
 <li><p>Усі прогнози виконуються за допомогою функції ПРЕДСКАЗ у MS-Excel!</p></li>
 </ul>
 </section>
-<section id="приклад-4.-авіалінії" class="slide level2">
-<h2>Приклад 4. Авіалінії</h2>
+<section id="приклад-3.-авіалінії" class="slide level2">
+<h2>Приклад 3. Авіалінії</h2>
 
 <img data-src="01_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="приклад-4.-авіалінії-1" class="slide level2">
-<h2>Приклад 4. Авіалінії</h2>
+<section id="приклад-3.-авіалінії-1" class="slide level2">
+<h2>Приклад 3. Авіалінії</h2>
 <p><strong>Проблема:</strong> як спрогнозувати пасажиропотік на основних маршрутах?</p>
 <p><em>Додаткова інформація:</em> * Вони можуть надавати велику кількість даних про попередні маршрути.</p>
 <ul>
@@ -582,16 +582,13 @@
 <h2>Що слід згадати?</h2>
 <ul>
 <li><p>Що прогнозуємо: випадкова величина, <em>y</em><sub><em>t</em></sub>.</p></li>
-<li><p>Розподіл прогнозу: якщо <span class="math inline">\({\cal T}\)</span> - це всі спостереження, то <span class="math inline">\(y\\\_{t} \\\| {\cal T}\)</span> означає “випадкову змінну <em>y</em><sub><em>t</em></sub>, враховуючи те, що ми знаємо в <span class="math inline">\({\cal T}\)</span>.</p></li>
-<li><p>“Точковий прогноз” - це середнє значення (або медіана) <span class="math inline">\(y\\\_{t}\\\|{\cal T}\)</span></p></li>
-<li><p>“Дисперсія прогнозу” - <span class="math inline">\(\text{var}\\\[y\\\_ {t}\\\|{\cal T}\\\]\)</span></p></li>
+<li><p>Розподіл прогнозу: якщо <span class="math inline">\({\cal T}\)</span> - це всі спостереження, то <span class="math inline">\(y\_{t} \| {\cal T}\)</span> означає “випадкову змінну <em>y</em><sub><em>t</em></sub>, враховуючи те, що ми знаємо в <span class="math inline">\({\cal T}\)</span>.</p></li>
+<li><p>“Точковий прогноз” - це середнє значення (або медіана) <span class="math inline">\(y\_{t}\|{\cal T}\)</span></p></li>
+<li><p>“Дисперсія прогнозу” - <span class="math inline">\(\text{var}[y\_{t}\|{\cal T}]\)</span></p></li>
 <li><p>Інтервал прогнозування або “інтервальний прогноз” - це діапазон значень <em>y</em><sub><em>t</em></sub> з високою ймовірністю.</p></li>
 <li><p>З часовими рядами <em>y</em><sub><em>t</em>|<em>t</em> − 1</sub> = <em>y</em><sub><em>t</em></sub>|{<em>y</em><sub>1</sub>, <em>y</em><sub>2</sub>, …, <em>y</em><sub><em>t</em> − 1</sub>}.</p></li>
 <li><p><em>ŷ</em><sub><em>T</em> + <em>h</em>|<em>T</em></sub> = E[<em>y</em><sub><em>T</em> + <em>h</em></sub>|<em>y</em><sub>1</sub>,…,<em>y</em><sub><em>T</em></sub>] ( <em>h</em> -кроковий прогноз з урахуванням усіх спостережень до часу <em>T</em>).</p></li>
 </ul>
-</section>
-<section class="slide level2">
-
 </section></section>
 <section>
 <section id="r-та-rstudio" class="title-slide slide level1 center">
