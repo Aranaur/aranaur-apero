@@ -37,7 +37,7 @@ library(fpp2)
 
 # Про мене
 
-::: nonincremental
+::: {.nonincremental}
 
 -   Мірошниченко Ігор Вікторович
 -   кандидат економічних наук
@@ -52,7 +52,9 @@ library(fpp2)
 
 `r fa("linkedin")` [\@ihormiroshnychenko](https://www.linkedin.com/in/ihormiroshnychenko/)
 
-`r fa("telegram")` [Data Mirosh](https://t.me/araprof) :::
+`r fa("telegram")` [Data Mirosh](https://t.me/araprof)
+
+:::
 
 # Що можна прогнозувати?
 
@@ -218,7 +220,7 @@ aus_production %>%
 
 ## Приклад 2. Схема фармацевтичних переваг (PBS)
 
--   У 2001 році: бюджет на $ 4,5 млрд., Прогноз на суму $ 800 млн.
+-   У 2001 році: бюджет на \$ 4,5 млрд., Прогноз на суму \$ 800 млн.
 
 -   Тисячі продуктів. Сезонний попит.
 
@@ -359,7 +361,7 @@ pop_df %>%
 
 ### Залежність
 
--   Це мова яку я люблю та популяризую^\[Але вивчення кількох мов є гарною ідеєю.\].
+-   Це мова яку я люблю та популяризую\^\[Але вивчення кількох мов є гарною ідеєю.\].
 
 ## Деякі основи R
 
@@ -453,8 +455,7 @@ ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) +
 
 ## ggplot2: Gapminder
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Код
 
 ```{r}
@@ -491,7 +492,6 @@ gapminder %>%
   transition_time(year) +
   ease_aes('linear')
 ```
-
 :::
 
 # Дякую за увагу! {.unnumbered .unlisted}
