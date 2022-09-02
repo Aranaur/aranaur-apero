@@ -3,7 +3,7 @@ title: "МФ: Прогнозування часових рядів"
 subtitle: "МФ-301/302"
 excerpt: "Матеріали лекцій з прогнозування часових рядів для міжнародниих фінансів КНЕУ"
 date: 2022-09-01
-date_end: ""
+date_end: " "
 show_post_time: false
 event: 
 event_url:
