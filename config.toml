@@ -113,8 +113,8 @@ enableEmoji = true
 
 [menu]
   [[menu.header]]
-    name = "Обо мне"
-    title = "Обо мне"
+    name = "Про мене"
+    title = "Про мене"
     url = "/about/"
     weight = 1
   [[menu.header]]
@@ -123,19 +123,19 @@ enableEmoji = true
     url = "/blog/"
     weight = 2
   [[menu.header]]
-    name = "Проекты"
-    title = "Проекты"
+    name = "Проекти"
+    title = "Проекти"
     url = "/project/"
     weight = 3
   [[menu.header]]
-    name = "Лекторий"
-    title = "Лекторий"
+    name = "Лекторій"
+    title = "Лекторій"
     url = "/talk/"
     weight = 4
     
   # Configure footer  
   [[menu.footer]]
-    name = "Лицензия"
+    name = "Ліцензія"
     title = "License"
     url = "/license/"
     weight = 1

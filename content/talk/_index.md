@@ -1,8 +1,8 @@
 ---
-title: Лекции и мастер-классы
+title: Лекції та майстер-класи
 description: |
-  Лекции и мероприятия на которые меня пригласили, которыми я делюсь с Вами
-author: "Игорь Мирошниченко"
+  Мої лекції та заходи на які мене запросили
+author: "Ігор Мірошничекно"
 show_post_thumbnail: true
 thumbnail_left: false
 show_author_byline: false
@@ -13,7 +13,7 @@ layout: list # list, list-sidebar
 
 # set up common front matter for all pages inside blog/
 cascade:
-  author: "Игорь Мирошниченко"
+  author: "Ігор Мірошничекно"
   show_author_byline: false
   show_post_date: true
   show_post_time: true

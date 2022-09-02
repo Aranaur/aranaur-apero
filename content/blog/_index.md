@@ -1,7 +1,7 @@
 ---
-title: Пристанище постов
+title: Притулок постів
 description: |
-  Блог про науку о данных и не только.
+  Блог про Data Science і не тільки.
 author: 
 show_post_thumbnail: true
 show_author_byline: true
@@ -19,20 +19,20 @@ sidebar:
     
     Check out the _index.md file in the /blog folder 
     to edit this content. 
-  author: "Игорь Мирошниченко"
+  author: "Ігор Мірошниченко"
   text_link_label: Subscribe via RSS
   text_link_url: /index.xml
   show_sidebar_adunit: false # show ad container
 
 # set up common front matter for all pages inside blog/
 cascade:
-  author: Игорь Мирошниченко
+  author: Ігор Мірошниченко
   show_author_byline: true
   show_post_date: true
   show_disqus_comments: false # see disqusShortname in site config
   # for single-sidebar layout
   sidebar:
-    text_link_label: Посмотреть последний пост
+    text_link_label: Переглянути останній пост
     text_link_url: /blog/
     show_sidebar_adunit: false # show ad container
 ---
