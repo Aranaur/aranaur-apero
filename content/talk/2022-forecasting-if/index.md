@@ -25,5 +25,11 @@ links:
   url: https://github.com/Aranaur/r_forecasting
 ---
 
+# Матеріали до курсу:
+
+| **№** | **Назва** 	| **Дата** 	|  **Слайд** | **Відео** 	| **Код** 	| **Завдання** |
+|----	|----	|---	|:----:	|:----:	|:----:	|:----:	|
+|  1  |  Вступ до прогнозування  |  2022.09.02  |  [<i class="fa-solid fa-presentation-screen"></i>](https://raw.githack.com/Aranaur/aranaur-apero/main/content/talk/2022-forecasting-if/lecture/01.html#/title-slide)  |  [<i class="fab fa-youtube"></i>](https://www.youtube.com/watch?v=fVma-nZvepk)  |    |   |
+
 
 > Рисунок к посту от [Ludmila Markova](https://www.instagram.com/mi_marko/)
