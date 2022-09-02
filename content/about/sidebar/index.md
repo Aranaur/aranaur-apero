@@ -1,7 +1,7 @@
 ---
 ## Configure sidebar content in narrow column
-author: "Игорь Мирошниченко"
-role: "PH.D., ДОЦЕНТ @ КНЭУ"
+author: "Ігор Мірошниченко"
+role: "PH.D., ДОЦЕНТ @ КНЕУ"
 avatar_shape: rounded # circle, square, rounded
 show_social_links: true # specify social accounts in site config
 show_audio_link: false
