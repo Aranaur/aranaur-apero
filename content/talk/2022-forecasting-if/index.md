@@ -2,13 +2,13 @@
 title: "2022: Прогнозування часових рядів (МФ)"
 subtitle: "МФ-301/302"
 excerpt: "Матеріали лекцій з часових рядів для економічної кібернетики КНЕУ"
-date: 2021-09-01
-date_end: "2021-12-25"
+date: 2022-09-01
+date_end: ""
 show_post_time: false
 event: 
 event_url:
-author: "Игорь Мирошниченко"
-location: "Киев, Украина"
+author: "Ігор Мірошниченко"
+location: "Київ, Україна"
 draft: false
 # layout options: single, single-sidebar
 layout: single
