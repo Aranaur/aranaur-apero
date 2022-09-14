@@ -1,0 +1,508 @@
+---
+title: "03 - Часові ряди та їх візуалізація"
+subtitle: "Прогнозування часових рядів"
+author: "Ігор Мірошниченко"
+date: "оновлено: `r Sys.Date()`"
+institute: КНЕУ::ІІТЕ
+crossref:
+  fig-title: Рис.     # (default is "Figure")
+  tbl-title: Таб.     # (default is "Table")
+format:
+  revealjs: 
+    theme: [moon, custom.scss]
+    footer: "[Data Mirosh](https://t.me/araprof)"
+    logo: img/logo.png
+    chalkboard: true
+    slide-number: true
+    toc: true
+    toc-title: ЗМІСТ
+    transition: fade
+    mouse-wheel: true
+    highlight-style: github
+    mainfont: metropolis
+    toc-depth: 1
+    incremental: false
+editor: source
+knitr: 
+  opts_chunk: 
+    echo: true
+    warnings: false
+    code-fold: false
+    cache: false
+---
+
+```{r setup, include=FALSE}
+library(fontawesome)
+library(tidyverse)
+library(fpp3)
+library(fpp2)
+library(quartoExtra)
+knitr::opts_chunk$set(
+  classes = "light-mode") # light-mode | dark-light
+```
+
+# Часові ряди
+
+## Часові ряди
+
+**Часовий ряд** (ЧР) - послідовність значень деякої змінної (або змінних), що зареєстровані через визначений проміжок часу (регулярні або нерегулярні).
+
+-   Одна змінна - одномірний часовий ряд
+
+-   Декілька змінних - багатовимірний часовий ряд
+
+## Компоненти часового ряду
+
+Часовий ряд $y_t$, в моменти часу $t$ можна розкласти на компоненти:
+
+-   **Тренд**, $T_t$: довгострокова тенденція зміни даних (підвищення або зменшення). Може бути лінійним або нелінійним. Напрямок може змінюватися.
+
+-   **Сезонність**, $S_t$: повторюваність патернів поведінки часового ряду з фіксованою частотою. Можуть бути в середині сезону (одного року).
+
+-   **Циклічність**, $C_t$: довгострокові патерни поведінки часового ряду, які мають відносно нефіксовану періодичність. Наприклад цикл економічного розвитку, цикл розробки програмного засобу тощо. Як правило, періодичність від двох років.
+
+-   **Випадкова компонента**, $R_t$: випадкові коливання часового ряду (шум), який не можемо пояснити.
+
+## Компоненти часового ряду
+
+Функціональний зв'язок між компонентами може бути будь-який, але виділяють класичні:
+
+-   адитивна модель: $y_t = T_t + S_t + C_t + R_t$
+
+-   мультиплікативна модель: $y_t = T_t * S_t * C_t * R_t$
+
+. . .
+
+Часто довжини часового ряду недостатньо для визначення циклічної складової і її виключають із дослідження.
+
+## Стаціонарність ЧР
+
+Стаціонарність - властивість ЧР не змінювати свої властивості з плином часу, а саме:
+
+-   постійність математичного сподівання
+
+-   постійність дисперсії (гомоскедастичність, згадуємо економетрику)
+
+-   незалежність коваріаційної функції
+
+# Формат даних `tsibble`
+
+## `tsibble`
+
+В концепції охайних даних tidyverse, поруч з вже відомим форматом `tibble` для часових рядів використовується `tsibble`:
+
+-   дані зберігаються в табличному вигляді
+
+-   в таблиці повинно бути мінімум два стовпчики: мітки часу у хронологічному порядку (`index`) та значення кількісної змінної.
+
+-   в таблиці може міститися декілька часових рядів, за рахунок використання групуючих змінних (`key`), які вказують на належність спостережень до відповідного ЧР
+
+-   будь-яке значення в таблиці можна унікально ідентифікувати за допомогою поєднання значень індексів та ключів.
+
+## `tsibble` {.smaller}
+
+Для створення об'єкту `tsibble` використовуються функції `tsibble()` або `as_tsibble()`, які мають наступні агрументи:
+
+-   `...` - набір пар даних
+
+-   `x` - об'єкт даних з яких треба створити ЧР, це може бути числовий вектор, матриця, дата фрейм.
+
+-   `index` - змінна часу, яка може бути від наносекунд до року.
+
+-   `key` - одна або декілька групуючих змінних, які визначають належність даних до відповідного ЧР. Назви змінних записуються без лапок та об'єднуються за допомогою конкатенації `c()`.
+
+-   `regular` - логічний аргумент, який вказує на врахування регулярності ЧР.
+
+-   `validate` - логічний аргумент, який дозволяє провести перевірку унікальності кожного спостереження для кожної пари `index-key`.
+
+-   `.drop` - логічний аргумент, який дозволяє виключити з таблиці пусті значення ЧР.
+
+## Приклад 1
+
+:::: {.columns}
+
+::: {.column width="50%"}
+#### `tsibble()`
+```{r}
+tsibble(
+  date = 2018:2022,
+  value = rnorm(n = 5),
+  index = date
+)
+```
+:::
+
+::: {.column width="50%"}
+#### `as_tsibble()`
+```{r}
+#| message: true
+tsibble(
+  date = as.Date("2022-01-01") + 0:4,
+  value = rnorm(5)
+)
+```
+:::
+
+::::
+
+## Приклад 2
+```{r}
+timetk::walmart_sales_weekly %>% 
+  select(id, Date, Weekly_Sales) %>% 
+  head(5)
+```
+
+```{r}
+#| code-line-numbers: "|1|2|3"
+
+timetk::walmart_sales_weekly %>% 
+  select(id, Date, Weekly_Sales) %>% 
+  as_tsibble(index = Date, key = c(id))
+```
+
+## Приклад 2
+```{r}
+#| code-line-numbers: "|4|5"
+
+timetk::walmart_sales_weekly %>% 
+  select(id, Date, Weekly_Sales) %>% 
+  as_tsibble(index = Date, key = c(id)) %>% 
+  autoplot(Weekly_Sales) +
+  facet_wrap(vars(id), scales = "free")
+```
+
+# Обробка пропущених значень
+
+## Пропущені значення
+```{r}
+markdown <- timetk::walmart_sales_weekly %>% 
+  select(id, Date, 11:15) %>% 
+  pivot_longer(!c(id, Date), names_to = "Markdown", values_to = "Value") %>% 
+  as_tsibble(index = Date, key = c(id, Markdown))
+
+markdown
+```
+
+## Пропущені значення
+```{r}
+markdown %>% 
+  autoplot() +
+  facet_wrap(vars(Markdown), scales = "free") + 
+  theme(legend.position = "none")
+```
+
+## Фільтрація індексу: `filter_index()`
+```{r}
+markdown %>% 
+  filter_index("2012-08" ~ .)
+
+markdown %>% 
+  filter_index("2012-08" ~ "2013-08")
+```
+
+## Визначення наявності пропусків: `has_gaps()`
+
+:::: {.columns}
+
+::: {.column width="50%"}
+Перевірмо наявність пропусків
+```{r}
+has_gaps(markdown)
+```
+:::
+
+::: {.column width="50%"}
+А тепер якщо прибрати `NA`
+```{r}
+markdown %>% 
+  drop_na() %>% 
+  has_gaps()
+```
+:::
+
+::::
+
+## Місцезнаходження пропусків: `scan_gaps()`
+Визначмо де саме пропущенні значення
+```{r}
+markdown %>% 
+  drop_na() %>% 
+  scan_gaps()
+```
+
+## Кількість пропусків: `count_gaps()`
+```{r}
+markdown %>% 
+  drop_na() %>% 
+  count_gaps()
+```
+
+## Заповнення пропусків: `fill_gaps()`
+#### Заповнення `NA`
+```{r}
+markdown %>% 
+  drop_na() %>% 
+  fill_gaps() %>% 
+  autoplot() +
+  scale_y_log10() +
+  facet_wrap(vars(Markdown), scales = "free") + 
+  theme(legend.position = "none")
+```
+
+## Заповнення пропусків: `fill_gaps()`
+#### Заповнення сумою значень у кожній групі
+```{r}
+#| code-line-numbers: "|3|4"
+markdown %>% 
+  drop_na() %>% 
+  group_by_key() %>% 
+  fill_gaps(Value = sum(Value)) %>% 
+  autoplot() +
+  scale_y_log10() +
+  facet_wrap(vars(Markdown), scales = "free") + 
+  theme(legend.position = "none")
+```
+
+## Заповнення пропусків: `fill_gaps()`
+#### Заповнення середнім по кожній групі
+```{r}
+#| code-line-numbers: "4"
+markdown %>% 
+  drop_na() %>% 
+  group_by_key() %>% 
+  fill_gaps(Value = mean(Value)) %>% 
+  autoplot() +
+  scale_y_log10() +
+  facet_wrap(vars(Markdown), scales = "free") + 
+  theme(legend.position = "none")
+```
+
+## Заповнення пропусків: `fill_gaps()`
+#### Заповнення медіаною по кожній групі
+```{r}
+#| code-line-numbers: "4"
+markdown %>% 
+  drop_na() %>% 
+  group_by_key() %>% 
+  fill_gaps(Value = median(Value)) %>% 
+  autoplot() +
+  scale_y_log10() +
+  facet_wrap(vars(Markdown), scales = "free") + 
+  theme(legend.position = "none")
+```
+
+## Заповнення пропусків: `tidyr::fill()`
+#### Заповнення останніми значеннями
+```{r}
+#| code-line-numbers: "5"
+markdown %>% 
+  drop_na() %>% 
+  group_by_key() %>% 
+  fill_gaps() %>% 
+  fill(Value, .direction = "down") %>% 
+  autoplot() +
+  scale_y_log10() +
+  facet_wrap(vars(Markdown), scales = "free") + 
+  theme(legend.position = "none")
+```
+
+# Агрегація спостережень
+
+## Групування за датою: `index_by()`
+Збережемо заповнений датасет
+```{r}
+markdown_fill <- markdown %>% 
+  drop_na() %>% 
+  group_by_key() %>% 
+  fill_gaps(Value = median(Value))
+
+markdown_fill
+```
+
+## Групування за датою: `index_by()`
+#### Варіанти групування
+| Групування 	| Функція                           	|
+|:----------:	|-----------------------------------	|
+| Рік        	| `year()`                          	|
+| Квартал    	| `yearquarter()`                   	|
+| Місяць     	| `yearmonth()`                     	|
+| Тиждень    	| `yearweek()`                      	|
+| День       	| `as.Date()`, `as_date()`, `day()` 	|
+| Година     	| `hour()`                          	|
+
+## Групування за датою: `index_by()`
+Згрупуємо дані по роках:
+```{r}
+markdown_fill %>% 
+  index_by(Year = ~ year(.)) %>% 
+  summarise(
+    mean_value = mean(Value),
+    median_value = median(Value),
+    sd_value = sd(Value)
+)
+```
+
+## Групування за датою: `index_by()`
+Згрупуємо дані по місяцям:
+```{r}
+markdown_fill %>% 
+  index_by(Year = ~ yearmonth(.)) %>% 
+  summarise(
+    mean_value = mean(Value),
+    median_value = median(Value),
+    sd_value = sd(Value)
+)
+```
+
+## Групування за датою: `index_by()`
+Візуалізація:
+```{r}
+markdown_fill %>% 
+  index_by(Year = ~ yearmonth(.)) %>% 
+  summarise(
+    mean_value = mean(Value),
+    median_value = median(Value),
+    sd_value = sd(Value)) %>% 
+  autoplot(mean_value) +
+  facet_wrap(~ Markdown, scales = "free")+
+  theme(legend.position = "none")
+```
+
+# Візуалізація часових рядів
+## Welmart
+Зберемо датасет
+```{r}
+walmart_sales <- timetk::walmart_sales_weekly %>% 
+  select(id, Date, Weekly_Sales, Temperature) %>% 
+  as_tsibble(index = Date, key = id)
+
+walmart_sales
+```
+
+## Базова візуалізація: `autoplot()`
+```{r}
+#| code-line-numbers: "2"
+walmart_sales %>% 
+  autoplot(Weekly_Sales)
+```
+
+## Базова візуалізація: `facet_grid()`
+```{r}
+#| code-line-numbers: "3"
+walmart_sales %>% 
+  autoplot(Weekly_Sales) +
+  facet_grid(id ~ ., scales = "free")
+```
+
+## Базова візуалізація: `facet_wrap()`
+```{r}
+#| code-line-numbers: "3"
+walmart_sales %>% 
+  autoplot(Weekly_Sales) +
+  facet_wrap(~ id, scales = "free")
+```
+
+## Базова візуалізація: `geom_smooth()`
+```{r}
+#| code-line-numbers: "3"
+walmart_sales %>% 
+  autoplot(Weekly_Sales) +
+  geom_smooth(se = FALSE, colour = "blue") +
+  facet_wrap(~ id, scales = "free")
+```
+
+## Графік сезонності: `gg_season()`
+```{r}
+#| code-line-numbers: "3"
+walmart_sales %>% 
+  filter(id == "1_1") %>% 
+  gg_season(Weekly_Sales)
+```
+
+## Графік сезонності: `gg_season()`
+```{r}
+#| code-line-numbers: "3"
+walmart_sales %>% 
+  filter(id == "1_1") %>% 
+  gg_season(Weekly_Sales, labels = "both")
+```
+
+## Точковий графік
+```{r}
+#| code-line-numbers: "3"
+walmart_sales %>% 
+  filter(id == "1_3") %>% 
+  ggplot(aes(Temperature, Weekly_Sales)) +
+  geom_point()
+```
+
+## Графік лагів: `gg_lag()`
+```{r}
+walmart_sales %>% 
+  filter(id == "1_1") %>% 
+  gg_lag(Weekly_Sales, geom = "point")
+```
+
+## Графік кореляцій: `ggpairs()`
+```{r}
+walmart_sales %>% 
+  pivot_wider(values_from=Weekly_Sales, names_from=id) %>%
+  GGally::ggpairs(columns = 3:9)
+```
+
+## Корелограма автокореляції: `ACF()`
+$$r_k = \frac{\sum_{t=k+1}^T(y_t - \overline{y})(y_{t-k} - \overline{y})}{\sum_{t=1}^T(y_t - \overline{y})^2}$$
+$T$ - довжина ЧР
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+walmart_sales %>% 
+  filter(id == "1_1") %>% 
+  ACF()
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+walmart_sales %>% 
+  filter(id == "1_1") %>% 
+  ACF() %>% 
+  autoplot()
+```
+:::
+
+::::
+
+## Додаткове оформлення графіків
+```{r}
+#| code-line-numbers: "5-12"
+walmart_sales %>% 
+  autoplot(Weekly_Sales) +
+  geom_smooth(se = FALSE, colour = "blue") +
+  facet_wrap(~ id, scales = "free") +
+  labs(
+    title = "Sample Time Series Retail Data",
+    subtitle = "Walmart Recruiting Store Sales Forecasting Competition",
+    caption = "Ihor Miroshnychenko",
+    x = "Day",
+    y = "Weekly Sales"
+  ) +
+  theme(legend.position = "none")
+```
+
+# Дякую за увагу! {.unnumbered .unlisted}
+
+<br>
+<br>
+
+`r fa("envelope")` ihor.miroshnychenko\@kneu.ua
+
+`r fa("house")` [aranaur.rbind.io](https://aranaur.rbind.io)
+
+`r fa("github")` [\@aranaur](https://github.com/Aranaur)
+
+`r fa("linkedin")` [\@ihormiroshnychenko](https://www.linkedin.com/in/ihormiroshnychenko/)
+
+`r fa("telegram")` [Data Mirosh](https://t.me/araprof)
