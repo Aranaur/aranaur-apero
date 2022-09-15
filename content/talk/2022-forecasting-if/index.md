@@ -30,7 +30,7 @@ links:
 | **№** | **Назва** 	| **Дата** 	|  **Слайд** | **Відео** 	| **Код** 	| **Завдання** |
 |----	|----	|---	|:----:	|:----:	|:----:	|:----:	|
 |  1  |  Вступ до прогнозування  |  2022.09.02  |  [<i class="fas fa-images"></i>](https://raw.githack.com/Aranaur/aranaur-apero/main/content/talk/2022-forecasting-if/lecture/01.html#/title-slide)  |  [<i class="fab fa-youtube"></i>](https://www.youtube.com/watch?v=fVma-nZvepk)  |    |   |
-|  2  |  Вступ до R  |  2022.09.05  |  [<i class="fas fa-images"></i>](https://raw.githack.com/Aranaur/aranaur-apero/main/content/talk/2022-forecasting-if/lecture/02.html#/title-slide)  |  [<i class="fab fa-youtube"></i>](https://www.youtube.com/watch?v=4VKAHUAZha8)  |    |  [<i class="fa-solid fa-dumbbell"></i>](https://raw.githack.com/Aranaur/aranaur-apero/main/content/talk/2022-forecasting-if/labs/lab01.html) |
+|  2  |  Вступ до R  |  2022.09.05  |  [<i class="fas fa-images"></i>](https://raw.githack.com/Aranaur/aranaur-apero/main/content/talk/2022-forecasting-if/lecture/02.html#/title-slide)  |  [<i class="fab fa-youtube"></i>](https://www.youtube.com/watch?v=4VKAHUAZha8)  |    |  [<i class="fas fa-dumbbell"></i>](https://raw.githack.com/Aranaur/aranaur-apero/main/content/talk/2022-forecasting-if/labs/lab01.html) |
 
 
 > Рисунок к посту от [Ludmila Markova](https://www.instagram.com/mi_marko/)
