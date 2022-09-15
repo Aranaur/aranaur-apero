@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Лабораторна робота №1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="lab01_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab01_files/libs/quarto-html/quarto.js"></script>
+<script src="lab01_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab01_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab01_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab01_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab01_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab01_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab01_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab01_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Лабораторна робота №1</h1>
+<p class="subtitle lead">Прогнозування часових рядів</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="вектори" class="level1">
+<h1>1. ВЕКТОРИ</h1>
+<p>Ви торгуєте двома видами криптовалют: Біткоїн (BTC) та Ефіріум (ETH).<br> За тиждень торгів ви отримали наступні результати:</p>
+<section id="для-btc" class="level5">
+<h5 class="anchored" data-anchor-id="для-btc"><strong>Для BTC:</strong></h5>
+<ul>
+<li>Понеділок заробили 140$</li>
+<li>Вівторок втратили 50$</li>
+<li>Середа заробили 20$</li>
+<li>Четверг втратили 120$</li>
+<li>П’ятниця заробили 240$</li>
+</ul>
+</section>
+<section id="для-eth" class="level5">
+<h5 class="anchored" data-anchor-id="для-eth"><strong>Для ETH:</strong></h5>
+<ul>
+<li>Понеділок втратили 24$</li>
+<li>Вівторок втратили 50$</li>
+<li>Середа заробили 100$</li>
+<li>Четвер втратили 350$</li>
+<li>П’ятниця заробили 10$</li>
+</ul>
+<p>Ви вирішили проаналізувати результати тижня за допомогою R.</p>
+<p><strong>1.1. Створіть два вектори <code>BTC_vector</code> та <code>ETH_vector</code> з результатами своїх торгів.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>BTC_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">140</span>, ..., ..., ..., ...)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ETH_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">24</span>, ..., ..., ..., ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.2. Додайте імена до кожного значення вектора.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(BTC_vector) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Понеділок"</span>, <span class="st">"..."</span>, <span class="st">"..."</span>, <span class="st">"..."</span>, <span class="st">"..."</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ETH_vector) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Понеділок"</span>, <span class="st">"..."</span>, <span class="st">"..."</span>, <span class="st">"..."</span>, <span class="st">"..."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.3. Розрахуйте суму ваших <em>щоденних</em> торгів по двом криптовалютам та запишіть результати у вектор <code>total_daily</code>.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>total_daily <span class="ot">&lt;-</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.4. Розрахуйте суму ваших торгів для двох криптовалют та запишіть результати у вектори <code>total_BTC</code> та <code>total_ETH</code>.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>total_BTC <span class="ot">&lt;-</span> <span class="fu">sum</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>total_ETH <span class="ot">&lt;-</span> ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.5. Розрахуйте загальну суму ваших торгів та запишіть результати у вектор <code>total_week</code>. Роздрукуйте результати</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>total_week <span class="ot">&lt;-</span> ... <span class="sc">+</span> ...</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.6. Порівняйте результати торгів BTC та ETH. Чи заробили Ви більше з Біткоїну у порівнянні з Ефіріумом?</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>total_BTC ... total_ETH</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.7. Запишіть результати торгів з середи BTC у змінну <code>BTC_wednesday</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>BTC_wednesday <span class="ot">&lt;-</span> BTC_vector[...]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.8. Запишіть результати торгів BTC з вівторка по четверг у змінну <code>BTC_midweek</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>BTC_midweek <span class="ot">&lt;-</span> BTC_vector[]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.9. Вибиріть перші три елементи вектора <code>BTC_vector</code> за допомогою їх імен “Понеділок”, “Вівторок”, “Середа”. Запишіть результати у вектор <code>BTC_start</code>.</strong> <strong>Розрахуйте середнє значення вектора <code>BTC_start</code> за допомогою функції <code>mean()</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>BTC_start <span class="ot">&lt;-</span> BTC_vector[<span class="fu">c</span>(<span class="st">"..."</span>,)]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.10. Які елементи вектора <code>BTC_vector</code> позитивні (більші за нуль). Запишіть ці значення у вектор <code>selection_vector</code></strong> <strong>Роздрукуйте результат. Роздруківка покаже, в який день ви заробили (<code>TRUE</code>) або втратили (<code>FALSE</code>) гроші</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>selection_vector <span class="ot">&lt;-</span> ...</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(selection_vector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.11. Використайте вектор <code>selection_vector</code> у квадратних дужках, щоб визначити суми, які Ви заробили у прибуткові дні. Запишіть результати у вектор <code>BTC_winning_days</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>BTC_winning_days <span class="ot">&lt;-</span> BTC_vector[...]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(BTC_winning_days)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.12. Аналогічно до пунку 10, зробіть розрахунок для <code>ETH_vector</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>selection_vector <span class="ot">&lt;-</span> ...</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(selection_vector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>1.13. Аналогічно до пунку 11, зробіть розрахунок для <code>ETH_vector</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ETH_winning_days <span class="ot">&lt;-</span> ETH_vector[...]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ETH_winning_days)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="таблиці-даних-data-frame" class="level1">
+<h1>2. ТАБЛИЦІ ДАНИХ (DATA FRAME)</h1>
+<p><strong>2.1. Роздрукуйте вбудований у R дата фрейм <code>mtcars</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mtcars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>2.2. Використайте функцію <code>head()</code> до дата фрейму <code>mtcars</code> для відображення перших спостережень</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>2.3. Дослідіть структуру даних за допомогою функції <code>str()</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>2.4. Створення data frame</strong></p>
+<p>Зараз нам потрібно побудувати дата фрейму, який описує основні характеристики восьми планет нашої Сонячної системи. До них належать:</p>
+<ul>
+<li>Тип планети (землеподібна або газовий гігант).<br>
+</li>
+<li>Діаметр планети відносно діаметра Землі.<br>
+</li>
+<li>Обертання планети навколо Сонця щодо обертання Землі.<br>
+</li>
+<li>Чи є на планеті кільця: так чи ні (<code>TRUE</code> або <code>FALSE</code>).<br>
+</li>
+</ul>
+<p>Дані вже сформровані у відповідні вектори: <code>name</code>, <code>type</code>, <code>diameter</code>, <code>rotation</code> та <code>rings</code></p>
+<p><strong>Використайте функцію <code>data.frame()</code> для побудови дата фрейму. Передайте вектори <code>name</code>, <code>type</code>, <code>diameter</code>, <code>rotation</code> та <code>rings</code> як аргументи в <code>data.frame()</code>. Збережіть результат у <code>planets_df</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Mercury"</span>, <span class="st">"Venus"</span>, <span class="st">"Earth"</span>, </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Mars"</span>, <span class="st">"Jupiter"</span>, <span class="st">"Saturn"</span>, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Uranus"</span>, <span class="st">"Neptune"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>type <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Terrestrial planet"</span>, </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Terrestrial planet"</span>, </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Terrestrial planet"</span>, </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Terrestrial planet"</span>, <span class="st">"Gas giant"</span>, </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Gas giant"</span>, <span class="st">"Gas giant"</span>, <span class="st">"Gas giant"</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>diameter <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.382</span>, <span class="fl">0.949</span>, <span class="dv">1</span>, <span class="fl">0.532</span>, </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>              <span class="fl">11.209</span>, <span class="fl">9.449</span>, <span class="fl">4.007</span>, <span class="fl">3.883</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>rotation <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">58.64</span>, <span class="sc">-</span><span class="fl">243.02</span>, <span class="dv">1</span>, <span class="fl">1.03</span>, </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>              <span class="fl">0.41</span>, <span class="fl">0.43</span>, <span class="sc">-</span><span class="fl">0.72</span>, <span class="fl">0.67</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>rings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Створення дата фрейму</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>planets_df <span class="ot">&lt;-</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>2.5. Переглянте структуру дата фрейму з пункту 2.4</strong><br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">...</span>(planets_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>2.5. Індексація елементів дата фрейму 1/2</strong><br>
+Подібно до векторів, індексація дата фрейму виконується за допомогою квадратних дужок <code>[]</code>. Використовуючи кому, ви можете вказати, що вибрати з рядків та стовпців відповідно. Наприклад:<br>
+</p>
+<ul>
+<li><p><code>my_df[1,2]</code> вибирає значення в першому рядку та другому стовпці в <code>my_df</code>.</p></li>
+<li><p><code>my_df[1:3, 2:4]</code> вибирає рядки 1, 2, 3 та стовпці 2, 3, 4 у my_df.</p></li>
+</ul>
+<p>Іноді потрібно виділити всі елементи рядка або стовпця. Наприклад, <code>my_df[1,]</code> вибирає всі елементи першого рядка. Давайте зараз застосуємо цю техніку на <code>planets_df</code>.</p>
+<p><strong>Із planets_df виберіть діаметр Меркурія (1 рядок, 3 стовпчик)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>planets_df[..., ...]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Із planets_df виберіть інформація про Марс (4 рядок)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>planets_df[...,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Із planets_df виберіть перші 5 значень зі стовпчика діаметр</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>planets_df[...<span class="sc">:</span>..., ...]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>2.6. Індексація елементів дата фрейму 2/2</strong><br>
+Існує декілька варіантів, як обрати цілий стовпчик (конкретну змінну):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>planets_df[,<span class="dv">3</span>]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>planets_df[,<span class="st">"diameter"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Однак є більш простий варіант. Якщо ваші стовпці мають імена, ви можете використовувати знак <code>$</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>planets_df<span class="sc">$</span>diameter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Використайте знак <code>$</code>, щоб вибрати змінну <code>rings</code> з <code>planets_df.</code> Збережіть результат у вектор <code>ring_vector</code></strong><br>
+<strong>Роздрукуйте <code>ring_Vector</code>, щоб перевірити, чи все правильно</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>rings_vector <span class="ot">&lt;-</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>2.7. Перевірка умов у дата фреймі</strong><br>
+<strong>Виконайте наступний код для того щоб обрати планети, які мають кільця.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Необхідно просто виконати код та отримати результат</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>planets_df[rings_vector <span class="sc">==</span> <span class="cn">TRUE</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
